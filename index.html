@@ -32,7 +32,7 @@
 
     /* Links: muted by default */
     a{ color:var(--muted-link); text-decoration:none; transition:color .2s ease, opacity .2s ease; }
-    a:hover{ color:var(--accent); text-decoration:underline; }
+    a:hover{ color:var(--accent); text-decoration:none; }
 
     /* Name/supervisor links should stay prominent */
     .lead a, .coauthors a{ color:var(--text); font-weight:400; }
@@ -253,6 +253,15 @@
   color: var(--accent);
   text-decoration: underline;
 }
+.meta-inline { display:flex; align-items:center; gap:17px; margin-top:10px;}
+ .meta-inline a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    top: 12px;              /* <-- lower the links slightly */
+  }
+
+
 
     footer{ margin-top:36px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:12px }
   </style>
@@ -285,7 +294,14 @@
           and
           <a href="https://sites.google.com/view/tjochem" target="_blank" class="muted-link" rel="noopener">Dr. Torsten Jochem</a>.
         </p>
-        <p class="meta">Email: <a href="mailto:r.p.oostdam@uva.nl">r.p.oostdam@uva.nl</a></p>
+         <p class="meta-inline">
+      <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" class="muted-link" rel="noopener">
+        LinkedIn
+      </a>
+      <a href="mailto:r.p.oostdam@uva.nl" class="muted-link">
+        r.p.oostdam@uva.nl
+      </a>
+    </p>
       </div>
     </div>
 
