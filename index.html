@@ -1,230 +1,546 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Remo Oostdam</title>
-  <meta name="description" content="Remo Oostdam – PhD Candidate in Finance" />
+  <meta name="description" content="Remo Oostdam – PhD Candidate in Finance"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#FFF9F0;
-      --text:#0f1115;
-      --muted:#5f6670;
-      --muted-link:#7a7f87;
-      --line:#e6e8eb;
-      --accent:#000000;
-      --max:980px;
-      --title-width:240px;
+    :root {
+      --bg: #FFF9F0;
+      --text: #0f1115;
+      --muted: #5f6670;
+      --muted-link: #7a7f87;
+      --line: #e6e8eb;
+      --accent: #000000;
+      --max: 980px;
+      --title-width: 240px;
 
       /* Fixed left menu sizing */
-      --side-w:96px;          /* width of the left menu column */
-      --side-gap:24px;        /* space between menu and content (used on mobile) */
-      --header-offset:68px;   /* distance from top (below sticky header) */
+      --side-w: 96px; /* width of the left menu column */
+      --side-gap: 24px; /* space between menu and content (used on mobile) */
+      --header-offset: 68px; /* distance from top (below sticky header) */
     }
-    html{box-sizing:border-box}
-    *,*:before,*:after{box-sizing:inherit}
+
+    html {
+      box-sizing: border-box
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit
+    }
 
     /* ---------- BASE TYPOGRAPHY (Inter) ---------- */
-    body{
-      margin:0; background:var(--bg); color:#2b2d30;
-      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-weight:400; font-size:16px; line-height:1.5;
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #2b2d30;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    a{ color:var(--muted-link); text-decoration:none; transition:color .2s ease, opacity .2s ease; }
-    a:hover{ color:var(--accent); text-decoration:none; }
+    a {
+      color: var(--muted-link);
+      text-decoration: none;
+      transition: color .2s ease, opacity .2s ease;
+    }
 
-    .lead a, .coauthors a{ color:var(--text); font-weight:400; }
-    .teaching-inline a{ color:var(--text); font-weight:300; }
+    a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .lead a, .coauthors a {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .teaching-inline a {
+      color: var(--text);
+      font-weight: 300;
+    }
+
     /*.teaching-inline a:hover{ color:var(--accent); }*/
 
     /* ---------- HEADER (sticky) ---------- */
-    .menu{
-  position:sticky;
-  top:0;
-  z-index:50;
-       width: 100vw;             /* full viewport width */
-  margin-left: calc(50% - 50vw); /* centers it in case inside a centered container */
-  background:rgba(108, 140, 198, 0.65); /* ← lighter, more transparent Turm blue */
-  color:#fff;
-  border-bottom:1px solid rgba(255,255,255,0.15);
-  backdrop-filter:blur(8px);  /* slightly stronger blur for balance */
-  -webkit-backdrop-filter:blur(8px);
-  transition:opacity .4s ease, transform .4s ease, background .4s ease;
-}
-    .menu.fade-out{opacity:0; transform:translateY(-20px); pointer-events:none;}
+    .menu {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100vw; /* full viewport width */
+      margin-left: calc(50% - 50vw); /* centers it in case inside a centered container */
+      background: rgba(108, 140, 198, 0.65); /* ← lighter, more transparent Turm blue */
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px); /* slightly stronger blur for balance */
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity .4s ease, transform .4s ease, background .4s ease;
+    }
 
-    .inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:8px 20px;
-      display:flex; justify-content:space-between; align-items:center;
+    .menu.fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
     }
-    .uva-logo img{ height:36px; width:auto; display:block; opacity:.85; transition:opacity .2s ease; }
-    .uva-logo img:hover{opacity:1}
 
-    .top-nav{
-      display:flex; gap:12px; align-items:center;
-      margin-left:auto; margin-right:12px; /* keep close to the logo */
+    .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .top-nav a{
-      padding:6px 8px; border-radius:4px; font-size:14.5px; font-weight:500; color:var(--text);
-      transition:background .15s ease, color .15s ease;
+
+    .uva-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      opacity: .85;
+      transition: opacity .2s ease;
     }
-.top-nav a:hover { background: rgba(0,0,0,0.04); }
-.top-nav a.active { background: #f1f2f4; }
+
+    .uva-logo img:hover {
+      opacity: 1
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 12px; /* keep close to the logo */
+    }
+
+    .top-nav a {
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text);
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .top-nav a:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .top-nav a.active {
+      background: #f1f2f4;
+    }
 
 
     /* Title section */
-    .title-wrap{display:grid; grid-template-columns:2px auto; column-gap:12px; align-items:center;}
-    .title-bar{background:var(--accent);}
-    .title-text{display:flex; flex-direction:column}
-    h1{
-      font-weight:700; font-size:23px; line-height:1.15; margin:0;
-      width:var(--title-width); letter-spacing:.03em; text-transform:uppercase; color:var(--text);
+    .title-wrap {
+      display: grid;
+      grid-template-columns:2px auto;
+      column-gap: 12px;
+      align-items: center;
     }
-    .subtitle{
-      color:var(--text); font-weight:400; font-size:12px; letter-spacing:.11em;
-      text-transform:uppercase; margin-top:4px; width:var(--title-width);
+
+    .title-bar {
+      background: var(--accent);
+    }
+
+    .title-text {
+      display: flex;
+      flex-direction: column
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 23px;
+      line-height: 1.15;
+      margin: 0;
+      width: var(--title-width);
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .subtitle {
+      color: var(--text);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      width: var(--title-width);
     }
 
     /* ---------- LAYOUT: fixed left menu + centered content ---------- */
     .wrap {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 16px 20px 0; /* no bottom padding */
-}
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 20px 0; /* no bottom padding */
+    }
 
-    .page{ display:flex; gap:32px; align-items:flex-start; }
+    .page {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
 
     /* FIXED slim menu on the complete left */
-    .side{
-      position:fixed;
-      z-index:40;
-      top:var(--header-offset);
-      left:0;
-      width:var(--side-w);
-      padding-left:12px;      /* a little inset so text isn’t glued to edge */
-      text-align:left;
+    .side {
+      position: fixed;
+      z-index: 40;
+      top: var(--header-offset);
+      left: 0;
+      width: var(--side-w);
+      padding-left: 12px; /* a little inset so text isn’t glued to edge */
+      text-align: left;
     }
-    .side-title{
-      font-size:10px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color:var(--muted);
-      margin-bottom:6px;
-      padding-left:2px;
-    }
-    .side-link{
-      display:block;
-      padding:6px 8px;
-      margin:3px 0;
-      border-radius:4px;
-      font-size:13px;
-      color:var(--text);
-      transition:background .15s ease, color .15s ease;
-      width:max-content;
-    }
-    .side-link:hover{ background:rgba(0,0,0,0.04); }
-    .side-link.active{ background:#f1f2f4; }
 
-    .main{ flex:1; min-width:0; }
+    .side-title {
+      font-size: 10px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding-left: 2px;
+    }
+
+    .side-link {
+      display: block;
+      padding: 6px 8px;
+      margin: 3px 0;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--text);
+      transition: background .15s ease, color .15s ease;
+      width: max-content;
+    }
+
+    .side-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .side-link.active {
+      background: #f1f2f4;
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+    }
 
     /* MOBILE: put menu inline at top */
-    @media (max-width:900px){
-      .wrap{ padding:16px 20px 88px; }
-      .page{ display:block; }
-      .side{
-        position:static; width:auto; padding-left:0; left:auto; top:auto;
-        display:flex; gap:10px; margin:8px 0 4px;
+    @media (max-width: 900px) {
+      .wrap {
+        padding: 16px 20px 88px;
       }
-      .side-title{ display:none; }
-      .side-link{ padding:6px 10px; margin:0; }
+
+      .page {
+        display: block;
+      }
+
+      .side {
+        position: static;
+        width: auto;
+        padding-left: 0;
+        left: auto;
+        top: auto;
+        display: flex;
+        gap: 10px;
+        margin: 8px 0 4px;
+      }
+
+      .side-title {
+        display: none;
+      }
+
+      .side-link {
+        padding: 6px 10px;
+        margin: 0;
+      }
     }
 
 
     /* ---------- Existing content styling ---------- */
     .top-nav a.active {
-  background: none;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
+      background: none;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
 
     .intro {
-      display:grid; grid-template-columns:120px 1fr; gap:22px; padding-top:14px; align-items:stretch;
-    }
-    .intro > div { display:flex; flex-direction:column; justify-content:space-between; }
-    .meta { color:black; margin-top:auto; padding-top:8px; }
-    @media (max-width:900px){ .intro{ grid-template-columns:1fr; } }
-
-    .portrait{
-      width:100%; max-width:120px; aspect-ratio:4/5; object-fit:cover;
-      border:1px solid #e4e0d8; box-shadow:0 2px 6px rgba(0,0,0,0.04);
+      display: grid;
+      grid-template-columns:120px 1fr;
+      gap: 22px;
+      padding-top: 14px;
+      align-items: stretch;
     }
 
-    .lead{ font-size:16px; font-weight:400; margin:0 0 8px; max-width:68ch; }
-    .meta{ margin:6px 0 0 }
+    .intro > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-    .content{ display:grid; grid-template-columns:1fr 320px; gap:32px; align-items:start; }
-    @media (max-width:1000px){ .content{ grid-template-columns:1fr; } }
+    .meta {
+      color: black;
+      margin-top: auto;
+      padding-top: 8px;
+    }
 
-    section{ margin-top:22px; padding-top:14px; border-top:1px solid var(--line) }
-    h2{ font-weight:500; font-size:17.5px; letter-spacing:.10em; text-transform:uppercase; margin:0 0 6px; color:var(--text); }
+    @media (max-width: 900px) {
+      .intro {
+        grid-template-columns:1fr;
+      }
+    }
 
-    .abs { margin-top:8px; }
-    .abs summary { cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-weight:500; font-size:15px; color:var(--muted-link); }
-    .abs summary:hover { color:var(--accent); text-decoration:none; }
-    .abs .caret{ width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--muted-link); transition:transform .2s ease, border-top-color .2s ease; }
-    .abs[open] .caret{ transform:rotate(180deg); border-top-color:var(--accent); }
-    .abs-content{ max-width:70ch; overflow:hidden; max-height:0; transition:max-height .24s ease-in-out; }
-    .abs[open] .abs-content{ max-height:1000px; }
+    .portrait {
+      width: 100%;
+      max-width: 120px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border: 1px solid #e4e0d8;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
 
-    .paper-title{ font-weight:500; font-size:17px; letter-spacing:.01em; margin:0 0 4px; color:var(--text); }
-    .coauthors{ font-size:14px; color:#8a8f96; margin:2px 0 10px; }
-    .note{ color:#8a8f96; font-size:12px; }
-    .abstract{ margin:10px 0 6px; font-size:14px; max-width:70ch; }
+    .lead {
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0 0 8px;
+      max-width: 68ch;
+    }
 
-    :root{ --art-w:220px; }
-    .art{ margin-top:28px; justify-self:end; place-self:start end; display:inline-grid; justify-items:end; width:max-content; text-align:right; }
-    .art img{ display:block; width:auto; max-width:var(--art-w); height:auto; margin:0; border:1px solid var(--line); }
-    .caption{ color:var(--muted); font-size:14px; margin-top:6px; max-width:var(--art-w); text-align:right; }
+    .meta {
+      margin: 6px 0 0
+    }
 
-    .lightbox{ display:none; position:fixed; z-index:100; padding-top:60px; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.8); backdrop-filter:blur(4px); }
-    .lightbox-content{ display:block; margin:auto; max-width:80%; max-height:80%; box-shadow:0 0 20px rgba(0,0,0,0.5); border:4px solid #fff; }
-    .lightbox-caption{ margin:16px auto; text-align:center; color:#f0f0f0; font-size:14px; max-width:80%; }
-    .lightbox-close{ position:absolute; top:20px; right:35px; color:#f0f0f0; font-size:32px; font-weight:300; cursor:pointer; transition:.2s; }
-    .lightbox-close:hover{ color:#fff; }
+    .content {
+      display: grid;
+      grid-template-columns:1fr 320px;
+      gap: 32px;
+      align-items: start;
+    }
 
-    .paper-title a{ color:var(--text); text-decoration:none; transition:color .2s ease, opacity .2s ease; }
-    .paper-title a:hover{ color:var(--accent); text-decoration:underline; }
+    @media (max-width: 1000px) {
+      .content {
+        grid-template-columns:1fr;
+      }
+    }
 
-    .meta-inline{ display:flex; align-items:center; gap:17px; margin-top:10px;}
-    .meta-inline a{ color:inherit; text-decoration:none; position:relative; top:12px; }
-    .art img { cursor: pointer; }
+    section {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line)
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 17.5px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+
+    .abs {
+      margin-top: 8px;
+    }
+
+    .abs summary {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--muted-link);
+    }
+
+    .abs summary:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .abs .caret {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--muted-link);
+      transition: transform .2s ease, border-top-color .2s ease;
+    }
+
+    .abs[open] .caret {
+      transform: rotate(180deg);
+      border-top-color: var(--accent);
+    }
+
+    .abs-content {
+      max-width: 70ch;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .24s ease-in-out;
+    }
+
+    .abs[open] .abs-content {
+      max-height: 1000px;
+    }
+
+    .paper-title {
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: .01em;
+      margin: 0 0 4px;
+      color: var(--text);
+    }
+
+    .coauthors {
+      font-size: 14px;
+      color: #8a8f96;
+      margin: 2px 0 10px;
+    }
+
+    .note {
+      color: #8a8f96;
+      font-size: 12px;
+    }
+
+    .abstract {
+      margin: 10px 0 6px;
+      font-size: 14px;
+      max-width: 70ch;
+    }
+
+    :root {
+      --art-w: 220px;
+    }
+
+    .art {
+      margin-top: 28px;
+      justify-self: end;
+      place-self: start end;
+      display: inline-grid;
+      justify-items: end;
+      width: max-content;
+      text-align: right;
+    }
+
+    .art img {
+      display: block;
+      width: auto;
+      max-width: var(--art-w);
+      height: auto;
+      margin: 0;
+      border: 1px solid var(--line);
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 6px;
+      max-width: var(--art-w);
+      text-align: right;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+    }
+
+    .lightbox-content {
+      display: block;
+      margin: auto;
+      max-width: 80%;
+      max-height: 80%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      border: 4px solid #fff;
+    }
+
+    .lightbox-caption {
+      margin: 16px auto;
+      text-align: center;
+      color: #f0f0f0;
+      font-size: 14px;
+      max-width: 80%;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f0f0f0;
+      font-size: 32px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .lightbox-close:hover {
+      color: #fff;
+    }
+
+    .paper-title a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s ease, opacity .2s ease;
+    }
+
+    .paper-title a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .meta-inline {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      margin-top: 10px;
+    }
+
+    .meta-inline a {
+      color: inherit;
+      text-decoration: none;
+      position: relative;
+      top: 12px;
+    }
+
+    .art img {
+      cursor: pointer;
+    }
+
     .art img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
     footer {
-  width: 100vw;              /* full viewport width */
-  margin: 48px 0 0;          /* space above, no side margins */
-  padding: 18px 0;           /* vertical padding */
-  background: #000;          /* black background */
-  color: #fff;               /* white text */
-  font-size: 13px;
-  text-align: center;
-  border-top: none;          /* remove inner border */
-  position: relative;
-  left: 50%;                 /* fix centering issue with 100vw inside a centered container */
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
+      width: 100vw; /* full viewport width */
+      margin: 48px 0 0; /* space above, no side margins */
+      padding: 18px 0; /* vertical padding */
+      background: #000; /* black background */
+      color: #fff; /* white text */
+      font-size: 13px;
+      text-align: center;
+      border-top: none; /* remove inner border */
+      position: relative;
+      left: 50%; /* fix centering issue with 100vw inside a centered container */
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
 
   </style>
 </head>
@@ -236,146 +552,156 @@
   <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
-  <div class="menu" id="menu">
-    <div class="inner">
-      <div class="title-wrap">
-        <div class="title-bar" style="height:40px"></div>
-        <div class="title-text">
-          <h1>Remo Oostdam</h1>
-          <div class="subtitle">PhD Candidate in Finance</div>
-        </div>
+<div class="menu" id="menu">
+  <div class="inner">
+    <div class="title-wrap">
+      <div class="title-bar" style="height:40px"></div>
+      <div class="title-text">
+        <h1>Remo Oostdam</h1>
+        <div class="subtitle">PhD Candidate in Finance</div>
       </div>
-      <nav class="top-nav" aria-label="Main menu">
-  <a class="side-link active" href="index.html">Home</a>
-  <a class="side-link" href="other.html">Other</a>
-</nav>
-
-<a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
-  <img src="assets/uva.svg" alt="University of Amsterdam Logo">
-</a>
     </div>
+    <nav class="top-nav" aria-label="Main menu">
+      <a class="side-link active" href="index.html">Home</a>
+      <a class="side-link" href="other.html">Other</a>
+    </nav>
+
+    <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
+      <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+    </a>
   </div>
+</div>
 
 
-  <!-- Centered content area (aligned with header) -->
-  <div class="wrap page">
-    <div class="main">
-      <div class="intro">
-        <img class="portrait" src="assets/cv_klein.JPG" alt="Portrait of Remo Oostdam" />
-        <div>
-          <p class="lead">
-            I am a third-year PhD candidate in Finance at the University of Amsterdam.
-            I study financial intermediation and how it affects efficiency and stability.
-            My work combines theory and empirics under the supervision of
-            <a href="https://www.enricoperotti.eu/" target="_blank" class="muted-link" rel="noopener">Prof. Enrico Perotti</a>
-            and
-            <a href="https://sites.google.com/view/tjochem" target="_blank" class="muted-link" rel="noopener">Dr. Torsten Jochem</a>.
-          </p>
-          <p class="meta-inline">
-            <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" class="muted-link" rel="noopener">LinkedIn</a>
-            <a href="mailto:r.p.oostdam@uva.nl" class="muted-link">r.p.oostdam@uva.nl</a>
-          </p>
-        </div>
+<!-- Centered content area (aligned with header) -->
+<div class="wrap page">
+  <div class="main">
+    <div class="intro">
+      <img class="portrait" src="assets/cv_klein.JPG" alt="Portrait of Remo Oostdam"/>
+      <div>
+        <p class="lead">
+          I am a third-year PhD candidate in Finance at the University of Amsterdam.
+          I study financial intermediation and how it affects efficiency and stability.
+          My work combines theory and empirics under the supervision of
+          <a href="https://www.enricoperotti.eu/" target="_blank" class="muted-link" rel="noopener">Prof. Enrico
+            Perotti</a>
+          and
+          <a href="https://sites.google.com/view/tjochem" target="_blank" class="muted-link" rel="noopener">Dr. Torsten
+            Jochem</a>.
+        </p>
+        <p class="meta-inline">
+          <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" class="muted-link"
+             rel="noopener">LinkedIn</a>
+          <a href="mailto:r.p.oostdam@uva.nl" class="muted-link">r.p.oostdam@uva.nl</a>
+        </p>
       </div>
+    </div>
 
-      <div class="content">
-        <main>
-          <section aria-labelledby="papers">
-            <h2 id="papers">Papers</h2>
-            <div>
-              <div class="paper-title">
-                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880" target="_blank" rel="noopener">
-                  Sand in the Wheels: Addressing Runs through Contingent Fees
-                </a>
-              </div>
-              <div class="coauthors">(Working paper with
-                <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael Matta</a> and
-                <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>)
-              </div>
-
-              <details class="abs">
-                <summary><span class="caret" aria-hidden="true"></span> Abstract</summary>
-                <div class="abs-content">
-                  <p>
-                    We show how escalation of outflows on viable banks can be tempered by automatic stabilizers.
-                    The frequency of inefficient runs is reduced by contingent redemption fees. Fee revenues may
-                    be retained or used to pay out more withdrawals. When reassigned back to the queue, they
-                    reduce strategic uncertainty and improve liquidity allocation, so a high fee is optimal.
-                    A ‘fee to the unpaid’ allocation reduces liquidity provision but reduces run incentives further,
-                    allowing lower fees. When liquidity needs are high, the ’fee to the queue’ is preferred, whereas
-                    when the costs of inefficient runs are high or to limit spillover effects, the ’fee to the unpaid’
-                    mechanism proves more effective.
-                  </p>
-                </div>
-              </details>
+    <div class="content">
+      <main>
+        <section aria-labelledby="papers">
+          <h2 id="papers">Papers</h2>
+          <div>
+            <div class="paper-title">
+              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880" target="_blank" rel="noopener">
+                Sand in the Wheels: Addressing Runs through Contingent Fees
+              </a>
             </div>
-          </section>
+            <div class="coauthors">(Working paper with
+              <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael
+                Matta</a> and
+              <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>)
+            </div>
 
-          <section aria-labelledby="teaching">
-            <h2 id="teaching">Teaching</h2>
-            <p class="teaching-inline">
-              <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131865" target="_blank" rel="noopener">Finance 1</a>,
-              <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131917" target="_blank" rel="noopener">Corporate Finance</a>,
-              <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131595" target="_blank" rel="noopener">Financial Regulation</a>,
-              <a href="https://eur.osiris-student.nl/onderwijscatalogus/extern/cursus?cursuscode=TIF20102&amp;collegejaar=2025" target="_blank" rel="noopener">Banking</a>
-            </p>
-          </section>
-        </main>
+            <details class="abs">
+              <summary><span class="caret" aria-hidden="true"></span> Abstract</summary>
+              <div class="abs-content">
+                <p>
+                  We show how escalation of outflows on viable banks can be tempered by automatic stabilizers.
+                  The frequency of inefficient runs is reduced by contingent redemption fees. Fee revenues may
+                  be retained or used to pay out more withdrawals. When reassigned back to the queue, they
+                  reduce strategic uncertainty and improve liquidity allocation, so a high fee is optimal.
+                  A ‘fee to the unpaid’ allocation reduces liquidity provision but reduces run incentives further,
+                  allowing lower fees. When liquidity needs are high, the ’fee to the queue’ is preferred, whereas
+                  when the costs of inefficient runs are high or to limit spillover effects, the ’fee to the unpaid’
+                  mechanism proves more effective.
+                </p>
+              </div>
+            </details>
+          </div>
+        </section>
 
-        <aside class="art">
-          <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image" />
-          <div class="caption"><em>Turm der blauen Pferde</em> (Tower of Blue Horses), Franz Marc.</div>
-        </aside>
-      </div>
+        <section aria-labelledby="teaching">
+          <h2 id="teaching">Teaching</h2>
+          <p class="teaching-inline">
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131865"
+               target="_blank" rel="noopener">Finance 1</a>,
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131917"
+               target="_blank" rel="noopener">Corporate Finance</a>,
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131595"
+               target="_blank" rel="noopener">Financial Regulation</a>,
+            <a href="https://eur.osiris-student.nl/onderwijscatalogus/extern/cursus?cursuscode=TIF20102&amp;collegejaar=2025"
+               target="_blank" rel="noopener">Banking</a>
+          </p>
+        </section>
+      </main>
 
-      <footer>
-        © <span id="year"></span> Remo Oostdam • remooostdam.com
-      </footer>
-    </div><!-- /main -->
-  </div><!-- /wrap.page -->
+      <aside class="art">
+        <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>
+        <div class="caption"><em>Turm der blauen Pferde</em> (Tower of Blue Horses), Franz Marc.</div>
+      </aside>
+    </div>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const menu = document.getElementById('menu');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > 60 && current > lastScroll) {
-        menu.classList.add('fade-out');
-      } else {
-        menu.classList.remove('fade-out');
-      }
-      lastScroll = current;
+    <footer>
+      © <span id="year"></span> Remo Oostdam • remooostdam.com
+    </footer>
+  </div><!-- /main -->
+</div><!-- /wrap.page -->
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const menu = document.getElementById('menu');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    if (current > 60 && current > lastScroll) {
+      menu.classList.add('fade-out');
+    } else {
+      menu.classList.remove('fade-out');
+    }
+    lastScroll = current;
+  });
+</script>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const artImage = document.getElementById('art-image');
+  const closeBtn = document.querySelector('.lightbox-close');
+
+  if (artImage) {
+    artImage.addEventListener('click', () => {
+      if (!lightbox) return;
+      lightbox.style.display = 'block';
+      lightboxImg.src = artImage.src;
+      lightboxCaption.innerHTML = document.querySelector('.caption').innerHTML;
     });
-  </script>
-
-  <script>
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const artImage = document.getElementById('art-image');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-    if (artImage) {
-      artImage.addEventListener('click', () => {
-        if (!lightbox) return;
-        lightbox.style.display = 'block';
-        lightboxImg.src = artImage.src;
-        lightboxCaption.innerHTML = document.querySelector('.caption').innerHTML;
-      });
-    }
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => { lightbox.style.display = 'none'; });
-    }
-    if (lightbox) {
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) lightbox.style.display = 'none';
-      });
-    }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox) lightbox.style.display = 'none';
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
     });
-  </script>
+  }
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) lightbox.style.display = 'none';
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox) lightbox.style.display = 'none';
+  });
+</script>
 </body>
 </html>
 
