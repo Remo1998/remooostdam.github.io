@@ -18,7 +18,7 @@
 
   <style>
     :root{
-      --bg:#FFFCF8;
+      --bg:#FFF9F0;
       --text:#0f1115;
       --muted:#5f6670;
       --muted-link:#7a7f87;
@@ -37,7 +37,7 @@
     body{
       margin:0; background:var(--bg); color:#2b2d30;
       font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-weight:300; font-size:14.5px; line-height:1.7;
+      font-weight:400; font-size:16px; line-height:1.5;
       -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
 
@@ -53,12 +53,33 @@ a:hover {
   opacity: 0.85;                /* subtle feedback when hovered */
 }
 
+.media {
+  margin-top: 85px !important;   /* moves the whole right column down */
+}
+
+:root{
+  --h2-size: 17.5px;   /* keep in sync with your h2 font-size */
+  --h2-line: 1.15;     /* keep in sync with your h2 line-height */
+  --h2-gap: 6px;       /* your h2 bottom margin */
+}
+
+.media-pair {
+  margin-bottom: 20px;   /* try 20–28px for optimal balance */
+}
+
+/* On mobile (stacked layout), no extra offset needed */
+@media (max-width: 1000px){
+  .media-pair{ margin-top: 0; }
+}
+
 
     /* ---------- HEADER (same as index) ---------- */
     .menu{
   position:sticky;
   top:0;
   z-index:50;
+       width: 100vw;             /* full viewport width */
+  margin-left: calc(50% - 50vw); /* centers it in case inside a centered container */
   background:rgba(108, 140, 198, 0.65); /* ← lighter, more transparent Turm blue */
   color:#fff;
   border-bottom:1px solid rgba(255,255,255,0.15);
@@ -77,14 +98,14 @@ a:hover {
     .title-bar{background:var(--accent);}
     .title-text{display:flex; flex-direction:column}
     h1{
-      font-weight:600; font-size:21px; line-height:1.15; margin:0;
+      font-weight:700; font-size:23px; line-height:1.15; margin:0;
       width:var(--title-width); letter-spacing:.03em; text-transform:uppercase; color:var(--text);
     }
     .subtitle{
-      color:var(--muted); font-weight:300; font-size:11px; letter-spacing:.11em;
+      color:var(--text); font-weight:400; font-size:12px; letter-spacing:.11em;
       text-transform:uppercase; margin-top:4px; width:var(--title-width);
     }
-    .uva-logo img{ height:30px; width:auto; display:block; opacity:.85; transition:opacity .2s ease; }
+    .uva-logo img{ height:36px; width:auto; display:block; opacity:.85; transition:opacity .2s ease; }
     .uva-logo img:hover{opacity:1}
 
     /* Top-right navigation (same as index) */
@@ -93,7 +114,7 @@ a:hover {
       margin-left:auto; margin-right:12px; /* keep close to the logo */
     }
     .top-nav a{
-      padding:6px 8px; border-radius:4px; font-size:13px; color:var(--text);
+      padding:6px 8px; border-radius:4px; font-size:14.5px; font-weight:500; color:var(--text);
       transition:background .15s ease, color .15s ease;
     }
     .top-nav a:hover{ background:rgba(0,0,0,0.04); }
@@ -106,14 +127,19 @@ a:hover {
     }
 
     /* ---------- PAGE LAYOUT (same as index) ---------- */
-    .wrap{ max-width:var(--max); margin:0 auto; padding:16px 20px 88px; }
+    .wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px 20px 0; /* no bottom padding */
+}
+
 
     /* Two-column content: left = text, right = media (images + viz) */
     .content{ display:grid; grid-template-columns:1fr var(--viz-w); gap:32px; align-items:start; }
     @media (max-width:1000px){ .content{ grid-template-columns:1fr; } }
 
     section{ margin-top:22px; padding-top:14px; }
-    h2{ font-weight:500; font-size:15px; letter-spacing:.10em; text-transform:uppercase; margin:0 0 6px; color:var(--text); }
+    h2{ font-weight:500; font-size:17.5px; letter-spacing:.10em; text-transform:uppercase; margin:0 0 6px; color:var(--text); }
     .lead{ font-size:15px; font-weight:300; margin:0 0 8px; max-width:68ch; }
 
     /* ---------- RIGHT COLUMN: images pair + visualization ---------- */
@@ -202,12 +228,26 @@ a:hover {
       position:relative;
       border:1px solid var(--line);
       border-radius:6px;
-      background:#fff;
+      background:var(--bg);
       height:calc(50vh - 80px);
       min-height:320px;
       overflow:hidden;
     }
     #vizMount{ position:absolute; inset:0; }
+
+    /* Interactive cursor for the visualization */
+.viz,
+#vizMount,
+.viz canvas {
+  cursor: grab;
+}
+
+.viz:active,
+#vizMount:active,
+.viz canvas:active {
+  cursor: grabbing;
+}
+
 
     /* Toolbar buttons (reuse look) */
     .ui-toolbar{
@@ -228,8 +268,21 @@ a:hover {
     .btn.wall.active:hover { background:#ffd8a8; }
     .btn.dome.active:hover { background:#e1e7ff; }
 
-
-    footer{ margin-top:36px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:12px }
+    footer {
+  width: 100vw;              /* full viewport width */
+  margin: 48px 0 0;          /* space above, no side margins */
+  padding: 18px 0;           /* vertical padding */
+  background: #000;          /* black background */
+  color: #fff;               /* white text */
+  font-size: 13px;
+  text-align: center;
+  border-top: none;          /* remove inner border */
+  position: relative;
+  left: 50%;                 /* fix centering issue with 100vw inside a centered container */
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
   </style>
 
   <!-- === DOME SIMULATION LOGIC (mounted into #vizMount) === -->
@@ -370,13 +423,26 @@ a:hover {
 
       model.renderer=new THREE.WebGLRenderer({ antialias:true });
       model.renderer.setSize(rect().width, rect().height);
-      model.renderer.setClearColor(new THREE.Color(0xFFFCF8), 1); // match site bg
+      model.renderer.setClearColor(new THREE.Color(0xFFF9F0), 1); // match site bg
       mount.appendChild(model.renderer.domElement);
 
-      model.camera=new THREE.PerspectiveCamera(90, rect().width/rect().height, 0.1, 1000);
-      model.camera.position.set(2.4*Math.max(model.a,model.b),0,model.c/2); /* slightly zoomed out */
-      model.camera.up=new THREE.Vector3(0,0,1);
-      model.scene.add(model.camera);
+model.camera = new THREE.PerspectiveCamera(80, rect().width / rect().height, 0.1, 1000);
+
+// Larger / closer view
+const R =  0.5* Math.max(model.a, model.b); // smaller multiplier = closer zoom
+
+// Higher and more left-above
+model.camera.position.set(-1.2 * R, 0.9 * R, 4 * R); // increase last value → more above
+
+
+// Z axis is up in this scene
+model.camera.up = new THREE.Vector3(0, 0, 1);
+
+// Look at the center of the dome
+model.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+model.scene.add(model.camera);
+
 
       // Lights
       let light=new THREE.PointLight(0xffffff); light.position.set(-20,0,-40); model.scene.add(light);
@@ -462,7 +528,7 @@ a:hover {
     <a href="https://en.wikipedia.org/wiki/Andrea_Pozzo" target="_blank" rel="noopener">Andrea Pozzo</a>
     painted a magnificent “false” dome on a flat ceiling — well worth a visit as well!
   </p>
-<p><em>I completed this project after a high school trip to Rome, with the help of my excellent math and programming teacher, <a href="https://www.johnval.nl/" target="_blank" rel="noopener">John Val</a>.</em></p>
+<p><em>I completed this project after a high school trip to Rome in 2016, with the help of my excellent math and programming teacher, <a href="https://www.johnval.nl/" target="_blank" rel="noopener">John Val</a>.</em></p>
 
 </section>
 
