@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Remo Oostdam — Curiosity</title>
+  <meta name="description" content="Remo Oostdam – Other Projects"/>
+
+  <!-- Favicon (same as index) -->
+  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
+  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
+
+  <!-- Inter (same as index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- JS for simulation -->
+  <script src="assets/js/three.min.js"></script>
+  <script src="assets/js/CircleAxisControls2.js"></script>
+  <script src="assets/js/odeSolvers.js"></script>
+  <script src="assets/js/JSON.js"></script>
+
+  <style>
+    :root {
+      --bg: #FFF9F0;
+      --text: #0f1115;
+      --muted: #5f6670;
+      --line: #c8c8c8;
+      --accent: #000000;
+      --max: 980px;
+
+      --sidebar-width: 260px;
+      --art-w: 200px;
+    }
+
+    html { box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #2b2d30;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* All links: black and clickable */
+    a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- LAYOUT (same base as index) ---------- */
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      padding: 24px 24px;
+      border-right: 1px solid var(--line);
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sidebar-name {
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .sidebar-role {
+      font-size: 12px;
+      letter-spacing: .092em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    /* Base sidebar link + underline logic (same as index) */
+    .sidebar-link {
+      display: inline-block;
+      padding: 6px 8px;
+      font-size: 13px;
+      color: var(--text);
+      width: max-content;
+      position: relative;
+      background: none;
+      text-decoration: none;
+    }
+
+    .sidebar-link:not(.active):hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .sidebar-link.active {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .sidebar-link.active::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 3px;
+      background: black;
+      border-radius: 2px;
+    }
+
+    .sidebar-link.active:hover {
+      background: none;
+    }
+
+    .sidebar-bottom {
+      margin-top: 24px;
+    }
+
+    .uva-contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .sidebar-contact {
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-weight: 500;
+    }
+
+    .uva-logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+      opacity: .85;
+      transition: opacity .2s ease;
+    }
+    .uva-logo img:hover { opacity: 1; }
+
+    .sidebar-copy {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .content-wrap {
+      margin-left: var(--sidebar-width);
+      max-width: var(--max);
+      width: 100%;
+      padding: 32px 24px 40px;
+    }
+
+    /* ---------- Content styling ---------- */
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 320px;  /* text + right images */
+      gap: 32px;
+      align-items: flex-start;
+      margin-top: -22px;
+    }
+
+    @media (max-width: 1000px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    section {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 17.5px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: 15px;
+      font-weight: 300;
+      margin: 0 0 8px;
+      max-width: 68ch;
+    }
+
+    /* ---------- RIGHT COLUMN: two images ---------- */
+
+    .other-art {
+      margin-top: 48px;
+      justify-self: end;
+      place-self: start end;
+      width: max-content;
+    }
+
+    .media-pair {
+  display: grid;
+  grid-template-columns: 1fr;   /* stack vertically */
+  gap: 16px;                    /* a bit more space between facade & dome */
+}
+    .facade-shift {
+  object-position: center 95%;
+}
+
+    .top-shift {
+  margin-top: -18px;   /* adjust this value until visually perfect */
+}
+
+.media-pair img {
+  width: 100%;
+  max-width: 260px;     /* makes the images narrower */
+  height: 360px;        /* taller */
+  object-fit: cover;    /* clean cropping */
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-left: auto;    /* centers in right column */
+  margin-right: auto;
+  display: block;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+
+
+    .media-pair img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    }
+
+    .caption-small {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+      max-width: 260px;
+      text-align: right;
+    }
+
+    /* ---------- SIMULATION SECTION (bottom, centered) ---------- */
+
+    .viz-section {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .viz-section h2 {
+      text-align: left;
+    }
+
+    .viz-wrapper {
+      margin-top: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .viz {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--bg);
+      height: 420px;
+      min-height: 320px;
+      overflow: hidden;
+    }
+
+    #vizMount {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ui-toolbar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 5;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .btn {
+      appearance: none;
+      height: 34px;
+      padding: 0 14px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background: transparent;
+      color: var(--text);
+      font: 400 13.5px/1 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+
+    .btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .btn:focus-visible {
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .btn.wall.active {
+      background: #ffe2c2;
+    }
+
+    .btn.dome.active {
+      background: #e9edff;
+    }
+
+    .btn.wall.active:hover {
+      background: #ffd8a8;
+    }
+
+    .btn.dome.active:hover {
+      background: #e1e7ff;
+    }
+
+    /* Cursor for viz */
+    .viz,
+    #vizMount,
+    .viz canvas {
+      cursor: grab;
+    }
+
+    .viz:active,
+    #vizMount:active,
+    .viz canvas:active {
+      cursor: grabbing;
+    }
+
+    /* ---------- Lightbox for images ---------- */
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      overflow: auto;
+    }
+
+    .lightbox-content {
+      display: block;
+      margin: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      border: 4px solid #fff;
+      transition: transform .3s ease;
+    }
+
+    .lightbox-content.rotated {
+      transform: rotate(90deg) scale(1.3);
+      max-height: 95vh;
+      max-width: 95vw;
+    }
+
+    .lightbox-caption {
+      margin: 16px auto;
+      text-align: center;
+      color: #f0f0f0;
+      font-size: 14px;
+      max-width: 80%;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f0f0f0;
+      font-size: 32px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .lightbox-close:hover {
+      color: #fff;
+    }
+
+        /* ---------- Scroll progress circle ---------- */
+    .scroll-progress {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 36px;
+      height: 36px;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .scroll-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .scroll-progress__bg {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 3;
+    }
+
+    .scroll-progress__value {
+      fill: none;
+      stroke: #b55e33;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      transition: stroke-dashoffset 0.15s ease-out;
+    }
+
+
+    /* ---------- Responsive tweaks ---------- */
+
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px;
+      }
+
+      .sidebar-nav {
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .sidebar-link {
+        padding: 4px 8px;
+      }
+
+      .sidebar-bottom {
+        margin-top: 0;
+      }
+
+      .content-wrap {
+        margin-left: 0;
+        padding: 20px 16px 32px;
+      }
+
+      .facade-shift {
+  object-position: center 20%;
+}
+
+      .other-art {
+        margin-top: 24px;
+        justify-self: start;
+      }
+
+      .viz-wrapper {
+        max-width: 100%;
+      }
+    }
+
+
+  </style>
+
+  <!-- === DOME SIMULATION LOGIC (unchanged, just mounted into #vizMount) === -->
+  <script>
+    var domeModel = {
+      name: "domeprojection",
+      showDome: true,
+      showWall: true,
+      scene: null,
+      renderer: null,
+      camera: null,
+      line: null,
+      linesWall: [],
+      linesProjection: [],
+      removeLinesProjection: function () {
+        for (var i = 0; i < this.linesProjection.length; i++) {
+          this.scene.remove(this.linesProjection[i]);
+        }
+        this.linesProjection = [];
+      },
+      l: [0],
+      a: 1,
+      b: 2,
+      c: 1,
+      lstartt: 0,
+      lendt: 2 * Math.PI,
+      lstepsize: Math.PI / 20000,
+      dldt: function (x, t) {
+        return [Math.sqrt(domeModel.b * domeModel.b * Math.cos(t) * Math.cos(t) +
+                domeModel.a * domeModel.a * Math.sin(t) * Math.sin(t))];
+      },
+      numberOfUnits: 120,
+      numberOfSubUnits: 0,
+      units: [], unitsx: [], unitsy: [], unitsz: [],
+      computeAxis: domeComputeAxis,
+      createWall: domeCreateWall,
+      createProjection: domeCreateProjection,
+      computeIntersection: domeComputeIntersection,
+      verticespattern0: [[3, 1], [2, 1], [2, 0], [1, 0], [1, 1], [0, 1], [0, 2], [1, 2], [1, 3], [2, 3], [2, 2], [3, 2], [4, 3], [5, 3], [6, 2], [6, 1], [5, 0], [4, 0], [3, 1], [3, 2]],
+      verticespattern1: [[3, 1], [4, 1], [4, 0], [5, 0], [5, 1], [6, 1], [6, 2], [5, 2], [5, 3], [4, 3], [4, 2], [3, 2], [2, 3], [1, 3], [0, 2], [0, 1], [1, 0], [2, 0], [3, 1], [3, 2]],
+      patternshiftl: 6, patternshiftz: 3, maxlevels: 24, unitlengtz: 0
+    };
+
+    function computeCircumference(model) {
+      var x = [0], h = model.lstepsize, vl = model.dldt;
+      for (var t = model.lstartt; t < model.lendt; t += h) {
+        x = rk4(x, vl, h, t);
+      }
+      model.l = x;
+      return x;
+    }
+
+    function unitSplit(model) {
+      if (model.l[0] == 0) computeCircumference(model);
+      var units = model.units = [];
+      if (model.l[0] == 0) return;
+      var totalunits = model.numberOfUnits * (1 + model.numberOfSubUnits);
+      var ul = model.l[0] / totalunits, x = [0], h = model.lstepsize, t = model.lstartt, vl = model.dldt, xn;
+      units[0] = t;
+      for (var i = 1; i <= totalunits; i++) {
+        while ((xn = rk4(x, vl, h, t))[0] < i * ul) {
+          x = xn;
+          t += h;
+        }
+        var ti = t - (((xn[0] - x[0]) > 0) ? (xn[0] - i * ul) * h / (xn[0] - x[0]) : 0);
+        units[i] = ti;
+      }
+      model.unitlengtz = units[model.numberOfSubUnits + 1] - units[0];
+    }
+
+    function domeCreateWall() {
+      var mainunits = domeModel.numberOfUnits, subunits = domeModel.numberOfSubUnits;
+      var pattern0 = domeModel.verticespattern0, pattern1 = domeModel.verticespattern1;
+      var patterncount = mainunits / domeModel.patternshiftl;
+      var patternunitcount = domeModel.patternshiftl * (1 + subunits);
+      var levelcount = domeModel.patternshiftz;
+      var unitsx = domeModel.unitsx, unitsy = domeModel.unitsy, unitz = domeModel.unitlengtz;
+
+      var material = new THREE.LineBasicMaterial({color: 0xde7f2f});
+
+      for (var j = 0; j < domeModel.maxlevels; j++) {
+        var pattern = (j % 2) ? pattern0 : pattern1;
+        for (var i = 0; i < patterncount; i++) {
+          var geometry = new THREE.Geometry();
+          for (var k = 0; k < pattern.length; k++) {
+            geometry.vertices.push(new THREE.Vector3(
+              unitsx[i * patternunitcount + pattern[k][0] * (1 + subunits)],
+              unitsy[i * patternunitcount + pattern[k][0] * (1 + subunits)],
+              (j * levelcount + pattern[k][1] * (1 + subunits)) * unitz
+            ));
+          }
+          var line = new THREE.Line(geometry, material);
+          domeModel.linesWall[j * patterncount + i] = line;
+          domeModel.scene.add(line);
+        }
+      }
+    }
+
+    function domeComputeAxis(model) {
+      for (var i = 0; i < model.units.length; i++) {
+        model.unitsx[i] = model.a * Math.cos(model.units[i]);
+        model.unitsy[i] = model.b * Math.sin(model.units[i]);
+        model.unitsz[i] = 0;
+      }
+    }
+
+    function domeCreateProjection(model) {
+      if (model.linesProjection.length > 0) model.removeLinesProjection();
+      var material = new THREE.LineBasicMaterial({color: 0x2a4de0});
+      for (var i = 0; i < model.linesWall.length; i++) {
+        var line = new THREE.Line(model.linesWall[i].geometry.clone(), material);
+        var vertices = line.geometry.vertices;
+        for (var k = 0; k < vertices.length; k++) model.computeIntersection(vertices[k]);
+        model.linesProjection[i] = line;
+        model.scene.add(line);
+      }
+    }
+
+    function domeComputeIntersection(p) {
+      var s = Math.sqrt(1 / (p.x * p.x / this.a / this.a + p.y * p.y / this.b / this.b + p.z * p.z / this.c / this.c));
+      p.x *= s;
+      p.y *= s;
+      p.z *= s;
+    }
+
+    function toggleWall(model) {
+      model.showWall = !model.showWall;
+      var btn = document.getElementById("toggleWallButton");
+      if (btn) btn.classList.toggle("active", model.showWall);
+      for (var i = 0; i < model.linesWall.length; i++) model.linesWall[i].visible = model.showWall;
+      model.renderer.render(model.scene, model.camera);
+    }
+
+    function toggleDome(model) {
+      model.showDome = !model.showDome;
+      var btn = document.getElementById("toggleDomeButton");
+      if (btn) btn.classList.toggle("active", model.showDome);
+      for (var i = 0; i < model.linesProjection.length; i++) model.linesProjection[i].visible = model.showDome;
+      model.renderer.render(model.scene, model.camera);
+    }
+
+    function init(model) {
+      unitSplit(model);
+      model.computeAxis(model);
+      model.scene = new THREE.Scene();
+
+      const mount = document.getElementById('vizMount');
+      const rect = () => mount.getBoundingClientRect();
+
+      model.renderer = new THREE.WebGLRenderer({antialias: true});
+      model.renderer.setSize(rect().width, rect().height);
+      model.renderer.setClearColor(new THREE.Color(0xFFF9F0), 1);
+      mount.appendChild(model.renderer.domElement);
+
+      model.camera = new THREE.PerspectiveCamera(80, rect().width / rect().height, 0.1, 1000);
+
+      const R = 0.5 * Math.max(model.a, model.b);
+      model.camera.position.set(-1.2 * R, 0.9 * R, 4 * R);
+      model.camera.up = new THREE.Vector3(0, 0, 1);
+      model.camera.lookAt(new THREE.Vector3(0, 0, 0));
+      model.scene.add(model.camera);
+
+      let light = new THREE.PointLight(0xffffff);
+      light.position.set(-20, 0, -40);
+      model.scene.add(light);
+      light = new THREE.PointLight(0x080808);
+      light.position.set(10, -20, 0);
+      model.scene.add(light);
+
+      model.createWall();
+      model.createProjection(model);
+
+      controls = new THREE.CircleAxisControls(model.camera, model.renderer.domElement, "z");
+      controls.update();
+
+      window.addEventListener('resize', function () {
+        const r = rect();
+        model.renderer.setSize(r.width, r.height);
+        model.camera.aspect = r.width / r.height;
+        model.camera.updateProjectionMatrix();
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      domeModel.renderer.render(domeModel.scene, domeModel.camera);
+    }
+  </script>
+</head>
+
+<body>
+<div class="layout">
+  <!-- Sidebar (same as index, but Other active) -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div>
+        <div class="sidebar-name">Remo Oostdam</div>
+        <div class="sidebar-role">PhD Candidate in Finance</div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main menu">
+        <a class="sidebar-link" href="index.html">Home</a>
+        <a class="sidebar-link active" href="curiosity.html">Curiosity</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="uva-contact-row">
+        <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
+          <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+        </a>
+        <div class="sidebar-contact">
+          <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:r.p.oostdam@uva.nl">r.p.oostdam@uva.nl</a>
+        </div>
+      </div>
+      <span class="sidebar-copy">©<span id="year"></span></span>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <div class="content-wrap">
+    <div class="content">
+      <!-- LEFT: text -->
+      <main>
+        <section aria-labelledby="san-carlo">
+          <h2 id="san-carlo">San Carlo</h2>
+
+          <p>
+            In Rome, there is a small 17th-century church called
+            <a href="https://sancarlino.org/" target="_blank" rel="noopener">San Carlo alle Quattro Fontane</a>,
+            designed by <a href="https://en.wikipedia.org/wiki/Francesco_Borromini" target="_blank" rel="noopener">Francesco
+            Borromini</a>,
+            a contemporary of <a href="https://en.wikipedia.org/wiki/Gian_Lorenzo_Bernini" target="_blank" rel="noopener">Gian
+            Lorenzo Bernini</a>
+            and one of the great masters of the Baroque period. Their rivalry produced some of the era’s most inventive
+            designs.
+          </p>
+
+          <p>
+            Inside the church, the dome’s pattern consists of a repetition of Greek crosses, octagons, and hexagons.
+            To make the dome appear higher, Borromini gradually reduced the size of these shapes toward the top,
+            creating a striking optical illusion.
+          </p>
+
+          <p>
+            This illusion can be reconstructed and improved by projecting the 2D pattern from a cylindrical surface
+            around the dome onto a viewpoint at the center of its base. The intersection of each projection line
+            with the dome determines where the pattern should be drawn.
+          </p>
+
+          <p>
+            In the simulation below, you can experiment with this effect. Approaching the center of the dome,
+            the structure appears to lift upward, with the illusion strongest at the origin.
+          </p>
+
+          <p>
+            Another fascinating example of optical illusion can be found in
+            <a href="https://santignazio.gesuiti.it/en/" target="_blank" rel="noopener">Sant’Ignazio di Loyola</a>, where
+            <a href="https://en.wikipedia.org/wiki/Andrea_Pozzo" target="_blank" rel="noopener">Andrea Pozzo</a>
+            painted a magnificent “false” dome on a flat ceiling — well worth a visit as well!
+          </p>
+
+          <p><em>I completed this project after a high school trip to Rome in 2016, with the help of my excellent math and
+            programming teacher, <a href="https://www.johnval.nl/" target="_blank" rel="noopener">John Val</a>.</em></p>
+        </section>
+      </main>
+
+      <!-- RIGHT: images -->
+      <aside class="other-art" aria-label="Photos of San Carlo">
+        <div class="media-pair">
+          <img src="assets/Gevel.jpeg" alt="Facade of San Carlo alle Quattro Fontane" class="media-img facade-shift top-shift">
+          <img src="assets/Dome.jpg" alt="Dome of San Carlo alle Quattro Fontane" class="rotated-thumb">
+        </div>
+        <div class="caption-small">
+          Facade and dome of San Carlo alle Quattro Fontane, Rome.
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bottom-centered simulation -->
+    <section class="viz-section" aria-label="Interactive dome projection visualization">
+      <h2>Simulation</h2>
+      <div class="viz-wrapper">
+        <div class="viz">
+          <div class="ui-toolbar">
+            <button id="toggleWallButton" class="btn wall active" onclick="toggleWall(domeModel)">Wall</button>
+            <button id="toggleDomeButton" class="btn dome active" onclick="toggleDome(domeModel)">Dome</button>
+          </div>
+          <div id="vizMount"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Lightbox for images -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <span class="lightbox-close" aria-label="Close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+  // Dynamic year in sidebar
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Boot the simulation
+  window.addEventListener('DOMContentLoaded', () => init(domeModel));
+
+  // Lightbox logic for the two images
+  (function () {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCap = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.media-pair img').forEach(img => {
+      img.addEventListener('click', () => {
+        lb.style.display = 'block';
+        lbImg.src = img.src;
+        lbImg.classList.toggle('rotated', img.classList.contains('rotated-thumb'));
+        lbCap.textContent = img.alt || '';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => lb.style.display = 'none');
+    lb.addEventListener('click', e => {
+      if (e.target === lb) lb.style.display = 'none';
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lb.style.display = 'none';
+    });
+  })();
+</script>
+
+<script>
+  // Reading progress circle
+  (function () {
+    const circle = document.querySelector('.scroll-progress__value');
+    if (!circle) return;
+
+    const radius = 16;
+    const circumference = 2 * Math.PI * radius;
+    circle.style.strokeDasharray = `${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
+
+    function setProgress() {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+
+      if (scrollHeight <= 0) {
+        circle.style.strokeDashoffset = `${circumference}`;
+        return;
+      }
+
+      const progress = scrollTop / scrollHeight;
+      const offset = circumference * (1 - progress);
+      circle.style.strokeDashoffset = offset;
+    }
+
+    window.addEventListener('scroll', setProgress, {passive: true});
+    window.addEventListener('resize', setProgress);
+    setProgress();
+  })();
+</script>
+<div class="scroll-progress" aria-hidden="true">
+  <svg viewBox="0 0 36 36">
+    <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
+    <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
+  </svg>
+</div>
+<script>
+  // Reading progress circle
+  (function () {
+    const circle = document.querySelector('.scroll-progress__value');
+    if (!circle) return;
+
+    const radius = 16;
+    const circumference = 2 * Math.PI * radius;
+    circle.style.strokeDasharray = `${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
+
+    function setProgress() {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+
+      if (scrollHeight <= 0) {
+        circle.style.strokeDashoffset = `${circumference}`;
+        return;
+      }
+
+      const progress = scrollTop / scrollHeight;
+      const offset = circumference * (1 - progress);
+      circle.style.strokeDashoffset = offset;
+    }
+
+    window.addEventListener('scroll', setProgress, { passive: true });
+    window.addEventListener('resize', setProgress);
+    setProgress();
+  })();
+</script>
+
+
+</body>
+</html>
