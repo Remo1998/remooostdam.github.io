@@ -515,36 +515,28 @@
       }
     }
 
-    @media (max-width: 900px) {
-
-  /* Mobile Header Layout */
-  .sidebar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 18px 12px;
-  }
-
+ /* MOBILE FIX FOR HEADER / SIDEBAR */
+@media (max-width: 600px) {
   .sidebar-top {
-    width: 100%;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
   }
 
-  /* MOBILE: Name + role stacked cleanly */
-  .sidebar-name {
-    font-size: 20px;
+  .uva-contact-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
   }
 
-  .sidebar-role {
-    font-size: 11px;
-    margin-top: -2px;
+  .sidebar-contact {
+    align-items: flex-start !important;
   }
 
-  /* MOBILE: Navigation centered and spaced */
   .sidebar-nav {
-    flex-direction: row;
-    gap: 22px;
-    margin-top: 10px;
-    justify-content: flex-start;
+    margin-top: 8px !important;
   }
+}
 
   /* MOBILE: Contact row moves BELOW nav, full-width */
   .sidebar-bottom {
