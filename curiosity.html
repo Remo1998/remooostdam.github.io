@@ -158,13 +158,14 @@
       gap: 10px;
     }
 
+    /* Always stack LinkedIn + email, same as index */
     .sidebar-contact {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;  /* vertical: LinkedIn, then email */
-  gap: 2px;
-  font-weight: 500;
-}
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-weight: 500;
+    }
 
     .uva-logo img {
       height: 40px;
@@ -196,12 +197,6 @@
       gap: 32px;
       align-items: flex-start;
       margin-top: -22px;
-    }
-
-    @media (max-width: 1000px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
     }
 
     section {
@@ -236,33 +231,32 @@
     }
 
     .media-pair {
-  display: grid;
-  grid-template-columns: 1fr;   /* stack vertically */
-  gap: 16px;                    /* a bit more space between facade & dome */
-}
+      display: grid;
+      grid-template-columns: 1fr;   /* stack vertically */
+      gap: 16px;                    /* a bit more space between facade & dome */
+    }
+
     .facade-shift {
-  object-position: center 95%;
-}
+      object-position: center 95%;
+    }
 
     .top-shift {
-  margin-top: -18px;   /* adjust this value until visually perfect */
-}
+      margin-top: -18px;   /* adjust this value until visually perfect */
+    }
 
-.media-pair img {
-  width: 100%;
-  max-width: 260px;     /* makes the images narrower */
-  height: 360px;        /* taller */
-  object-fit: cover;    /* clean cropping */
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  margin-left: auto;    /* centers in right column */
-  margin-right: auto;
-  display: block;
-  cursor: pointer;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-
+    .media-pair img {
+      width: 100%;
+      max-width: 260px;     /* makes the images narrower */
+      height: 360px;        /* taller */
+      object-fit: cover;    /* clean cropping */
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      margin-left: auto;    /* centers in right column */
+      margin-right: auto;
+      display: block;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
 
     .media-pair img:hover {
       transform: scale(1.02);
@@ -429,7 +423,7 @@
       color: #fff;
     }
 
-        /* ---------- Scroll progress circle ---------- */
+    /* ---------- Scroll progress circle ---------- */
     .scroll-progress {
       position: fixed;
       right: 24px;
@@ -462,8 +456,13 @@
       transition: stroke-dashoffset 0.15s ease-out;
     }
 
+    /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
 
-    /* ---------- Responsive tweaks ---------- */
+    @media (max-width: 1000px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
 
     @media (max-width: 900px) {
       .layout {
@@ -476,38 +475,69 @@
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--line);
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 16px;
+        padding: 16px 16px 12px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .sidebar-top {
+        flex-direction: column;
+        gap: 6px;
       }
 
       .sidebar-nav {
         flex-direction: row;
-        gap: 8px;
-        margin-top: 4px;
+        gap: 18px;
+        margin-top: 6px;
       }
 
       .sidebar-link {
-        padding: 4px 8px;
+        padding: 4px 0;
+        font-size: 14px;
       }
 
       .sidebar-bottom {
-        margin-top: 0;
+        margin-top: 6px;
+        width: 100%;
+      }
+
+      .uva-contact-row {
+        align-items: center;
+        gap: 8px;
+      }
+
+      .uva-logo img {
+        height: 30px;
+      }
+
+      .sidebar-contact {
+        flex-direction: column;
+        gap: 2px;
+        font-size: 13px;
+      }
+
+      .sidebar-copy {
+        margin-top: 2px;
+        font-size: 11.5px;
       }
 
       .content-wrap {
         margin-left: 0;
-        padding: 20px 16px 32px;
+        padding: 20px 16px 56px;
       }
 
-      .facade-shift {
-  object-position: center 20%;
-}
-
+      /* Curiosity-specific tweaks on mobile */
       .other-art {
         margin-top: 24px;
         justify-self: start;
+      }
+
+      .caption-small {
+        text-align: left;
+      }
+
+      .facade-shift {
+        object-position: center 20%;
       }
 
       .viz-wrapper {
@@ -515,82 +545,23 @@
       }
     }
 
- /* ---------- Responsive tweaks ---------- */
-@media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-  }
+    @media (max-width: 600px) {
+      .lead, p {
+        max-width: 55ch;
+      }
 
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 16px 16px;
-  }
+      .sidebar-name {
+        font-size: 20px;
+      }
 
-  .sidebar-top {
-    gap: 4px;
-  }
+      .sidebar-role {
+        font-size: 11px;
+      }
 
-  .sidebar-nav {
-    flex-direction: row;
-    gap: 8px;
-    margin-top: 4px;
-  }
-
-  .sidebar-link {
-    padding: 4px 8px;
-  }
-
-  .sidebar-bottom {
-    margin-top: 0;
-    width: auto;
-  }
-
-  .uva-contact-row {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .sidebar-contact {
-    flex-direction: column;      /* <- stay stacked on mobile */
-    align-items: flex-start;
-    gap: 2px;
-    font-size: 13px;
-  }
-
-  .uva-logo img {
-    height: 32px;                /* slightly smaller logo on phones */
-  }
-
-  .content-wrap {
-    margin-left: 0;
-    padding: 20px 16px 32px;
-  }
-
-  .other-art {
-    margin-top: 24px;
-    justify-self: start;
-  }
-
-  .facade-shift {
-    object-position: center 20%;
-  }
-
-  .viz-wrapper {
-    max-width: 100%;
-  }
-}
-
-
-
+      .sidebar-contact {
+        font-size: 12.5px;
+      }
+    }
   </style>
 
   <!-- === DOME SIMULATION LOGIC (unchanged, just mounted into #vizMount) === -->
@@ -785,7 +756,7 @@
 
 <body>
 <div class="layout">
-  <!-- Sidebar (same as index, but Other active) -->
+  <!-- Sidebar (same as index, but Curiosity active) -->
   <aside class="sidebar">
     <div class="sidebar-top">
       <div>
@@ -929,43 +900,13 @@
   })();
 </script>
 
-<script>
-  // Reading progress circle
-  (function () {
-    const circle = document.querySelector('.scroll-progress__value');
-    if (!circle) return;
-
-    const radius = 16;
-    const circumference = 2 * Math.PI * radius;
-    circle.style.strokeDasharray = `${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-
-    function setProgress() {
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-
-      if (scrollHeight <= 0) {
-        circle.style.strokeDashoffset = `${circumference}`;
-        return;
-      }
-
-      const progress = scrollTop / scrollHeight;
-      const offset = circumference * (1 - progress);
-      circle.style.strokeDashoffset = offset;
-    }
-
-    window.addEventListener('scroll', setProgress, {passive: true});
-    window.addEventListener('resize', setProgress);
-    setProgress();
-  })();
-</script>
 <div class="scroll-progress" aria-hidden="true">
   <svg viewBox="0 0 36 36">
     <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
     <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
   </svg>
 </div>
+
 <script>
   // Reading progress circle
   (function () {
@@ -997,7 +938,9 @@
     setProgress();
   })();
 </script>
-
-
 </body>
 </html>
+
+
+
+
