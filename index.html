@@ -6,12 +6,9 @@
   <title>Remo Oostdam</title>
   <meta name="description" content="Remo Oostdam – PhD Candidate in Finance"/>
 
-
   <!-- Favicon -->
-<link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
-<link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
-
-
+  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
+  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +65,7 @@
       left: 0;
       width: var(--sidebar-width);
       height: 100vh;
-      padding: 24px 24px; /* increased top padding for a bit more margin */
+      padding: 24px 24px;
       border-right: 1px solid var(--line);
       background: var(--bg);
       display: flex;
@@ -85,14 +82,10 @@
     .sidebar-name {
       font-weight: 700;
       font-size: 22px;
-      letter-spacing: .03em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text);
-    }
-
-    .sidebar-name {
-       margin-bottom: 4px;
-        letter-spacing: 0.04em;
+      margin-bottom: 4px;
     }
 
     .sidebar-role {
@@ -109,50 +102,42 @@
       margin-top: 10px;
     }
 
-  /* Base sidebar link */
-.sidebar-link {
-  display: inline-block;
-  padding: 6px 8px;
-  font-size: 13px;
-  color: var(--text);
-  width: max-content;
-  position: relative;   /* required for underline positioning */
-  background: none;
-  text-decoration: none;
-}
+    /* Base sidebar link */
+    .sidebar-link {
+      display: inline-block;
+      padding: 6px 8px;
+      font-size: 13px;
+      color: var(--text);
+      width: max-content;
+      position: relative;
+      background: none;
+      text-decoration: none;
+    }
 
-/* Hover underline for non-active links */
-.sidebar-link:not(.active):hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
+    /* Hover underline for non-active links */
+    .sidebar-link:not(.active):hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
 
-/* ACTIVE PAGE (current page): centered thick black underline */
-.sidebar-link.active {
-  pointer-events: none;   /* not clickable */
-  cursor: default;
-}
+    /* ACTIVE PAGE (current page): centered thick black underline */
+    .sidebar-link.active {
+      pointer-events: none;
+      cursor: default;
+    }
 
-.sidebar-link.active::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -2px;
-  transform: translateX(-50%);
-  width: 80%;            /* underline length */
-  height: 3px;           /* underline thickness */
-  background: black;
-  border-radius: 2px;
-}
-
-/* Active link does NOT react to hover */
-.sidebar-link.active:hover {
-  background: none;
-}
-
-
-
+    .sidebar-link.active::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 3px;
+      background: black;
+      border-radius: 2px;
+    }
 
     .sidebar-bottom {
       margin-top: 24px;
@@ -165,16 +150,17 @@
       gap: 10px;
     }
 
-    .sidebar-contact {
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px; /* smaller gap between LinkedIn and email */
-      font-weight: 500;
-    }
+    /* Always stack LinkedIn + email */
+.sidebar-contact {
+  display: flex;
+  flex-direction: column;   /* <-- always vertical */
+  gap: 2px;
+  font-size: 14px;
+}
+
 
     .uva-logo img {
-      height: 40px; /* slightly bigger logo */
+      height: 40px;
       width: auto;
       display: block;
       opacity: .85;
@@ -201,7 +187,7 @@
       display: grid;
       grid-template-columns:120px 1fr;
       gap: 22px;
-      padding-top: 0px;  /* moved higher to align with name */
+      padding-top: 0;
       align-items: stretch;
     }
 
@@ -234,65 +220,6 @@
       align-items: start;
       margin-top: 24px;
     }
-
-/* MOBILE FIX FOR HEADER / SIDEBAR */
-@media (max-width: 600px) {
-  .sidebar-top {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-  }
-
-  .uva-contact-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-  }
-
-  .sidebar-contact {
-    align-items: flex-start !important;
-  }
-
-  .sidebar-nav {
-    margin-top: 8px !important;
-  }
-}
-
-
-  /* MOBILE: Contact row moves BELOW nav, full-width */
-  .sidebar-bottom {
-    margin-top: 10px;
-    width: 100%;
-  }
-
-  .uva-contact-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  /* MOBILE: Make logo small enough */
-  .uva-logo img {
-    height: 28px;
-  }
-
-  /* MOBILE: Make LinkedIn + Email go on 1 line cleanly */
-  .sidebar-contact {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    font-size: 13px;
-    padding-left: 2px;
-  }
-
-  /* Copyright below contact */
-  .sidebar-copy {
-    margin-top: 3px;
-    font-size: 11.5px;
-  }
-}
-
 
     section {
       margin-top: 22px;
@@ -402,42 +329,49 @@
     .lightbox-close:hover {
       color: #fff;
     }
+
     /* ---------- Scroll progress circle ---------- */
 
-.scroll-progress {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 36px;
-  height: 36px;
-  z-index: 200;
-  pointer-events: none;
-}
+    .scroll-progress {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 36px;
+      height: 36px;
+      z-index: 200;
+      pointer-events: none;
+    }
 
-.scroll-progress svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
+    .scroll-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
 
-.scroll-progress__bg {
-  fill: none;
-  stroke: var(--line);
-  stroke-width: 3;
-}
+    .scroll-progress__bg {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 3;
+    }
 
-.scroll-progress__value {
-  fill: none;
-  stroke: #b55e33;;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  transition: stroke-dashoffset 0.15s ease-out;
-}
+    .scroll-progress__value {
+      fill: none;
+      stroke: #b55e33;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      transition: stroke-dashoffset 0.15s ease-out;
+    }
 
+    /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
 
-    /* ---------- Responsive ---------- */
+    @media (max-width: 1000px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 900px) {
       .layout {
         flex-direction: column;
@@ -449,41 +383,86 @@
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--line);
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 16px;
+        padding: 16px 16px 12px;
+        flex-direction: column;
+        gap: 8px;
       }
 
       .sidebar-top {
-        gap: 4px;
+        flex-direction: column;
+        gap: 6px;
       }
 
       .sidebar-nav {
         flex-direction: row;
-        gap: 8px;
-        margin-top: 4px;
+        gap: 18px;
+        margin-top: 6px;
       }
 
       .sidebar-link {
-        padding: 4px 8px;
+        padding: 4px 0;
+        font-size: 14px;
       }
 
       .sidebar-bottom {
-        margin-top: 0;
+        margin-top: 6px;
+        width: 100%;
+      }
+
+      .uva-contact-row {
+        align-items: center;
+        gap: 8px;
+      }
+
+      .uva-logo img {
+        height: 30px;
+      }
+
+      .sidebar-contact {
+        flex-direction: column;
+        gap: 2px;
+        font-size: 13px;
+      }
+
+      .sidebar-copy {
+        margin-top: 2px;
+        font-size: 11.5px;
       }
 
       .content-wrap {
         margin-left: 0;
-        padding: 20px 16px 72px;
+        padding: 20px 16px 56px;
       }
 
       .intro {
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
       }
 
-      .uva-contact-row {
-        justify-content: flex-end;
+      .art {
+        justify-self: start;
+        text-align: left;
+      }
+
+      .caption {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .lead, p {
+        max-width: 55ch;
+      }
+
+      .sidebar-name {
+        font-size: 20px;
+      }
+
+      .sidebar-role {
+        font-size: 11px;
+      }
+
+      .sidebar-contact {
+        font-size: 12.5px;
       }
     }
   </style>
@@ -498,7 +477,7 @@
 </div>
 
 <div class="layout">
-  <!-- Fixed left sidebar -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-top">
       <div>
@@ -520,7 +499,6 @@
         <div class="sidebar-contact">
           <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="mailto:r.p.oostdam@uva.nl">r.p.oostdam@uva.nl</a>
-
         </div>
       </div>
       <span class="sidebar-copy">©<span id="year"></span></span>
@@ -593,10 +571,9 @@
       <aside class="art">
         <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>
         <div class="caption">
-  <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>
-  Franz Marc.
-</div>
-
+          <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>
+          Franz Marc.
+        </div>
       </aside>
     </div>
   </div>
