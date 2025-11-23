@@ -515,6 +515,72 @@
       }
     }
 
+    @media (max-width: 900px) {
+
+  /* Mobile Header Layout */
+  .sidebar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 18px 12px;
+  }
+
+  .sidebar-top {
+    width: 100%;
+  }
+
+  /* MOBILE: Name + role stacked cleanly */
+  .sidebar-name {
+    font-size: 20px;
+  }
+
+  .sidebar-role {
+    font-size: 11px;
+    margin-top: -2px;
+  }
+
+  /* MOBILE: Navigation centered and spaced */
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 22px;
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  /* MOBILE: Contact row moves BELOW nav, full-width */
+  .sidebar-bottom {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .uva-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  /* MOBILE: Make logo small enough */
+  .uva-logo img {
+    height: 28px;
+  }
+
+  /* MOBILE: Make LinkedIn + Email go on 1 line cleanly */
+  .sidebar-contact {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    font-size: 13px;
+    padding-left: 2px;
+  }
+
+  /* Copyright below contact */
+  .sidebar-copy {
+    margin-top: 3px;
+    font-size: 11.5px;
+  }
+}
+
+
 
   </style>
 
