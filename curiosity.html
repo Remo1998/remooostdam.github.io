@@ -515,60 +515,77 @@
       }
     }
 
- /* MOBILE FIX FOR HEADER / SIDEBAR */
-@media (max-width: 600px) {
+ /* ---------- Responsive tweaks ---------- */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px 16px;
+  }
+
   .sidebar-top {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-  }
-
-  .uva-contact-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important;
-  }
-
-  .sidebar-contact {
-    align-items: flex-start !important;
+    gap: 4px;
   }
 
   .sidebar-nav {
-    margin-top: 8px !important;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 4px;
   }
-}
 
-  /* MOBILE: Contact row moves BELOW nav, full-width */
+  .sidebar-link {
+    padding: 4px 8px;
+  }
+
   .sidebar-bottom {
-    margin-top: 10px;
-    width: 100%;
+    margin-top: 0;
+    width: auto;
   }
 
   .uva-contact-row {
-    display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 10px;
     margin-top: 4px;
   }
 
-  /* MOBILE: Make logo small enough */
-  .uva-logo img {
-    height: 28px;
-  }
-
-  /* MOBILE: Make LinkedIn + Email go on 1 line cleanly */
   .sidebar-contact {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
+    flex-direction: column;      /* <- stay stacked on mobile */
+    align-items: flex-start;
+    gap: 2px;
     font-size: 13px;
-    padding-left: 2px;
   }
 
-  /* Copyright below contact */
-  .sidebar-copy {
-    margin-top: 3px;
-    font-size: 11.5px;
+  .uva-logo img {
+    height: 32px;                /* slightly smaller logo on phones */
+  }
+
+  .content-wrap {
+    margin-left: 0;
+    padding: 20px 16px 32px;
+  }
+
+  .other-art {
+    margin-top: 24px;
+    justify-self: start;
+  }
+
+  .facade-shift {
+    object-position: center 20%;
+  }
+
+  .viz-wrapper {
+    max-width: 100%;
   }
 }
 
