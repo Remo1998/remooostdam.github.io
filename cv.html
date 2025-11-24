@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Remo Oostdam</title>
-  <meta name="description" content="Remo Oostdam – PhD Candidate in Finance"/>
+  <title>Remo Oostdam — CV</title>
+  <meta name="description" content="Curriculum Vitae of Remo Oostdam"/>
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
@@ -24,7 +24,6 @@
       --max: 980px;
 
       --sidebar-width: 260px;
-      --art-w: 200px;
     }
 
     html { box-sizing: border-box; }
@@ -42,7 +41,6 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* All links: black and clickable */
     a {
       color: var(--text);
       text-decoration: none;
@@ -52,7 +50,7 @@
       text-decoration: underline;
     }
 
-    /* ---------- LAYOUT ---------- */
+    /* ---------- LAYOUT / SIDEBAR (copied from index) ---------- */
 
     .layout {
       display: flex;
@@ -101,7 +99,6 @@
       margin-top: 10px;
     }
 
-    /* Base sidebar link */
     .sidebar-link {
       display: inline-block;
       padding: 6px 8px;
@@ -113,14 +110,12 @@
       text-decoration: none;
     }
 
-    /* Hover underline for non-active links */
     .sidebar-link:not(.active):hover {
       text-decoration: underline;
       text-decoration-thickness: 2px;
       text-underline-offset: 3px;
     }
 
-    /* ACTIVE PAGE (current page): centered thick black underline */
     .sidebar-link.active {
       pointer-events: none;
       cursor: default;
@@ -142,21 +137,19 @@
       margin-top: 24px;
     }
 
-    /* UvA logo left, contact + copyright right */
     .uva-contact-row {
       display: flex;
       align-items: flex-start;
       gap: 10px;
     }
 
-    /* Always stack LinkedIn + email */
-.sidebar-contact {
-  display: flex;
-  flex-direction: column;   /* <-- always vertical */
-  gap: 2px;
-  font-size: 14px;
-}
-
+    .sidebar-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
     .uva-logo img {
       height: 40px;
@@ -180,156 +173,50 @@
       padding: 32px 24px 72px;
     }
 
-    /* ---------- Content styling ---------- */
-
-    .intro {
-      display: grid;
-      grid-template-columns:120px 1fr;
-      gap: 22px;
-      padding-top: 0;
-      align-items: stretch;
-    }
-
-    .intro > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .portrait {
-      width: 100%;
-      max-width: 120px;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border: 1px solid #e4e0d8;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    }
-
-    .lead {
-      font-size: 16px;
-      font-weight: 400;
-      margin: 0 0 8px;
-      max-width: 68ch;
-    }
-
-    .content {
-      display: grid;
-      grid-template-columns:1fr 320px;
-      gap: 32px;
-      align-items: start;
-      margin-top: 24px;
-    }
+    /* ---------- MAIN CONTENT ---------- */
 
     section {
-      margin-top: 22px;
+      margin-top: -5px;
       padding-top: 14px;
       border-top: 1px solid var(--line);
     }
 
-    h2 {
+    h1 {
       font-weight: 500;
-      font-size: 17.5px;
+      font-size: 21px;
       letter-spacing: .10em;
       text-transform: uppercase;
-      margin: 0 0 6px;
-      color: var(--text);
-    }
-
-    .paper-title {
-      font-weight: 500;
-      font-size: 17px;
-      letter-spacing: .01em;
       margin: 0 0 4px;
       color: var(--text);
     }
 
-    .coauthors {
-      font-size: 14px;
-      color: #8a8f96;
-      margin: 2px 0 10px;
+    .cv-intro {
+      font-size: 15px;
+      margin: 6px 0 18px;
+      max-width: 70ch;
     }
 
-    .art {
-      margin-top: 48px;
-      justify-self: end;
-      place-self: start end;
-      display: inline-grid;
-      justify-items: end;
-      width: max-content;
-      text-align: right;
-    }
-
-    .art img {
-      display: block;
-      width: auto;
-      max-width: var(--art-w);
-      height: auto;
-      margin: 0;
+    .cv-embed-wrapper {
       border: 1px solid var(--line);
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
     }
 
-    .art img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .caption {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 6px;
-      max-width: var(--art-w);
-      text-align: right;
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(4px);
-    }
-
-    .lightbox-content {
+    .cv-embed {
       display: block;
-      margin: auto;
-      max-width: 80%;
-      max-height: 80%;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      border: 4px solid #fff;
+      width: 100%;
+      height: 900px; /* desktop-ish */
+      border: none;
     }
 
-    .lightbox-caption {
-      margin: 16px auto;
-      text-align: center;
-      color: #f0f0f0;
+    .cv-download {
+      margin-top: 10px;
       font-size: 14px;
-      max-width: 80%;
+      color: var(--muted);
     }
 
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #f0f0f0;
-      font-size: 32px;
-      font-weight: 300;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .lightbox-close:hover {
-      color: #fff;
-    }
-
-    /* ---------- Scroll progress circle ---------- */
+    /* ---------- SCROLL PROGRESS (same as index) ---------- */
 
     .scroll-progress {
       position: fixed;
@@ -363,13 +250,7 @@
       transition: stroke-dashoffset 0.15s ease-out;
     }
 
-    /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
-
-    @media (max-width: 1000px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
-    }
+    /* ---------- RESPONSIVE (same philosophy as index) ---------- */
 
     @media (max-width: 900px) {
       .layout {
@@ -433,25 +314,12 @@
         padding: 20px 16px 56px;
       }
 
-      .intro {
-        grid-template-columns: 1fr;
-      }
-
-      .art {
-        justify-self: start;
-        text-align: left;
-      }
-
-      .caption {
-        text-align: left;
+      .cv-embed {
+        height: 700px;
       }
     }
 
     @media (max-width: 600px) {
-      .lead, p {
-        max-width: 55ch;
-      }
-
       .sidebar-name {
         font-size: 20px;
       }
@@ -463,17 +331,14 @@
       .sidebar-contact {
         font-size: 12.5px;
       }
+
+      .cv-embed {
+        height: 600px;
+      }
     }
   </style>
 </head>
 <body>
-
-<!-- Lightbox modal -->
-<div id="lightbox" class="lightbox">
-  <span class="lightbox-close" aria-label="Close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img" alt="">
-  <div class="lightbox-caption" id="lightbox-caption"></div>
-</div>
 
 <div class="layout">
   <!-- Sidebar -->
@@ -485,8 +350,8 @@
       </div>
 
       <nav class="sidebar-nav" aria-label="Main menu">
-  <a class="sidebar-link active" href="index.html">Home</a>
-  <a class="sidebar-link" href="cv.html">CV</a>
+  <a class="sidebar-link" href="index.html">Home</a>
+  <a class="sidebar-link active" href="cv.html">CV</a>
   <a class="sidebar-link" href="curiosity.html">Curiosity</a>
 </nav>
     </div>
@@ -507,75 +372,18 @@
 
   <!-- Main content -->
   <div class="content-wrap">
-    <div class="intro">
-      <img class="portrait" src="assets/cv_klein.JPG" alt="Portrait of Remo Oostdam"/>
-      <div>
-        <p class="lead">
-          I am a third-year PhD candidate in Finance at the University of Amsterdam.
-          I study financial intermediation and how it affects efficiency and stability.
-          My work combines theory and empirics under the supervision of
-          <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico
-            Perotti</a>
-          and
-          <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">Dr. Torsten
-            Jochem</a>.
-        </p>
+    <section aria-labelledby="cv-heading">
+
+
+      <div class="cv-embed-wrapper">
+        <!-- ⚠️ Update the src to your real CV path/filename -->
+        <iframe
+          class="cv-embed"
+          src="assets/Remo_Oostdam_CV.pdf#view=FitH"
+          title="CV of Remo Oostdam">
+        </iframe>
       </div>
-    </div>
-
-    <div class="content">
-      <main>
-        <section aria-labelledby="papers">
-          <h2 id="papers">Papers</h2>
-
-          <div>
-            <div class="paper-title">
-              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880" target="_blank" rel="noopener">
-                Sand in the Wheels: Addressing Runs through Contingent Fees
-              </a>
-            </div>
-            <div class="coauthors">
-              Working paper with
-              <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael Matta</a>
-              and
-              <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>.
-            </div>
-          </div>
-
-          <div style="margin-top:20px;">
-            <div class="paper-title">
-              Expansion and Contraction: The Dawn of Deposit Banking in the Netherlands
-            </div>
-            <div class="coauthors">
-              Work in progress with
-              <a href="https://www.evamulder.com/" target="_blank" rel="noopener">Eva Mulder</a>.
-            </div>
-          </div>
-        </section>
-
-        <section aria-labelledby="teaching">
-          <h2 id="teaching">Teaching</h2>
-          <p class="teaching-inline">
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131865"
-               target="_blank" rel="noopener">Finance 1</a>,
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131917"
-               target="_blank" rel="noopener">Corporate Finance</a>,
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131595"
-               target="_blank" rel="noopener">Financial Regulation</a>,
-            <a href="https://eur.osiris-student.nl/onderwijscatalogus/extern/cursus?cursuscode=TIF20102&amp;collegejaar=2025"
-               target="_blank" rel="noopener">Banking</a>
-          </p>
-        </section>
-      </main>
-
-      <aside class="art">
-        <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>
-        <div class="caption">
-          <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>
-          Franz Marc.
-        </div>
-      </aside>
-    </div>
+    </section>
   </div>
 </div>
 
@@ -590,37 +398,7 @@
   // Dynamic year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Lightbox logic
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
-  const artImage = document.getElementById('art-image');
-  const closeBtn = document.querySelector('.lightbox-close');
-
-  if (artImage) {
-    artImage.addEventListener('click', () => {
-      if (!lightbox) return;
-      lightbox.style.display = 'block';
-      lightboxImg.src = artImage.src;
-      lightboxCaption.innerHTML = document.querySelector('.caption').innerHTML;
-    });
-  }
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      lightbox.style.display = 'none';
-    });
-  }
-  if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) lightbox.style.display = 'none';
-    });
-  }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox) lightbox.style.display = 'none';
-  });
-</script>
-<script>
-  // Reading progress circle
+  // Reading progress circle (same logic as index)
   (function () {
     const circle = document.querySelector('.scroll-progress__value');
     if (!circle) return;
@@ -645,7 +423,7 @@
       circle.style.strokeDashoffset = offset;
     }
 
-    window.addEventListener('scroll', setProgress, {passive: true});
+    window.addEventListener('scroll', setProgress, { passive: true });
     window.addEventListener('resize', setProgress);
     setProgress();
   })();
@@ -653,4 +431,5 @@
 
 </body>
 </html>
+
 
