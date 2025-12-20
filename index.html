@@ -183,12 +183,13 @@
     /* ---------- Content styling ---------- */
 
     .intro {
-      display: grid;
-      grid-template-columns:120px 1fr;
-      gap: 22px;
-      padding-top: 0;
-      align-items: stretch;
-    }
+  display: grid;
+  grid-template-columns: 1fr auto; /* text | portrait */
+  gap: 22px;
+  align-items: start;
+  margin-top: 0;
+}
+
 
     .intro > div {
       display: flex;
@@ -197,13 +198,14 @@
     }
 
     .portrait {
-      width: 100%;
-      max-width: 120px;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border: 1px solid #e4e0d8;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    }
+  width: 150px;          /* fixed, clean alignment */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid #e4e0d8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  justify-self: end;     /* key: push to the right edge */
+}
+
 
     .lead {
       font-size: 16px;
@@ -213,10 +215,7 @@
     }
 
     .content {
-      display: grid;
-      grid-template-columns:1fr 320px;
-      gap: 32px;
-      align-items: start;
+      display: block;
       margin-top: 24px;
     }
 
@@ -447,6 +446,19 @@
       }
     }
 
+    .fields {
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.fields strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+
     @media (max-width: 600px) {
       .lead, p {
         max-width: 55ch;
@@ -498,7 +510,14 @@
         </a>
         <div class="sidebar-contact">
           <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:r.p.oostdam@uva.nl">r.p.oostdam@uva.nl</a>
+          <a class="js-email"
+   data-user="r.p.oostdam"
+   data-domain="uva.nl"
+   href="#"
+   rel="nofollow">
+  r.p.oostdam at uva.nl
+</a>
+
         </div>
       </div>
       <span class="sidebar-copy">©<span id="year"></span></span>
@@ -508,7 +527,6 @@
   <!-- Main content -->
   <div class="content-wrap">
     <div class="intro">
-      <img class="portrait" src="assets/cv_klein.JPG" alt="Portrait of Remo Oostdam"/>
       <div>
         <p class="lead">
           I am a third-year PhD candidate in Finance at the University of Amsterdam.
@@ -520,13 +538,18 @@
           <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">Dr. Torsten
             Jochem</a>.
         </p>
+         <p class="fields">
+      <strong>Fields of Interest:</strong>
+      financial intermediation, information economics, fintech, financial history
+    </p>
       </div>
+      <img class="portrait" src="assets/cv_klein.JPG" alt="Portrait of Remo Oostdam"/>
     </div>
 
     <div class="content">
       <main>
         <section aria-labelledby="papers">
-          <h2 id="papers">Papers</h2>
+          <h2 id="papers">Research</h2>
 
           <div>
             <div class="paper-title">
@@ -649,6 +672,29 @@
     window.addEventListener('resize', setProgress);
     setProgress();
   })();
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("a.js-email").forEach((a) => {
+      const user = a.dataset.user;
+      const domain = a.dataset.domain;
+      if (!user || !domain) return;
+
+      const email = `${user}@${domain}`;
+      const mailto = `mailto:${email}`;
+
+      // Keep visible text obfuscated, only make click target real
+      a.setAttribute("href", mailto);
+
+      // Extra safety: if something overwrites href later, still open mail
+      a.addEventListener("click", (e) => {
+        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
+          e.preventDefault();
+          window.location.href = mailto;
+        }
+      });
+    });
+  });
 </script>
 
 </body>
