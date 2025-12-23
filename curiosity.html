@@ -1,1105 +1,19 @@
-
-
-
-
-<!--<!doctype html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="utf-8"/>-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1"/>-->
-<!--  <title>Remo Oostdam — Curiosity</title>-->
-<!--  <meta name="description" content="Remo Oostdam – Other Projects"/>-->
-
-<!--  &lt;!&ndash; Favicon (same as index) &ndash;&gt;-->
-<!--  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">-->
-<!--  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">-->
-
-<!--  &lt;!&ndash; Inter (same as index) &ndash;&gt;-->
-<!--  <link rel="preconnect" href="https://fonts.googleapis.com">-->
-<!--  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
-<!--  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">-->
-
-<!--  &lt;!&ndash; JS for simulation &ndash;&gt;-->
-<!--  <script src="assets/js/three.min.js"></script>-->
-<!--  <script src="assets/js/CircleAxisControls2.js"></script>-->
-<!--  <script src="assets/js/odeSolvers.js"></script>-->
-<!--  <script src="assets/js/JSON.js"></script>-->
-
-<!--  <style>-->
-<!--    :root {-->
-<!--      &#45;&#45;bg: #FFF9F0;-->
-<!--      &#45;&#45;text: #0f1115;-->
-<!--      &#45;&#45;muted: #5f6670;-->
-<!--      &#45;&#45;line: #c8c8c8;-->
-<!--      &#45;&#45;accent: #000000;-->
-<!--      &#45;&#45;max: 980px;-->
-<!--      &#45;&#45;sidebar-width: 260px;-->
-<!--      &#45;&#45;art-w: 200px;-->
-<!--    }-->
-
-<!--    html {-->
-<!--      box-sizing: border-box;-->
-<!--    }-->
-<!--    *, *:before, *:after {-->
-<!--      box-sizing: inherit;-->
-<!--    }-->
-
-<!--    body {-->
-<!--      margin: 0;-->
-<!--      background: var(&#45;&#45;bg);-->
-<!--      color: #2b2d30;-->
-<!--      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;-->
-<!--      font-weight: 400;-->
-<!--      font-size: 16px;-->
-<!--      line-height: 1.5;-->
-<!--      -webkit-font-smoothing: antialiased;-->
-<!--      text-rendering: optimizeLegibility;-->
-<!--    }-->
-
-<!--    /* All links: black and clickable */-->
-<!--    a {-->
-<!--      color: var(&#45;&#45;text);-->
-<!--      text-decoration: none;-->
-<!--      transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;-->
-<!--    }-->
-<!--    a:hover {-->
-<!--      text-decoration: underline;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; LAYOUT (same base as index) &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .layout {-->
-<!--      display: flex;-->
-<!--      min-height: 100vh;-->
-<!--    }-->
-
-<!--    .sidebar {-->
-<!--      position: fixed;-->
-<!--      top: 0;-->
-<!--      left: 0;-->
-<!--      width: var(&#45;&#45;sidebar-width);-->
-<!--      height: 100vh;-->
-<!--      padding: 24px 24px;-->
-<!--      border-right: 1px solid var(&#45;&#45;line);-->
-<!--      background: var(&#45;&#45;bg);-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      justify-content: space-between;-->
-<!--    }-->
-
-<!--    .sidebar-top {-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      gap: 16px;-->
-<!--    }-->
-
-<!--    .sidebar-name {-->
-<!--      font-weight: 700;-->
-<!--      font-size: 22px;-->
-<!--      letter-spacing: 0.04em;-->
-<!--      color: var(&#45;&#45;text);-->
-<!--      margin-bottom: 4px;-->
-<!--    }-->
-
-<!--    .sidebar-role {-->
-<!--      font-size: 12px;-->
-<!--      letter-spacing: .092em;-->
-<!--      text-transform: uppercase;-->
-<!--      color: var(&#45;&#45;text);-->
-<!--    }-->
-
-<!--    .sidebar-nav {-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      gap: 4px;-->
-<!--      margin-top: 10px;-->
-<!--    }-->
-
-<!--    /* Base sidebar link + underline logic (same as index) */-->
-<!--    .sidebar-link {-->
-<!--      display: inline-block;-->
-<!--      padding: 6px 8px;-->
-<!--      font-size: 13px;-->
-<!--      color: var(&#45;&#45;text);-->
-<!--      width: max-content;-->
-<!--      position: relative;-->
-<!--      background: none;-->
-<!--      text-decoration: none;-->
-<!--    }-->
-
-<!--    .sidebar-link:not(.active):hover {-->
-<!--      text-decoration: underline;-->
-<!--      text-decoration-thickness: 2px;-->
-<!--      text-underline-offset: 3px;-->
-<!--    }-->
-
-<!--    .sidebar-link.active {-->
-<!--      pointer-events: none;-->
-<!--      cursor: default;-->
-<!--    }-->
-
-<!--    .sidebar-link.active::after {-->
-<!--      content: "";-->
-<!--      position: absolute;-->
-<!--      left: 50%;-->
-<!--      bottom: -2px;-->
-<!--      transform: translateX(-50%);-->
-<!--      width: 80%;-->
-<!--      height: 3px;-->
-<!--      background: black;-->
-<!--      border-radius: 2px;-->
-<!--    }-->
-
-<!--    .sidebar-link.active:hover {-->
-<!--      background: none;-->
-<!--    }-->
-
-<!--    .sidebar-bottom {-->
-<!--      margin-top: 24px;-->
-<!--    }-->
-
-<!--    .uva-contact-row {-->
-<!--      display: flex;-->
-<!--      align-items: flex-start;-->
-<!--      gap: 10px;-->
-<!--    }-->
-
-<!--    /* Always stack LinkedIn + email, same as index */-->
-<!--    .sidebar-contact {-->
-<!--      font-size: 14px;-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      gap: 2px;-->
-<!--      font-weight: 500;-->
-<!--    }-->
-
-<!--    .uva-logo img {-->
-<!--      height: 40px;-->
-<!--      width: auto;-->
-<!--      display: block;-->
-<!--      opacity: .85;-->
-<!--      transition: opacity .2s ease;-->
-<!--    }-->
-
-<!--    .uva-logo img:hover {-->
-<!--      opacity: 1;-->
-<!--    }-->
-
-<!--    .sidebar-copy {-->
-<!--      font-size: 12px;-->
-<!--      color: var(&#45;&#45;muted);-->
-<!--      margin-top: 4px;-->
-<!--    }-->
-
-<!--    .content-wrap {-->
-<!--      margin-left: var(&#45;&#45;sidebar-width);-->
-<!--      max-width: var(&#45;&#45;max);-->
-<!--      width: 100%;-->
-<!--      padding: 32px 24px 40px;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Content styling &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .content {-->
-<!--      display: grid;-->
-<!--      grid-template-columns: 1fr 320px; /* text + right images */-->
-<!--      gap: 32px;-->
-<!--      align-items: flex-start;-->
-<!--      margin-top: -22px;-->
-<!--    }-->
-
-<!--    section {-->
-<!--      margin-top: 22px;-->
-<!--      padding-top: 14px;-->
-<!--      border-top: 1px solid var(&#45;&#45;line);-->
-<!--    }-->
-
-<!--    h2 {-->
-<!--      font-weight: 500;-->
-<!--      font-size: 17.5px;-->
-<!--      letter-spacing: .10em;-->
-<!--      text-transform: uppercase;-->
-<!--      margin: 0 0 6px;-->
-<!--      color: var(&#45;&#45;text);-->
-<!--    }-->
-
-<!--    .lead {-->
-<!--      font-size: 15px;-->
-<!--      font-weight: 300;-->
-<!--      margin: 0 0 8px;-->
-<!--      max-width: 68ch;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; RIGHT COLUMN: two images &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .other-art {-->
-<!--      margin-top: 48px;-->
-<!--      justify-self: end;-->
-<!--      place-self: start end;-->
-<!--      width: max-content;-->
-<!--    }-->
-
-<!--    .media-pair {-->
-<!--      display: grid;-->
-<!--      grid-template-columns: 1fr; /* stack vertically */-->
-<!--      gap: 16px; /* a bit more space between facade & dome */-->
-<!--    }-->
-
-<!--    .facade-shift {-->
-<!--      object-position: center 95%;-->
-<!--    }-->
-
-<!--    .top-shift {-->
-<!--      margin-top: -18px; /* adjust this value until visually perfect */-->
-<!--    }-->
-
-<!--    .media-pair img {-->
-<!--      width: 100%;-->
-<!--      max-width: 260px; /* makes the images narrower */-->
-<!--      height: 360px; /* taller */-->
-<!--      object-fit: cover; /* clean cropping */-->
-<!--      border: 1px solid var(&#45;&#45;line);-->
-<!--      border-radius: 6px;-->
-<!--      margin-left: auto; /* centers in right column */-->
-<!--      margin-right: auto;-->
-<!--      display: block;-->
-<!--      cursor: pointer;-->
-<!--      transition: transform .25s ease, box-shadow .25s ease;-->
-<!--    }-->
-
-<!--    .media-pair img:hover {-->
-<!--      transform: scale(1.02);-->
-<!--      box-shadow: 0 4px 12px rgba(0, 0, 0, .08);-->
-<!--    }-->
-
-<!--    .caption-small {-->
-<!--      color: var(&#45;&#45;muted);-->
-<!--      font-size: 13px;-->
-<!--      margin-top: 6px;-->
-<!--      max-width: 260px;-->
-<!--      text-align: right;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; SIMULATION SECTION (bottom, centered) &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .viz-section {-->
-<!--      margin-top: 48px;-->
-<!--      padding-top: 24px;-->
-<!--      border-top: 1px solid var(&#45;&#45;line);-->
-<!--    }-->
-
-<!--    .viz-section h2 {-->
-<!--      text-align: left;-->
-<!--    }-->
-
-<!--    .viz-wrapper {-->
-<!--      margin-top: 16px;-->
-<!--      max-width: 700px;-->
-<!--      margin-left: auto;-->
-<!--      margin-right: auto;-->
-<!--    }-->
-
-<!--    .viz {-->
-<!--      position: relative;-->
-<!--      border: 1px solid var(&#45;&#45;line);-->
-<!--      border-radius: 6px;-->
-<!--      background: var(&#45;&#45;bg);-->
-<!--      height: 420px;-->
-<!--      min-height: 320px;-->
-<!--      overflow: hidden;-->
-<!--    }-->
-
-<!--    #vizMount {-->
-<!--      position: absolute;-->
-<!--      inset: 0;-->
-<!--    }-->
-
-<!--    .ui-toolbar {-->
-<!--      position: absolute;-->
-<!--      top: 12px;-->
-<!--      left: 12px;-->
-<!--      z-index: 5;-->
-<!--      display: flex;-->
-<!--      gap: 12px;-->
-<!--      align-items: center;-->
-<!--      background: transparent;-->
-<!--      border: none;-->
-<!--      padding: 0;-->
-<!--    }-->
-
-<!--    .btn {-->
-<!--      appearance: none;-->
-<!--      height: 34px;-->
-<!--      padding: 0 14px;-->
-<!--      border: 1px solid transparent;-->
-<!--      border-radius: 3px;-->
-<!--      background: transparent;-->
-<!--      color: var(&#45;&#45;text);-->
-<!--      font: 400 13.5px/1 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;-->
-<!--      cursor: pointer;-->
-<!--      transition: background .15s ease, color .15s ease, border-color .15s ease;-->
-<!--    }-->
-
-<!--    .btn:hover {-->
-<!--      background: rgba(0, 0, 0, 0.04);-->
-<!--    }-->
-
-<!--    .btn:focus-visible {-->
-<!--      outline: none;-->
-<!--      border: 1px solid rgba(0, 0, 0, 0.25);-->
-<!--    }-->
-
-<!--    .btn.wall.active {-->
-<!--      background: #ffe2c2;-->
-<!--    }-->
-
-<!--    .btn.dome.active {-->
-<!--      background: #e9edff;-->
-<!--    }-->
-
-<!--    .btn.wall.active:hover {-->
-<!--      background: #ffd8a8;-->
-<!--    }-->
-
-<!--    .btn.dome.active:hover {-->
-<!--      background: #e1e7ff;-->
-<!--    }-->
-
-<!--    /* Cursor for viz */-->
-<!--    .viz, #vizMount, .viz canvas {-->
-<!--      cursor: grab;-->
-<!--    }-->
-
-<!--    .viz:active, #vizMount:active, .viz canvas:active {-->
-<!--      cursor: grabbing;-->
-<!--    }-->
-
-<!-- /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; TURM DER BLAUEN PFERDE SECTION &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--.turm-section {-->
-<!--  margin-top: 48px;-->
-<!--  padding-top: 24px;-->
-<!--  border-top: 1px solid var(&#45;&#45;line);-->
-<!--}-->
-
-<!--.turm-layout {-->
-<!--  display: grid;-->
-<!--  grid-template-columns: minmax(0, 1fr) 320px; /* text left, images right */-->
-<!--  gap: 24px;-->
-<!--  align-items: flex-start;-->
-<!--  margin-top: 12px;-->
-<!--}-->
-
-<!--.turm-text p {-->
-<!--  max-width: 68ch;-->
-<!--}-->
-
-<!--.turm-images-column {-->
-<!--  display: flex;-->
-<!--  flex-direction: column;-->
-<!--  gap: 16px;-->
-<!--}-->
-
-<!--/* top: two horse images next to each other, same size */-->
-<!--.turm-images-right {-->
-<!--  display: grid;-->
-<!--  grid-template-columns: 1fr 1fr;-->
-<!--  gap: 12px;-->
-<!--}-->
-
-<!--.turm-images-right img,-->
-<!--.turm-bottom-img {-->
-<!--  width: 100%;-->
-<!--  border: 1px solid var(&#45;&#45;line);-->
-<!--  border-radius: 6px;-->
-<!--  cursor: pointer;-->
-<!--  display: block;-->
-<!--  margin: 0;-->
-<!--  transition: transform .25s ease, box-shadow .25s ease;-->
-<!--}-->
-
-<!--.turm-images-right img:hover,-->
-<!--.turm-bottom-img:hover {-->
-<!--  transform: scale(1.02);-->
-<!--  box-shadow: 0 4px 12px rgba(0, 0, 0, .08);-->
-<!--}-->
-
-<!--/* bottom image: same column width as horses combined */-->
-<!--.turm-bottom {-->
-<!--  margin: 0;-->
-<!--  text-align: center;-->
-<!--}-->
-
-<!--.turm-bottom figcaption {-->
-<!--  color: var(&#45;&#45;muted);-->
-<!--  font-size: 13px;-->
-<!--  margin-top: 6px;-->
-<!--}-->
-
-<!--/* responsive: stack on narrow screens */-->
-<!--@media (max-width: 900px) {-->
-<!--  .turm-layout {-->
-<!--    grid-template-columns: 1fr;-->
-<!--  }-->
-
-<!--  .turm-images-right {-->
-<!--    grid-template-columns: 1fr;-->
-<!--  }-->
-<!--}-->
-
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Lightbox for images &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .lightbox {-->
-<!--      display: none;-->
-<!--      position: fixed;-->
-<!--      z-index: 1000;-->
-<!--      left: 0;-->
-<!--      top: 0;-->
-<!--      width: 100%;-->
-<!--      height: 100%;-->
-<!--      background: rgba(0, 0, 0, 0.85);-->
-<!--      backdrop-filter: blur(4px);-->
-<!--      overflow: auto;-->
-<!--    }-->
-
-<!--    .lightbox-content {-->
-<!--      display: block;-->
-<!--      margin: auto;-->
-<!--      max-width: 90vw;-->
-<!--      max-height: 90vh;-->
-<!--      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);-->
-<!--      border: 4px solid #fff;-->
-<!--      transition: transform .3s ease;-->
-<!--    }-->
-
-<!--    .lightbox-content.rotated {-->
-<!--      transform: rotate(90deg) scale(1.3);-->
-<!--      max-height: 95vh;-->
-<!--      max-width: 95vw;-->
-<!--    }-->
-
-<!--    .lightbox-caption {-->
-<!--      margin: 16px auto;-->
-<!--      text-align: center;-->
-<!--      color: #f0f0f0;-->
-<!--      font-size: 14px;-->
-<!--      max-width: 80%;-->
-<!--    }-->
-
-<!--    .lightbox-close {-->
-<!--      position: absolute;-->
-<!--      top: 20px;-->
-<!--      right: 35px;-->
-<!--      color: #f0f0f0;-->
-<!--      font-size: 32px;-->
-<!--      font-weight: 300;-->
-<!--      cursor: pointer;-->
-<!--      transition: .2s;-->
-<!--    }-->
-
-<!--    .lightbox-close:hover {-->
-<!--      color: #fff;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Scroll progress circle &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    .scroll-progress {-->
-<!--      position: fixed;-->
-<!--      right: 24px;-->
-<!--      bottom: 24px;-->
-<!--      width: 36px;-->
-<!--      height: 36px;-->
-<!--      z-index: 200;-->
-<!--      pointer-events: none;-->
-<!--    }-->
-
-<!--    .scroll-progress svg {-->
-<!--      width: 100%;-->
-<!--      height: 100%;-->
-<!--      transform: rotate(-90deg);-->
-<!--    }-->
-
-<!--    .scroll-progress__bg {-->
-<!--      fill: none;-->
-<!--      stroke: var(&#45;&#45;line);-->
-<!--      stroke-width: 3;-->
-<!--    }-->
-
-<!--    .scroll-progress__value {-->
-<!--      fill: none;-->
-<!--      stroke: #b55e33;-->
-<!--      stroke-width: 3;-->
-<!--      stroke-linecap: round;-->
-<!--      stroke-dasharray: 100;-->
-<!--      stroke-dashoffset: 100;-->
-<!--      transition: stroke-dashoffset 0.15s ease-out;-->
-<!--    }-->
-
-<!--    /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; RESPONSIVE (iPad + iPhone) &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--    @media (max-width: 1000px) {-->
-<!--      .content {-->
-<!--        grid-template-columns: 1fr;-->
-<!--      }-->
-<!--    }-->
-
-<!--    @media (max-width: 900px) {-->
-<!--      .layout {-->
-<!--        flex-direction: column;-->
-<!--      }-->
-
-<!--      .sidebar {-->
-<!--        position: static;-->
-<!--        width: 100%;-->
-<!--        height: auto;-->
-<!--        border-right: none;-->
-<!--        border-bottom: 1px solid var(&#45;&#45;line);-->
-<!--        padding: 16px 16px 12px;-->
-<!--        flex-direction: column;-->
-<!--        gap: 8px;-->
-<!--      }-->
-
-<!--      .sidebar-top {-->
-<!--        flex-direction: column;-->
-<!--        gap: 6px;-->
-<!--      }-->
-
-<!--      .sidebar-nav {-->
-<!--        flex-direction: row;-->
-<!--        gap: 18px;-->
-<!--        margin-top: 6px;-->
-<!--      }-->
-
-<!--      .sidebar-link {-->
-<!--        padding: 4px 0;-->
-<!--        font-size: 14px;-->
-<!--      }-->
-
-<!--      .sidebar-bottom {-->
-<!--        margin-top: 6px;-->
-<!--        width: 100%;-->
-<!--      }-->
-
-<!--      .uva-contact-row {-->
-<!--        align-items: center;-->
-<!--        gap: 8px;-->
-<!--      }-->
-
-<!--      .uva-logo img {-->
-<!--        height: 30px;-->
-<!--      }-->
-
-<!--      .sidebar-contact {-->
-<!--        flex-direction: column;-->
-<!--        gap: 2px;-->
-<!--        font-size: 13px;-->
-<!--      }-->
-
-<!--      .sidebar-copy {-->
-<!--        margin-top: 2px;-->
-<!--        font-size: 11.5px;-->
-<!--      }-->
-
-<!--      .content-wrap {-->
-<!--        margin-left: 0;-->
-<!--        padding: 20px 16px 56px;-->
-<!--      }-->
-
-<!--      /* Curiosity-specific tweaks on mobile */-->
-<!--      .other-art {-->
-<!--        margin-top: 24px;-->
-<!--        justify-self: start;-->
-<!--      }-->
-
-<!--      .caption-small {-->
-<!--        text-align: left;-->
-<!--      }-->
-
-<!--      .facade-shift {-->
-<!--        object-position: center 20%;-->
-<!--      }-->
-
-<!--      .viz-wrapper {-->
-<!--        max-width: 100%;-->
-<!--      }-->
-
-<!--      .turm-layout {-->
-<!--        grid-template-columns: 1fr;-->
-<!--      }-->
-<!--    }-->
-
-<!--    @media (max-width: 600px) {-->
-<!--      .lead, p {-->
-<!--        max-width: 55ch;-->
-<!--      }-->
-
-<!--      .sidebar-name {-->
-<!--        font-size: 20px;-->
-<!--      }-->
-
-<!--      .sidebar-role {-->
-<!--        font-size: 11px;-->
-<!--      }-->
-
-<!--      .sidebar-contact {-->
-<!--        font-size: 12.5px;-->
-<!--      }-->
-<!--    }-->
-<!--  </style>-->
-
-<!--  &lt;!&ndash; === DOME SIMULATION LOGIC (unchanged, just mounted into #vizMount) === &ndash;&gt;-->
-<!--  <script>-->
-<!--    var domeModel = {-->
-<!--      name: "domeprojection",-->
-<!--      showDome: true,-->
-<!--      showWall: true,-->
-<!--      scene: null,-->
-<!--      renderer: null,-->
-<!--      camera: null,-->
-<!--      line: null,-->
-<!--      linesWall: [],-->
-<!--      linesProjection: [],-->
-<!--      removeLinesProjection: function () {-->
-<!--        for (var i = 0; i < this.linesProjection.length; i++) {-->
-<!--          this.scene.remove(this.linesProjection[i]);-->
-<!--        }-->
-<!--        this.linesProjection = [];-->
-<!--      },-->
-<!--      l: [0],-->
-<!--      a: 1,-->
-<!--      b: 2,-->
-<!--      c: 1,-->
-<!--      lstartt: 0,-->
-<!--      lendt: 2 * Math.PI,-->
-<!--      lstepsize: Math.PI / 20000,-->
-<!--      dldt: function (x, t) {-->
-<!--        return [Math.sqrt(domeModel.b * domeModel.b * Math.cos(t) * Math.cos(t) + domeModel.a * domeModel.a * Math.sin(t) * Math.sin(t))];-->
-<!--      },-->
-<!--      numberOfUnits: 120,-->
-<!--      numberOfSubUnits: 0,-->
-<!--      units: [],-->
-<!--      unitsx: [],-->
-<!--      unitsy: [],-->
-<!--      unitsz: [],-->
-<!--      computeAxis: domeComputeAxis,-->
-<!--      createWall: domeCreateWall,-->
-<!--      createProjection: domeCreateProjection,-->
-<!--      computeIntersection: domeComputeIntersection,-->
-<!--      verticespattern0: [[3, 1], [2, 1], [2, 0], [1, 0], [1, 1], [0, 1], [0, 2], [1, 2], [1, 3], [2, 3], [2, 2], [3, 2], [4, 3], [5, 3], [6, 2], [6, 1], [5, 0], [4, 0], [3, 1], [3, 2]],-->
-<!--      verticespattern1: [[3, 1], [4, 1], [4, 0], [5, 0], [5, 1], [6, 1], [6, 2], [5, 2], [5, 3], [4, 3], [4, 2], [3, 2], [2, 3], [1, 3], [0, 2], [0, 1], [1, 0], [2, 0], [3, 1], [3, 2]],-->
-<!--      patternshiftl: 6,-->
-<!--      patternshiftz: 3,-->
-<!--      maxlevels: 24,-->
-<!--      unitlengtz: 0-->
-<!--    };-->
-
-<!--    function computeCircumference(model) {-->
-<!--      var x = [0], h = model.lstepsize, vl = model.dldt;-->
-<!--      for (var t = model.lstartt; t < model.lendt; t += h) {-->
-<!--        x = rk4(x, vl, h, t);-->
-<!--      }-->
-<!--      model.l = x;-->
-<!--      return x;-->
-<!--    }-->
-
-<!--    function unitSplit(model) {-->
-<!--      if (model.l[0] == 0) computeCircumference(model);-->
-<!--      var units = model.units = [];-->
-<!--      if (model.l[0] == 0) return;-->
-<!--      var totalunits = model.numberOfUnits * (1 + model.numberOfSubUnits);-->
-<!--      var ul = model.l[0] / totalunits,-->
-<!--          x = [0],-->
-<!--          h = model.lstepsize,-->
-<!--          t = model.lstartt,-->
-<!--          vl = model.dldt,-->
-<!--          xn;-->
-<!--      units[0] = t;-->
-<!--      for (var i = 1; i <= totalunits; i++) {-->
-<!--        while ((xn = rk4(x, vl, h, t))[0] < i * ul) {-->
-<!--          x = xn;-->
-<!--          t += h;-->
-<!--        }-->
-<!--        var ti = t - (((xn[0] - x[0]) > 0) ? (xn[0] - i * ul) * h / (xn[0] - x[0]) : 0);-->
-<!--        units[i] = ti;-->
-<!--      }-->
-<!--      model.unitlengtz = units[model.numberOfSubUnits + 1] - units[0];-->
-<!--    }-->
-
-<!--    function domeCreateWall() {-->
-<!--      var mainunits = domeModel.numberOfUnits, subunits = domeModel.numberOfSubUnits;-->
-<!--      var pattern0 = domeModel.verticespattern0, pattern1 = domeModel.verticespattern1;-->
-<!--      var patterncount = mainunits / domeModel.patternshiftl;-->
-<!--      var patternunitcount = domeModel.patternshiftl * (1 + subunits);-->
-<!--      var levelcount = domeModel.patternshiftz;-->
-<!--      var unitsx = domeModel.unitsx, unitsy = domeModel.unitsy, unitz = domeModel.unitlengtz;-->
-<!--      var material = new THREE.LineBasicMaterial({color: 0xde7f2f});-->
-<!--      for (var j = 0; j < domeModel.maxlevels; j++) {-->
-<!--        var pattern = (j % 2) ? pattern0 : pattern1;-->
-<!--        for (var i = 0; i < patterncount; i++) {-->
-<!--          var geometry = new THREE.Geometry();-->
-<!--          for (var k = 0; k < pattern.length; k++) {-->
-<!--            geometry.vertices.push(new THREE.Vector3(-->
-<!--              unitsx[i * patternunitcount + pattern[k][0] * (1 + subunits)],-->
-<!--              unitsy[i * patternunitcount + pattern[k][0] * (1 + subunits)],-->
-<!--              (j * levelcount + pattern[k][1] * (1 + subunits)) * unitz-->
-<!--            ));-->
-<!--          }-->
-<!--          var line = new THREE.Line(geometry, material);-->
-<!--          domeModel.linesWall[j * patterncount + i] = line;-->
-<!--          domeModel.scene.add(line);-->
-<!--        }-->
-<!--      }-->
-<!--    }-->
-
-<!--    function domeComputeAxis(model) {-->
-<!--      for (var i = 0; i < model.units.length; i++) {-->
-<!--        model.unitsx[i] = model.a * Math.cos(model.units[i]);-->
-<!--        model.unitsy[i] = model.b * Math.sin(model.units[i]);-->
-<!--        model.unitsz[i] = 0;-->
-<!--      }-->
-<!--    }-->
-
-<!--    function domeCreateProjection(model) {-->
-<!--      if (model.linesProjection.length > 0) model.removeLinesProjection();-->
-<!--      var material = new THREE.LineBasicMaterial({color: 0x2a4de0});-->
-<!--      for (var i = 0; i < model.linesWall.length; i++) {-->
-<!--        var line = new THREE.Line(model.linesWall[i].geometry.clone(), material);-->
-<!--        var vertices = line.geometry.vertices;-->
-<!--        for (var k = 0; k < vertices.length; k++) model.computeIntersection(vertices[k]);-->
-<!--        model.linesProjection[i] = line;-->
-<!--        model.scene.add(line);-->
-<!--      }-->
-<!--    }-->
-
-<!--    function domeComputeIntersection(p) {-->
-<!--      var s = Math.sqrt(1 / (p.x * p.x / this.a / this.a + p.y * p.y / this.b / this.b + p.z * p.z / this.c / this.c));-->
-<!--      p.x *= s;-->
-<!--      p.y *= s;-->
-<!--      p.z *= s;-->
-<!--    }-->
-
-<!--    function toggleWall(model) {-->
-<!--      model.showWall = !model.showWall;-->
-<!--      var btn = document.getElementById("toggleWallButton");-->
-<!--      if (btn) btn.classList.toggle("active", model.showWall);-->
-<!--      for (var i = 0; i < model.linesWall.length; i++) model.linesWall[i].visible = model.showWall;-->
-<!--      model.renderer.render(model.scene, model.camera);-->
-<!--    }-->
-
-<!--    function toggleDome(model) {-->
-<!--      model.showDome = !model.showDome;-->
-<!--      var btn = document.getElementById("toggleDomeButton");-->
-<!--      if (btn) btn.classList.toggle("active", model.showDome);-->
-<!--      for (var i = 0; i < model.linesProjection.length; i++) model.linesProjection[i].visible = model.showDome;-->
-<!--      model.renderer.render(model.scene, model.camera);-->
-<!--    }-->
-
-<!--    function init(model) {-->
-<!--      unitSplit(model);-->
-<!--      model.computeAxis(model);-->
-<!--      model.scene = new THREE.Scene();-->
-<!--      const mount = document.getElementById('vizMount');-->
-<!--      const rect = () => mount.getBoundingClientRect();-->
-<!--      model.renderer = new THREE.WebGLRenderer({antialias: true});-->
-<!--      model.renderer.setSize(rect().width, rect().height);-->
-<!--      model.renderer.setClearColor(new THREE.Color(0xFFF9F0), 1);-->
-<!--      mount.appendChild(model.renderer.domElement);-->
-
-<!--      model.camera = new THREE.PerspectiveCamera(80, rect().width / rect().height, 0.1, 1000);-->
-<!--      const R = 0.5 * Math.max(model.a, model.b);-->
-<!--      model.camera.position.set(-1.2 * R, 0.9 * R, 4 * R);-->
-<!--      model.camera.up = new THREE.Vector3(0, 0, 1);-->
-<!--      model.camera.lookAt(new THREE.Vector3(0, 0, 0));-->
-<!--      model.scene.add(model.camera);-->
-
-<!--      let light = new THREE.PointLight(0xffffff);-->
-<!--      light.position.set(-20, 0, -40);-->
-<!--      model.scene.add(light);-->
-<!--      light = new THREE.PointLight(0x080808);-->
-<!--      light.position.set(10, -20, 0);-->
-<!--      model.scene.add(light);-->
-
-<!--      model.createWall();-->
-<!--      model.createProjection(model);-->
-
-<!--      controls = new THREE.CircleAxisControls(model.camera, model.renderer.domElement, "z");-->
-<!--      controls.update();-->
-
-<!--      window.addEventListener('resize', function () {-->
-<!--        const r = rect();-->
-<!--        model.renderer.setSize(r.width, r.height);-->
-<!--        model.camera.aspect = r.width / r.height;-->
-<!--        model.camera.updateProjectionMatrix();-->
-<!--      });-->
-
-<!--      animate();-->
-<!--    }-->
-
-<!--    function animate() {-->
-<!--      requestAnimationFrame(animate);-->
-<!--      domeModel.renderer.render(domeModel.scene, domeModel.camera);-->
-<!--    }-->
-<!--  </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <div class="layout">-->
-<!--    &lt;!&ndash; Sidebar (same as index, but Curiosity active) &ndash;&gt;-->
-<!--    <aside class="sidebar">-->
-<!--      <div class="sidebar-top">-->
-<!--        <div>-->
-<!--          <div class="sidebar-name">Remo Oostdam</div>-->
-<!--          <div class="sidebar-role">PhD Candidate in Finance</div>-->
-<!--        </div>-->
-<!--        <nav class="sidebar-nav" aria-label="Main menu">-->
-<!--          <a class="sidebar-link" href="index.html">Home</a>-->
-<!--          <a class="sidebar-link" href="cv.html">CV</a>-->
-<!--          <a class="sidebar-link active" href="curiosity.html">Curiosity</a>-->
-<!--        </nav>-->
-<!--      </div>-->
-<!--      <div class="sidebar-bottom">-->
-<!--        <div class="uva-contact-row">-->
-<!--          <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">-->
-<!--            <img src="assets/uva.svg" alt="University of Amsterdam Logo">-->
-<!--          </a>-->
-<!--          <div class="sidebar-contact">-->
-<!--            <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>-->
-<!--            <a href="mailto:r.p.oostdam@uva.nl">r.p.oostdam@uva.nl</a>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <span class="sidebar-copy">©<span id="year"></span></span>-->
-<!--      </div>-->
-<!--    </aside>-->
-
-<!--    &lt;!&ndash; Main content &ndash;&gt;-->
-<!--    <div class="content-wrap">-->
-<!--      <div class="content">-->
-<!--        &lt;!&ndash; LEFT: text &ndash;&gt;-->
-<!--        <main>-->
-<!--          <section aria-labelledby="san-carlo">-->
-<!--            <h2 id="san-carlo">San Carlo</h2>-->
-<!--            <p>-->
-<!--              In Rome, there is a small 17th-century church called-->
-<!--              <a href="https://sancarlino.org/" target="_blank" rel="noopener">San Carlo alle Quattro Fontane</a>,-->
-<!--              designed by-->
-<!--              <a href="https://en.wikipedia.org/wiki/Francesco_Borromini" target="_blank" rel="noopener">Francesco Borromini</a>,-->
-<!--              a contemporary of-->
-<!--              <a href="https://en.wikipedia.org/wiki/Gian_Lorenzo_Bernini" target="_blank" rel="noopener">Gian Lorenzo Bernini</a>-->
-<!--              and one of the great masters of the Baroque period. Their rivalry produced some of the era’s most inventive designs.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              Inside the church, the dome’s pattern consists of a repetition of Greek crosses, octagons, and hexagons.-->
-<!--              To make the dome appear higher, Borromini gradually reduced the size of these shapes toward the top,-->
-<!--              creating a striking optical illusion.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              This illusion can be reconstructed and improved by projecting the 2D pattern from a cylindrical surface-->
-<!--              around the dome onto a viewpoint at the center of its base. The intersection of each projection line with-->
-<!--              the dome determines where the pattern should be drawn.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              In the simulation below, you can experiment with this effect. Approaching the center of the dome, the structure-->
-<!--              appears to lift upward, with the illusion strongest at the origin.-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              Another fascinating example of optical illusion can be found in-->
-<!--              <a href="https://santignazio.gesuiti.it/en/" target="_blank" rel="noopener">Sant’Ignazio di Loyola</a>,-->
-<!--              where-->
-<!--              <a href="https://en.wikipedia.org/wiki/Andrea_Pozzo" target="_blank" rel="noopener">Andrea Pozzo</a>-->
-<!--              painted a magnificent “false” dome on a flat ceiling — well worth a visit as well!-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              <em>I completed this project after a high school trip to Rome in 2016, with the help of my excellent math and-->
-<!--              programming teacher, <a href="https://www.johnval.nl/" target="_blank" rel="noopener">John Val</a>.</em>-->
-<!--            </p>-->
-<!--          </section>-->
-<!--        </main>-->
-
-<!--        &lt;!&ndash; RIGHT: images &ndash;&gt;-->
-<!--        <aside class="other-art" aria-label="Photos of San Carlo">-->
-<!--          <div class="media-pair">-->
-<!--            <img src="assets/Gevel.jpeg"-->
-<!--                 alt="Facade of San Carlo alle Quattro Fontane"-->
-<!--                 class="media-img facade-shift top-shift">-->
-<!--            <img src="assets/Dome.jpg"-->
-<!--                 alt="Dome of San Carlo alle Quattro Fontane"-->
-<!--                 class="rotated-thumb">-->
-<!--          </div>-->
-<!--          <div class="caption-small">-->
-<!--            Facade and dome of San Carlo alle Quattro Fontane, Rome.-->
-<!--          </div>-->
-<!--        </aside>-->
-<!--      </div>-->
-
-<!--      &lt;!&ndash; Bottom-centered simulation &ndash;&gt;-->
-<!--      <section class="viz-section" aria-label="Interactive dome projection visualization">-->
-<!--        <h2>Simulation</h2>-->
-<!--        <div class="viz-wrapper">-->
-<!--          <div class="viz">-->
-<!--            <div class="ui-toolbar">-->
-<!--              <button id="toggleWallButton" class="btn wall active" onclick="toggleWall(domeModel)">Wall</button>-->
-<!--              <button id="toggleDomeButton" class="btn dome active" onclick="toggleDome(domeModel)">Dome</button>-->
-<!--            </div>-->
-<!--            <div id="vizMount"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </section>-->
-
-<!--      &lt;!&ndash; TURM DER BLAUEN PFERDE SECTION &ndash;&gt;-->
-<!--      <section class="turm-section" aria-labelledby="turm-der-blauen-pferde">-->
-<!--  <h2 id="turm-der-blauen-pferde">Turm der blauen Pferde</h2>-->
-<!--  <div class="turm-layout">-->
-<!--    &lt;!&ndash; LEFT: text &ndash;&gt;-->
-<!--    <div class="turm-text">-->
-<!--      <p>-->
-<!--        Franz Marc painted <em>Der Turm der Blauen Pferde</em> toward the early end of his life,-->
-<!--        at a moment when his work was moving away from the natural lyricism of his early years-->
-<!--        toward a more cubist and orphic structure. Shortly afterward, he was drafted to the front,-->
-<!--        where he died at the Battle of Verdun before orders to be withdrawn reached him.-->
-<!--      </p>-->
-<!--      <p>-->
-<!--        Just like Marc, the painting took on a tragic fate. It was labelled “Entartete Kunst”-->
-<!--        (“Degenerate Art”) by the National Socialists, who publicly condemned its modern appearance —-->
-<!--        although Göring later expropriated it for his private collection. As one can see in the image-->
-<!--        on the right, the horses on the original painting are almost life-size.-->
-<!--      </p>-->
-<!--      <p>-->
-<!--        After the Second World War, the painting was lost and its location remains unknown.-->
-<!--        The canvas likely still exists somewhere in a private collection, and one can only hope it will-->
-<!--        return to public view someday.-->
-<!--      </p>-->
-<!--      <p>-->
-<!--        What has survived is a small colour sketch that Marc sent as a postcard to Else Lasker-Schüler-->
-<!--        on New Year’s Day 1913. The card shows the scene with a clearly visible moon and star, motifs-->
-<!--        that appear only subtly in the final version. This postcard is on display at the Pinakothek der-->
-<!--        Moderne in Munich, serving as a quiet reminder of a lost masterpiece.-->
-<!--      </p>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; RIGHT: two horses on top, Entartete Kunst below &ndash;&gt;-->
-<!--    <div class="turm-images-column">-->
-<!--      <div class="turm-images-right">-->
-<!--        <img-->
-<!--          src="assets/Franz_Marc_029a.jpg"-->
-<!--          alt="Turm der blauen Pferde (Tower of Blue Horses) by Franz Marc"-->
-<!--          class="js-lightbox"-->
-<!--          data-caption="Turm der blauen Pferde (Tower of Blue Horses), Franz Marc.">-->
-<!--        <img-->
-<!--          src="assets/8505-FRANZ-MARC_DER-TURM-DER-BLAUEN-PFERDE_CC-BY-SA_BSTGS_13550.jpg"-->
-<!--          alt="Postcard with sketch for Turm der blauen Pferde"-->
-<!--          class="js-lightbox"-->
-<!--          data-caption="Postcard with sketch.">-->
-<!--      </div>-->
-
-<!--      <figure class="turm-bottom">-->
-<!--        <img-->
-<!--          src="assets/Entartete%20Kunst.jpg"-->
-<!--          alt="Visitors view the Degenerate Art exhibition, with Der Turm der Blauen Pferde visible on the right"-->
-<!--          class="turm-bottom-img js-lightbox"-->
-<!--          data-caption="Visitors view the &quot;Degenerate Art&quot; exhibition (Entartete Kunst) at the Munich Hofgarten in July 1937. Der Turm der Blauen Pferde can be seen on the right.">-->
-<!--        <figcaption>-->
-<!--          Visitors view the “Degenerate Art” exhibition (Entartete Kunst) at the Munich Hofgarten in July 1937.-->
-<!--          <em>Der Turm der Blauen Pferde</em> can be seen on the right.-->
-<!--        </figcaption>-->
-<!--      </figure>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-
-
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; Lightbox for images &ndash;&gt;-->
-<!--  <div id="lightbox" class="lightbox" aria-hidden="true">-->
-<!--    <span class="lightbox-close" aria-label="Close">&times;</span>-->
-<!--    <img class="lightbox-content" id="lightbox-img" alt="">-->
-<!--    <div class="lightbox-caption" id="lightbox-caption"></div>-->
-<!--  </div>-->
-
-<!--  <script>-->
-<!--    // Dynamic year in sidebar-->
-<!--    document.getElementById('year').textContent = new Date().getFullYear();-->
-
-<!--    // Boot the simulation-->
-<!--    window.addEventListener('DOMContentLoaded', () => init(domeModel));-->
-
-<!--    // Lightbox logic for images-->
-<!--    (function () {-->
-<!--      const lb = document.getElementById('lightbox');-->
-<!--      const lbImg = document.getElementById('lightbox-img');-->
-<!--      const lbCap = document.getElementById('lightbox-caption');-->
-<!--      const closeBtn = document.querySelector('.lightbox-close');-->
-
-<!--      document.querySelectorAll('.media-pair img, .js-lightbox').forEach(img => {-->
-<!--        img.addEventListener('click', () => {-->
-<!--          lb.style.display = 'block';-->
-<!--          lbImg.src = img.src;-->
-<!--          lbImg.classList.toggle('rotated', img.classList.contains('rotated-thumb'));-->
-<!--          const caption = img.getAttribute('data-caption') || img.alt || '';-->
-<!--          lbCap.textContent = caption;-->
-<!--        });-->
-<!--      });-->
-
-<!--      closeBtn.addEventListener('click', () => lb.style.display = 'none');-->
-
-<!--      lb.addEventListener('click', e => {-->
-<!--        if (e.target === lb) lb.style.display = 'none';-->
-<!--      });-->
-
-<!--      document.addEventListener('keydown', e => {-->
-<!--        if (e.key === 'Escape') lb.style.display = 'none';-->
-<!--      });-->
-<!--    })();-->
-<!--  </script>-->
-
-<!--  <div class="scroll-progress" aria-hidden="true">-->
-<!--    <svg viewBox="0 0 36 36">-->
-<!--      <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>-->
-<!--      <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>-->
-<!--    </svg>-->
-<!--  </div>-->
-
-<!--  <script>-->
-<!--    // Reading progress circle-->
-<!--    (function () {-->
-<!--      const circle = document.querySelector('.scroll-progress__value');-->
-<!--      if (!circle) return;-->
-
-<!--      const radius = 16;-->
-<!--      const circumference = 2 * Math.PI * radius;-->
-
-<!--      circle.style.strokeDasharray = `${circumference}`;-->
-<!--      circle.style.strokeDashoffset = `${circumference}`;-->
-
-<!--      function setProgress() {-->
-<!--        const doc = document.documentElement;-->
-<!--        const scrollTop = doc.scrollTop || document.body.scrollTop;-->
-<!--        const scrollHeight = doc.scrollHeight - doc.clientHeight;-->
-
-<!--        if (scrollHeight <= 0) {-->
-<!--          circle.style.strokeDashoffset = `${circumference}`;-->
-<!--          return;-->
-<!--        }-->
-
-<!--        const progress = scrollTop / scrollHeight;-->
-<!--        const offset = circumference * (1 - progress);-->
-<!--        circle.style.strokeDashoffset = offset;-->
-<!--      }-->
-
-<!--      window.addEventListener('scroll', setProgress, { passive: true });-->
-<!--      window.addEventListener('resize', setProgress);-->
-<!--      setProgress();-->
-<!--    })();-->
-<!--  </script>-->
-<!--</body>-->
-<!--</html>-->
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Remo Oostdam — Curiosity</title>
+  <title>Remo Oostdam — Curiosities</title>
   <meta name="description" content="Remo Oostdam – Other Projects"/>
 
-  <!-- Favicon (same as index) -->
-  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
-  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Inter (same as index) -->
+  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -1122,12 +36,8 @@
       --art-w: 200px;
     }
 
-    html {
-      box-sizing: border-box;
-    }
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
+    html { box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
 
     body {
       margin: 0;
@@ -1141,21 +51,15 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* All links: black and clickable */
     a {
       color: var(--text);
       text-decoration: none;
       transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
     }
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
-    /* ---------- LAYOUT (same base as index) ---------- */
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
+    /* ---------- LAYOUT ---------- */
+    .layout { display: flex; min-height: 100vh; }
 
     .sidebar {
       position: fixed;
@@ -1171,11 +75,7 @@
       justify-content: space-between;
     }
 
-    .sidebar-top {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    .sidebar-top { display: flex; flex-direction: column; gap: 16px; }
 
     .sidebar-header-row {
       display: flex;
@@ -1205,7 +105,6 @@
       margin-top: 10px;
     }
 
-    /* Base sidebar link + underline logic (same as index) */
     .sidebar-link {
       display: inline-block;
       padding: 6px 8px;
@@ -1240,13 +139,9 @@
       border-radius: 2px;
     }
 
-    .sidebar-link.active:hover {
-      background: none;
-    }
+    .sidebar-link.active:hover { background: none; }
 
-    .sidebar-bottom {
-      margin-top: 24px;
-    }
+    .sidebar-bottom { margin-top: 24px; }
 
     .uva-contact-row {
       display: flex;
@@ -1254,14 +149,13 @@
       gap: 10px;
     }
 
-    /* Always stack LinkedIn + email, same as index */
     .sidebar-contact {
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      font-weight: 500;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+
 
     .uva-logo img {
       height: 40px;
@@ -1271,9 +165,7 @@
       transition: opacity .2s ease;
     }
 
-    .uva-logo img:hover {
-      opacity: 1;
-    }
+    .uva-logo img:hover { opacity: 1; }
 
     .sidebar-copy {
       font-size: 12px;
@@ -1290,7 +182,7 @@
 
     /* ---------- Hamburger menu ---------- */
     .menu-toggle {
-      display: none; /* shown in mobile only */
+      display: none;
       background: transparent;
       border: none;
       padding: 4px;
@@ -1309,9 +201,7 @@
     .menu-toggle.is-open .menu-bar:nth-child(1) {
       transform: translateY(6px) rotate(45deg);
     }
-    .menu-toggle.is-open .menu-bar:nth-child(2) {
-      opacity: 0;
-    }
+    .menu-toggle.is-open .menu-bar:nth-child(2) { opacity: 0; }
     .menu-toggle.is-open .menu-bar:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
     }
@@ -1319,17 +209,13 @@
     /* ---------- Content styling ---------- */
     .content {
       display: grid;
-      grid-template-columns: 1fr 320px; /* text + right images */
+      grid-template-columns: 1fr 320px;
       gap: 32px;
       align-items: flex-start;
       margin-top: -22px;
     }
 
-    section {
-      margin-top: 22px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-    }
+    section { margin-top: 22px; padding-top: 14px; }
 
     h2 {
       font-weight: 500;
@@ -1357,26 +243,21 @@
 
     .media-pair {
       display: grid;
-      grid-template-columns: 1fr; /* stack vertically */
-      gap: 16px; /* a bit more space between facade & dome */
+      grid-template-columns: 1fr; /* desktop: stacked */
+      gap: 16px;
     }
 
-    .facade-shift {
-      object-position: center 95%;
-    }
-
-    .top-shift {
-      margin-top: -18px; /* adjust this value until visually perfect */
-    }
+    .facade-shift { object-position: center 95%; }
+    .top-shift { margin-top: -18px; }
 
     .media-pair img {
       width: 100%;
-      max-width: 260px; /* makes the images narrower */
-      height: 360px; /* taller */
-      object-fit: cover; /* clean cropping */
+      max-width: 260px;
+      height: 360px;
+      object-fit: cover;
       border: 1px solid var(--line);
       border-radius: 6px;
-      margin-left: auto; /* centers in right column */
+      margin-left: auto;
       margin-right: auto;
       display: block;
       cursor: pointer;
@@ -1396,16 +277,14 @@
       text-align: right;
     }
 
-    /* ---------- SIMULATION SECTION (bottom, centered) ---------- */
+    /* ---------- SIMULATION SECTION ---------- */
     .viz-section {
       margin-top: 48px;
       padding-top: 24px;
       border-top: 1px solid var(--line);
     }
 
-    .viz-section h2 {
-      text-align: left;
-    }
+    .viz-section h2 { text-align: left; }
 
     .viz-wrapper {
       margin-top: 16px;
@@ -1424,10 +303,7 @@
       overflow: hidden;
     }
 
-    #vizMount {
-      position: absolute;
-      inset: 0;
-    }
+    #vizMount { position: absolute; inset: 0; }
 
     .ui-toolbar {
       position: absolute;
@@ -1455,39 +331,20 @@
       transition: background .15s ease, color .15s ease, border-color .15s ease;
     }
 
-    .btn:hover {
-      background: rgba(0, 0, 0, 0.04);
-    }
+    .btn:hover { background: rgba(0, 0, 0, 0.04); }
 
     .btn:focus-visible {
       outline: none;
       border: 1px solid rgba(0, 0, 0, 0.25);
     }
 
-    .btn.wall.active {
-      background: #ffe2c2;
-    }
+    .btn.wall.active { background: #ffe2c2; }
+    .btn.dome.active { background: #e9edff; }
+    .btn.wall.active:hover { background: #ffd8a8; }
+    .btn.dome.active:hover { background: #e1e7ff; }
 
-    .btn.dome.active {
-      background: #e9edff;
-    }
-
-    .btn.wall.active:hover {
-      background: #ffd8a8;
-    }
-
-    .btn.dome.active:hover {
-      background: #e1e7ff;
-    }
-
-    /* Cursor for viz */
-    .viz, #vizMount, .viz canvas {
-      cursor: grab;
-    }
-
-    .viz:active, #vizMount:active, .viz canvas:active {
-      cursor: grabbing;
-    }
+    .viz, #vizMount, .viz canvas { cursor: grab; }
+    .viz:active, #vizMount:active, .viz canvas:active { cursor: grabbing; }
 
     /* ---------- TURM DER BLAUEN PFERDE SECTION ---------- */
     .turm-section {
@@ -1498,15 +355,13 @@
 
     .turm-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px; /* text left, images right */
+      grid-template-columns: minmax(0, 1fr) 320px;
       gap: 24px;
       align-items: flex-start;
       margin-top: 12px;
     }
 
-    .turm-text p {
-      max-width: 68ch;
-    }
+    .turm-text p { max-width: 68ch; }
 
     .turm-images-column {
       display: flex;
@@ -1514,7 +369,6 @@
       gap: 16px;
     }
 
-    /* top: two horse images next to each other, same size */
     .turm-images-right {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1538,11 +392,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
     }
 
-    /* bottom image: same column width as horses combined */
-    .turm-bottom {
-      margin: 0;
-      text-align: center;
-    }
+    .turm-bottom { margin: 0; text-align: center; }
 
     .turm-bottom figcaption {
       color: var(--muted);
@@ -1550,18 +400,12 @@
       margin-top: 6px;
     }
 
-    /* responsive: stack on narrow screens for turm */
     @media (max-width: 900px) {
-      .turm-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .turm-images-right {
-        grid-template-columns: 1fr;
-      }
+      .turm-layout { grid-template-columns: 1fr; }
+      .turm-images-right { grid-template-columns: 1fr; }
     }
 
-    /* ---------- Lightbox for images ---------- */
+    /* ---------- Lightbox ---------- */
     .lightbox {
       display: none;
       position: fixed;
@@ -1610,9 +454,7 @@
       transition: .2s;
     }
 
-    .lightbox-close:hover {
-      color: #fff;
-    }
+    .lightbox-close:hover { color: #fff; }
 
     /* ---------- Scroll progress circle ---------- */
     .scroll-progress {
@@ -1647,17 +489,13 @@
       transition: stroke-dashoffset 0.15s ease-out;
     }
 
-    /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 1000px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
+      .content { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-      }
+      .layout { flex-direction: column; }
 
       .sidebar {
         position: static;
@@ -1670,12 +508,8 @@
         gap: 8px;
       }
 
-      .sidebar-top {
-        flex-direction: column;
-        gap: 6px;
-      }
+      .sidebar-top { flex-direction: column; gap: 6px; }
 
-      /* show hamburger on mobile */
       .menu-toggle {
         display: inline-flex;
         flex-direction: column;
@@ -1683,7 +517,6 @@
         align-items: center;
       }
 
-      /* nav hidden by default, opened via JS */
       .sidebar-nav {
         flex-direction: column;
         gap: 4px;
@@ -1691,84 +524,63 @@
         display: none;
       }
 
-      .sidebar-nav.is-open {
-        display: flex;
-      }
+      .sidebar-nav.is-open { display: flex; }
 
-      .sidebar-link {
-        padding: 4px 0;
-        font-size: 14px;
-      }
+      .sidebar-link { padding: 4px 0; font-size: 14px; }
 
-      .sidebar-bottom {
-        margin-top: 6px;
-        width: 100%;
-      }
+      .sidebar-bottom { margin-top: 6px; width: 100%; }
 
-      .uva-contact-row {
-        align-items: center;
-        gap: 8px;
-      }
+      .uva-contact-row { align-items: center; gap: 8px; }
 
-      .uva-logo img {
-        height: 30px;
-      }
+      .uva-logo img { height: 30px; }
 
-      .sidebar-contact {
-        flex-direction: column;
-        gap: 2px;
-        font-size: 13px;
-      }
+      .sidebar-contact { flex-direction: column; gap: 2px; font-size: 13px; }
 
-      .sidebar-copy {
-        margin-top: 2px;
-        font-size: 11.5px;
-      }
+      .sidebar-copy { margin-top: 2px; font-size: 11.5px; }
 
-      .content-wrap {
-        margin-left: 0;
-        padding: 20px 16px 56px;
-      }
+      .content-wrap { margin-left: 0; padding: 20px 16px 56px; }
 
       /* Curiosity-specific tweaks on mobile */
-      .other-art {
-        margin-top: 24px;
-        justify-self: start;
+      .other-art { margin-top: 24px; justify-self: start; width: 100%; }
+
+      /* ✅ Put gevel + dome side-by-side on phones */
+      .media-pair {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
+
+      /* ✅ Make them fit the row cleanly */
+      .media-pair img {
+        max-width: none;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      /* ✅ Remove the negative nudge on mobile so both align */
+      .top-shift { margin-top: 0; }
 
       .caption-small {
         text-align: left;
+        max-width: none;
       }
 
-      .facade-shift {
-        object-position: center 20%;
-      }
+      .facade-shift { object-position: center 20%; }
 
-      .viz-wrapper {
-        max-width: 100%;
-      }
+      .viz-wrapper { max-width: 100%; }
     }
 
     @media (max-width: 600px) {
-      .lead, p {
-        max-width: 55ch;
-      }
-
-      .sidebar-name {
-        font-size: 20px;
-      }
-
-      .sidebar-role {
-        font-size: 11px;
-      }
-
-      .sidebar-contact {
-        font-size: 12.5px;
-      }
+      .lead, p { max-width: 55ch; }
+      .sidebar-name { font-size: 20px; }
+      .sidebar-role { font-size: 11px; }
+      .sidebar-contact { font-size: 12.5px; }
     }
   </style>
 
-  <!-- === DOME SIMULATION LOGIC (unchanged, just mounted into #vizMount) === -->
+  <!-- === DOME SIMULATION LOGIC (unchanged) === -->
   <script>
     var domeModel = {
       name: "domeprojection",
@@ -1894,9 +706,7 @@
 
     function domeComputeIntersection(p) {
       var s = Math.sqrt(1 / (p.x * p.x / this.a / this.a + p.y * p.y / this.b / this.b + p.z * p.z / this.c / this.c));
-      p.x *= s;
-      p.y *= s;
-      p.z *= s;
+      p.x *= s; p.y *= s; p.z *= s;
     }
 
     function toggleWall(model) {
@@ -1964,7 +774,6 @@
 </head>
 <body>
   <div class="layout">
-    <!-- Sidebar (same as index, but Curiosity active) -->
     <aside class="sidebar">
       <div class="sidebar-top">
         <div class="sidebar-header-row">
@@ -1972,7 +781,7 @@
             <div class="sidebar-name">Remo Oostdam</div>
             <div class="sidebar-role">PhD Candidate in Finance</div>
           </div>
-          <!-- Mobile menu toggle -->
+
           <button
             class="menu-toggle"
             type="button"
@@ -1989,9 +798,10 @@
         <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
           <a class="sidebar-link" href="index.html">Home</a>
           <a class="sidebar-link" href="cv.html">CV</a>
-          <a class="sidebar-link active" href="curiosity.html">Curiosity</a>
+          <a class="sidebar-link active" href="curiosity.html">Curiosities</a>
         </nav>
       </div>
+
       <div class="sidebar-bottom">
         <div class="uva-contact-row">
           <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
@@ -2000,22 +810,20 @@
           <div class="sidebar-contact">
             <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="js-email"
-   data-user="r.p.oostdam"
-   data-domain="uva.nl"
-   href="#"
-   rel="nofollow">
-  r.p.oostdam at uva.nl
-</a>
+               data-user="r.p.oostdam"
+               data-domain="uva.nl"
+               href="#"
+               rel="nofollow">
+              r.p.oostdam at uva.nl
+            </a>
           </div>
         </div>
         <span class="sidebar-copy">©<span id="year"></span></span>
       </div>
     </aside>
 
-    <!-- Main content -->
     <div class="content-wrap">
       <div class="content">
-        <!-- LEFT: text -->
         <main>
           <section aria-labelledby="san-carlo">
             <h2 id="san-carlo">San Carlo</h2>
@@ -2056,7 +864,6 @@
           </section>
         </main>
 
-        <!-- RIGHT: images -->
         <aside class="other-art" aria-label="Photos of San Carlo">
           <div class="media-pair">
             <img src="assets/Gevel.jpeg"
@@ -2072,7 +879,6 @@
         </aside>
       </div>
 
-      <!-- Bottom-centered simulation -->
       <section class="viz-section" aria-label="Interactive dome projection visualization">
         <h2>Simulation</h2>
         <div class="viz-wrapper">
@@ -2086,11 +892,9 @@
         </div>
       </section>
 
-      <!-- TURM DER BLAUEN PFERDE SECTION -->
       <section class="turm-section" aria-labelledby="turm-der-blauen-pferde">
         <h2 id="turm-der-blauen-pferde">Turm der blauen Pferde</h2>
         <div class="turm-layout">
-          <!-- LEFT: text -->
           <div class="turm-text">
             <p>
               Franz Marc painted <em>Der Turm der Blauen Pferde</em> toward the early end of his life,
@@ -2117,7 +921,6 @@
             </p>
           </div>
 
-          <!-- RIGHT: two horses on top, Entartete Kunst below -->
           <div class="turm-images-column">
             <div class="turm-images-right">
               <img
@@ -2149,7 +952,6 @@
     </div>
   </div>
 
-  <!-- Lightbox for images -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <span class="lightbox-close" aria-label="Close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" alt="">
@@ -2157,13 +959,9 @@
   </div>
 
   <script>
-    // Dynamic year in sidebar
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Boot the simulation
     window.addEventListener('DOMContentLoaded', () => init(domeModel));
 
-    // Lightbox logic for images
     (function () {
       const lb = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightbox-img');
@@ -2181,19 +979,10 @@
       });
 
       closeBtn.addEventListener('click', () => lb.style.display = 'none');
-
-      lb.addEventListener('click', e => {
-        if (e.target === lb) lb.style.display = 'none';
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') lb.style.display = 'none';
-      });
+      lb.addEventListener('click', e => { if (e.target === lb) lb.style.display = 'none'; });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.style.display = 'none'; });
     })();
-  </script>
 
-  <script>
-    // Mobile hamburger menu toggle
     (function () {
       const toggle = document.querySelector('.menu-toggle');
       const nav = document.getElementById('main-menu');
@@ -2215,7 +1004,6 @@
   </div>
 
   <script>
-    // Reading progress circle
     (function () {
       const circle = document.querySelector('.scroll-progress__value');
       if (!circle) return;
@@ -2246,29 +1034,28 @@
       setProgress();
     })();
   </script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("a.js-email").forEach((a) => {
-      const user = a.dataset.user;
-      const domain = a.dataset.domain;
-      if (!user || !domain) return;
 
-      const email = `${user}@${domain}`;
-      const mailto = `mailto:${email}`;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a.js-email").forEach((a) => {
+        const user = a.dataset.user;
+        const domain = a.dataset.domain;
+        if (!user || !domain) return;
 
-      // Keep visible text obfuscated, only make click target real
-      a.setAttribute("href", mailto);
+        const email = `${user}@${domain}`;
+        const mailto = `mailto:${email}`;
 
-      // Extra safety: if something overwrites href later, still open mail
-      a.addEventListener("click", (e) => {
-        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
-          e.preventDefault();
-          window.location.href = mailto;
-        }
+        a.setAttribute("href", mailto);
+
+        a.addEventListener("click", (e) => {
+          if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
+            e.preventDefault();
+            window.location.href = mailto;
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>

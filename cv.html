@@ -6,9 +6,12 @@
   <title>Remo Oostdam — CV</title>
   <meta name="description" content="Curriculum Vitae of Remo Oostdam"/>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
-  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +23,7 @@
       --text: #0f1115;
       --muted: #5f6670;
       --line: #c8c8c8;
-      --accent: #000000;
       --max: 980px;
-
       --sidebar-width: 260px;
     }
 
@@ -46,17 +47,16 @@
       text-decoration: none;
       transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
     }
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
-    /* ---------- LAYOUT / SIDEBAR (copied from index) ---------- */
+    /* ---------- LAYOUT ---------- */
 
     .layout {
       display: flex;
       min-height: 100vh;
     }
 
+    /* === Sidebar: MATCH index.html exactly === */
     .sidebar {
       position: fixed;
       top: 0;
@@ -75,6 +75,13 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+
+    .sidebar-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .sidebar-name {
@@ -148,7 +155,7 @@
       flex-direction: column;
       gap: 2px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400; /* index */
     }
 
     .uva-logo img {
@@ -169,32 +176,11 @@
     .content-wrap {
       margin-left: var(--sidebar-width);
       max-width: var(--max);
-      width: 100%;
       padding: 32px 24px 72px;
+      width: 100%;
     }
 
-    /* ---------- MAIN CONTENT ---------- */
-
-    section {
-      margin-top: -5px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-    }
-
-    h1 {
-      font-weight: 500;
-      font-size: 21px;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      margin: 0 0 4px;
-      color: var(--text);
-    }
-
-    .cv-intro {
-      font-size: 15px;
-      margin: 6px 0 18px;
-      max-width: 70ch;
-    }
+    /* ---------- CV ---------- */
 
     .cv-embed-wrapper {
       border: 1px solid var(--line);
@@ -204,19 +190,12 @@
     }
 
     .cv-embed {
-      display: block;
       width: 100%;
-      height: 900px; /* desktop-ish */
+      height: 900px;
       border: none;
     }
 
-    .cv-download {
-      margin-top: 10px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    /* ---------- SCROLL PROGRESS (same as index) ---------- */
+    /* ---------- Scroll progress ---------- */
 
     .scroll-progress {
       position: fixed;
@@ -224,13 +203,10 @@
       bottom: 24px;
       width: 36px;
       height: 36px;
-      z-index: 200;
       pointer-events: none;
     }
 
     .scroll-progress svg {
-      width: 100%;
-      height: 100%;
       transform: rotate(-90deg);
     }
 
@@ -247,15 +223,43 @@
       stroke-linecap: round;
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
-      transition: stroke-dashoffset 0.15s ease-out;
     }
 
-    /* ---------- RESPONSIVE (same philosophy as index) ---------- */
+    /* ---------- Hamburger (match index) ---------- */
+
+    .menu-toggle {
+      display: none; /* desktop: hidden */
+      background: transparent;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      line-height: 0;
+      margin-top: 2px;
+    }
+
+    .menu-bar {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      margin: 4px 0;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .menu-toggle.is-open .menu-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle.is-open .menu-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.is-open .menu-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* ---------- MOBILE (match index) ---------- */
 
     @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-      }
+      .layout { flex-direction: column; }
 
       .sidebar {
         position: static;
@@ -273,10 +277,22 @@
         gap: 6px;
       }
 
+      .menu-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
       .sidebar-nav {
-        flex-direction: row;
-        gap: 18px;
+        flex-direction: column;
+        gap: 4px;
         margin-top: 6px;
+        display: none;
+      }
+
+      .sidebar-nav.is-open {
+        display: flex;
       }
 
       .sidebar-link {
@@ -302,6 +318,7 @@
         flex-direction: column;
         gap: 2px;
         font-size: 13px;
+        font-weight: 400;
       }
 
       .sidebar-copy {
@@ -315,150 +332,155 @@
       }
 
       .cv-embed {
-        height: 700px;
+        height: 650px;
       }
     }
 
     @media (max-width: 600px) {
-      .sidebar-name {
-        font-size: 20px;
-      }
-
-      .sidebar-role {
-        font-size: 11px;
-      }
+      .cv-embed { height: 580px; }
 
       .sidebar-contact {
         font-size: 12.5px;
       }
-
-      .cv-embed {
-        height: 600px;
-      }
     }
   </style>
 </head>
+
 <body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-header-row">
+          <div>
+            <div class="sidebar-name">Remo Oostdam</div>
+            <div class="sidebar-role">PhD Candidate in Finance</div>
+          </div>
 
-<div class="layout">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <div>
-        <div class="sidebar-name">Remo Oostdam</div>
-        <div class="sidebar-role">PhD Candidate in Finance</div>
-      </div>
-
-      <nav class="sidebar-nav" aria-label="Main menu">
-  <a class="sidebar-link" href="index.html">Home</a>
-  <a class="sidebar-link active" href="cv.html">CV</a>
-  <a class="sidebar-link" href="curiosity.html">Curiosity</a>
-</nav>
-    </div>
-
-    <div class="sidebar-bottom">
-      <div class="uva-contact-row">
-        <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
-          <img src="assets/uva.svg" alt="University of Amsterdam Logo">
-        </a>
-        <div class="sidebar-contact">
-          <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="js-email"
-   data-user="r.p.oostdam"
-   data-domain="uva.nl"
-   href="#"
-   rel="nofollow">
-  r.p.oostdam at uva.nl
-</a>
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="main-menu"
+          >
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+          </button>
         </div>
+
+        <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
+          <a class="sidebar-link" href="index.html">Home</a>
+          <a class="sidebar-link active" href="cv.html">CV</a>
+          <a class="sidebar-link" href="curiosity.html">Curiosities</a>
+        </nav>
       </div>
-      <span class="sidebar-copy">©<span id="year"></span></span>
-    </div>
-  </aside>
 
-  <!-- Main content -->
-  <div class="content-wrap">
-    <section aria-labelledby="cv-heading">
+      <div class="sidebar-bottom">
+        <div class="uva-contact-row">
+          <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
+            <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+          </a>
+          <div class="sidebar-contact">
+            <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">
+              r.p.oostdam at uva.nl
+            </a>
+          </div>
+        </div>
+        <span class="sidebar-copy">©<span id="year"></span></span>
+      </div>
+    </aside>
 
-
+    <div class="content-wrap">
       <div class="cv-embed-wrapper">
-        <!-- ⚠️ Update the src to your real CV path/filename -->
         <iframe
           class="cv-embed"
           src="assets/Remo_Oostdam_CV.pdf#view=FitH"
-          title="CV of Remo Oostdam">
-        </iframe>
+          title="CV of Remo Oostdam"
+        ></iframe>
       </div>
-    </section>
+    </div>
   </div>
-</div>
 
-<div class="scroll-progress" aria-hidden="true">
-  <svg viewBox="0 0 36 36">
-    <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
-    <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
-  </svg>
-</div>
+  <div class="scroll-progress" aria-hidden="true">
+    <svg viewBox="0 0 36 36">
+      <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
+      <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
+    </svg>
+  </div>
 
-<script>
-  // Dynamic year
-  document.getElementById('year').textContent = new Date().getFullYear();
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Reading progress circle (same logic as index)
-  (function () {
-    const circle = document.querySelector('.scroll-progress__value');
-    if (!circle) return;
+    // Mobile hamburger menu toggle (same as index.html)
+    (function () {
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('main-menu');
+      if (!toggle || !nav) return;
 
-    const radius = 16;
-    const circumference = 2 * Math.PI * radius;
-    circle.style.strokeDasharray = `${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    })();
 
-    function setProgress() {
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    // Email obfuscation
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a.js-email").forEach((a) => {
+        const user = a.dataset.user;
+        const domain = a.dataset.domain;
+        if (!user || !domain) return;
 
-      if (scrollHeight <= 0) {
-        circle.style.strokeDashoffset = `${circumference}`;
-        return;
-      }
+        const email = `${user}@${domain}`;
+        const mailto = `mailto:${email}`;
 
-      const progress = scrollTop / scrollHeight;
-      const offset = circumference * (1 - progress);
-      circle.style.strokeDashoffset = offset;
-    }
+        a.setAttribute("href", mailto);
 
-    window.addEventListener('scroll', setProgress, { passive: true });
-    window.addEventListener('resize', setProgress);
-    setProgress();
-  })();
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("a.js-email").forEach((a) => {
-      const user = a.dataset.user;
-      const domain = a.dataset.domain;
-      if (!user || !domain) return;
-
-      const email = `${user}@${domain}`;
-      const mailto = `mailto:${email}`;
-
-      // Keep visible text obfuscated, only make click target real
-      a.setAttribute("href", mailto);
-
-      // Extra safety: if something overwrites href later, still open mail
-      a.addEventListener("click", (e) => {
-        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
-          e.preventDefault();
-          window.location.href = mailto;
-        }
+        a.addEventListener("click", (e) => {
+          if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
+            e.preventDefault();
+            window.location.href = mailto;
+          }
+        });
       });
     });
-  });
-</script>
 
+    // Scroll progress
+    (function () {
+      const circle = document.querySelector('.scroll-progress__value');
+      if (!circle) return;
+
+      const radius = 16;
+      const circumference = 2 * Math.PI * radius;
+      circle.style.strokeDasharray = `${circumference}`;
+      circle.style.strokeDashoffset = `${circumference}`;
+
+      function setProgress() {
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+
+        if (scrollHeight <= 0) {
+          circle.style.strokeDashoffset = `${circumference}`;
+          return;
+        }
+
+        const progress = scrollTop / scrollHeight;
+        const offset = circumference * (1 - progress);
+        circle.style.strokeDashoffset = offset;
+      }
+
+      window.addEventListener('scroll', setProgress, { passive: true });
+      window.addEventListener('resize', setProgress);
+      setProgress();
+    })();
+  </script>
 </body>
 </html>
+
+
 
 

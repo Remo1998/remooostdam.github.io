@@ -6,9 +6,12 @@
   <title>Remo Oostdam</title>
   <meta name="description" content="Remo Oostdam – PhD Candidate in Finance"/>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/assets/familienwappen.png?v=2" type="image/png" sizes="32x32">
-  <link rel="shortcut icon" href="/assets/familienwappen.png?v=2" type="image/png">
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +80,14 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+
+    /* NEW: header row so hamburger can sit on the right on mobile */
+    .sidebar-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .sidebar-name {
@@ -150,13 +161,12 @@
     }
 
     /* Always stack LinkedIn + email */
-.sidebar-contact {
-  display: flex;
-  flex-direction: column;   /* <-- always vertical */
-  gap: 2px;
-  font-size: 14px;
-}
-
+    .sidebar-contact {
+      display: flex;
+      flex-direction: column;   /* <-- always vertical */
+      gap: 2px;
+      font-size: 14px;
+    }
 
     .uva-logo img {
       height: 40px;
@@ -183,13 +193,12 @@
     /* ---------- Content styling ---------- */
 
     .intro {
-  display: grid;
-  grid-template-columns: 1fr auto; /* text | portrait */
-  gap: 22px;
-  align-items: start;
-  margin-top: 0;
-}
-
+      display: grid;
+      grid-template-columns: 1fr auto; /* text | portrait */
+      gap: 22px;
+      align-items: start;
+      margin-top: 0;
+    }
 
     .intro > div {
       display: flex;
@@ -198,14 +207,13 @@
     }
 
     .portrait {
-  width: 150px;          /* fixed, clean alignment */
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border: 1px solid #e4e0d8;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-  justify-self: end;     /* key: push to the right edge */
-}
-
+      width: 150px;          /* fixed, clean alignment */
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 1px solid #e4e0d8;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      justify-self: end;     /* key: push to the right edge */
+    }
 
     .lead {
       font-size: 16px;
@@ -362,6 +370,37 @@
       transition: stroke-dashoffset 0.15s ease-out;
     }
 
+    /* ---------- NEW: Hamburger menu styles ---------- */
+
+    .menu-toggle {
+      display: none; /* desktop: hidden */
+      background: transparent;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      line-height: 0;
+      margin-top: 2px;
+    }
+
+    .menu-bar {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      margin: 4px 0;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .menu-toggle.is-open .menu-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle.is-open .menu-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.is-open .menu-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
     /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
 
     @media (max-width: 1000px) {
@@ -391,10 +430,24 @@
         gap: 6px;
       }
 
+      /* show hamburger on mobile only */
+      .menu-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* nav: hidden by default on mobile, opened via JS */
       .sidebar-nav {
-        flex-direction: row;
-        gap: 18px;
+        flex-direction: column;
+        gap: 4px;
         margin-top: 6px;
+        display: none;
+      }
+
+      .sidebar-nav.is-open {
+        display: flex;
       }
 
       .sidebar-link {
@@ -432,9 +485,16 @@
         padding: 20px 16px 56px;
       }
 
-      .intro {
-        grid-template-columns: 1fr;
-      }
+      .intro{
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .portrait{
+    width: 120px;        /* slightly smaller for phones */
+    justify-self: end;
+  }
 
       .art {
         justify-self: start;
@@ -447,17 +507,16 @@
     }
 
     .fields {
-  margin-top: 14px;
-  font-size: 14.5px;
-  color: var(--muted);
-  max-width: 68ch;
-}
+      margin-top: 14px;
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 68ch;
+    }
 
-.fields strong {
-  font-weight: 500;
-  color: var(--text);
-}
-
+    .fields strong {
+      font-weight: 500;
+      color: var(--text);
+    }
 
     @media (max-width: 600px) {
       .lead, p {
@@ -491,16 +550,33 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-top">
-      <div>
-        <div class="sidebar-name">Remo Oostdam</div>
-        <div class="sidebar-role">PhD Candidate in Finance</div>
+
+      <!-- UPDATED: header row + hamburger (mobile only) -->
+      <div class="sidebar-header-row">
+        <div>
+          <div class="sidebar-name">Remo Oostdam</div>
+          <div class="sidebar-role">PhD Candidate in Finance</div>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="main-menu"
+        >
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
 
-      <nav class="sidebar-nav" aria-label="Main menu">
-  <a class="sidebar-link active" href="index.html">Home</a>
-  <a class="sidebar-link" href="cv.html">CV</a>
-  <a class="sidebar-link" href="curiosity.html">Curiosity</a>
-</nav>
+      <!-- UPDATED: add id so JS can control -->
+      <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
+        <a class="sidebar-link active" href="index.html">Home</a>
+        <a class="sidebar-link" href="cv.html">CV</a>
+        <a class="sidebar-link" href="curiosity.html">Curiosities</a>
+      </nav>
     </div>
 
     <div class="sidebar-bottom">
@@ -511,13 +587,12 @@
         <div class="sidebar-contact">
           <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="js-email"
-   data-user="r.p.oostdam"
-   data-domain="uva.nl"
-   href="#"
-   rel="nofollow">
-  r.p.oostdam at uva.nl
-</a>
-
+             data-user="r.p.oostdam"
+             data-domain="uva.nl"
+             href="#"
+             rel="nofollow">
+            r.p.oostdam at uva.nl
+          </a>
         </div>
       </div>
       <span class="sidebar-copy">©<span id="year"></span></span>
@@ -538,10 +613,10 @@
           <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">Dr. Torsten
             Jochem</a>.
         </p>
-         <p class="fields">
-      <strong>Fields of Interest:</strong>
-      financial intermediation, information economics, fintech, financial history
-    </p>
+        <p class="fields">
+          <strong>Fields of Interest:</strong>
+          financial intermediation, information economics, fintech, financial history
+        </p>
       </div>
       <img class="portrait" src="assets/cv_klein.jpg" alt="Portrait of Remo Oostdam"/>
     </div>
@@ -591,13 +666,13 @@
         </section>
       </main>
 
-<!--      <aside class="art">-->
-<!--        <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>-->
-<!--        <div class="caption">-->
-<!--          <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>-->
-<!--          Franz Marc.-->
-<!--        </div>-->
-<!--      </aside>-->
+      <!--      <aside class="art">-->
+      <!--        <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>-->
+      <!--        <div class="caption">-->
+      <!--          <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>-->
+      <!--          Franz Marc.-->
+      <!--        </div>-->
+      <!--      </aside>-->
     </div>
   </div>
 </div>
@@ -642,6 +717,7 @@
     if (e.key === 'Escape' && lightbox) lightbox.style.display = 'none';
   });
 </script>
+
 <script>
   // Reading progress circle
   (function () {
@@ -673,6 +749,7 @@
     setProgress();
   })();
 </script>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a.js-email").forEach((a) => {
@@ -695,6 +772,21 @@
       });
     });
   });
+</script>
+
+<!-- NEW: Mobile hamburger menu toggle (same behavior as curiosity.html) -->
+<script>
+  (function () {
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('main-menu');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  })();
 </script>
 
 </body>
