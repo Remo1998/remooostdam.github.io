@@ -7,11 +7,14 @@
   <meta name="description" content="Curriculum Vitae of Remo Oostdam"/>
 
   <!-- Favicons -->
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
+  <!-- Favicons -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="shortcut icon" href="assets/favicon.ico">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+
+  <link rel="apple-touch-icon" href="assets/apple-icon.png">
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,8 +31,13 @@
       --sidebar-width: 260px;
     }
 
-    html { box-sizing: border-box; }
-    *, *:before, *:after { box-sizing: inherit; }
+    html {
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
 
     body {
       margin: 0;
@@ -48,7 +56,10 @@
       text-decoration: none;
       transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
     }
-    a:hover { text-decoration: underline; }
+
+    a:hover {
+      text-decoration: underline;
+    }
 
     /* ---------- LAYOUT ---------- */
 
@@ -166,7 +177,10 @@
       opacity: .85;
       transition: opacity .2s ease;
     }
-    .uva-logo img:hover { opacity: 1; }
+
+    .uva-logo img:hover {
+      opacity: 1;
+    }
 
     .sidebar-copy {
       font-size: 12px;
@@ -250,9 +264,11 @@
     .menu-toggle.is-open .menu-bar:nth-child(1) {
       transform: translateY(6px) rotate(45deg);
     }
+
     .menu-toggle.is-open .menu-bar:nth-child(2) {
       opacity: 0;
     }
+
     .menu-toggle.is-open .menu-bar:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
     }
@@ -260,7 +276,9 @@
     /* ---------- MOBILE (match index) ---------- */
 
     @media (max-width: 900px) {
-      .layout { flex-direction: column; }
+      .layout {
+        flex-direction: column;
+      }
 
       .sidebar {
         position: static;
@@ -338,7 +356,9 @@
     }
 
     @media (max-width: 600px) {
-      .cv-embed { height: 580px; }
+      .cv-embed {
+        height: 580px;
+      }
 
       .sidebar-contact {
         font-size: 12.5px;
@@ -348,137 +368,137 @@
 </head>
 
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <div class="sidebar-header-row">
-          <div>
-            <div class="sidebar-name">Remo Oostdam</div>
-            <div class="sidebar-role">PhD Candidate in Finance</div>
-          </div>
-
-          <button
-            class="menu-toggle"
-            type="button"
-            aria-label="Toggle navigation menu"
-            aria-expanded="false"
-            aria-controls="main-menu"
-          >
-            <span class="menu-bar"></span>
-            <span class="menu-bar"></span>
-            <span class="menu-bar"></span>
-          </button>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-header-row">
+        <div>
+          <div class="sidebar-name">Remo Oostdam</div>
+          <div class="sidebar-role">PhD Candidate in Finance</div>
         </div>
 
-        <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
-          <a class="sidebar-link" href="index.html">Home</a>
-          <a class="sidebar-link active" href="cv.html">CV</a>
-          <a class="sidebar-link" href="curiosity.html">Curiosities</a>
-        </nav>
+        <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="main-menu"
+        >
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
       </div>
 
-      <div class="sidebar-bottom">
-        <div class="uva-contact-row">
-          <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
-            <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+      <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
+        <a class="sidebar-link" href="index.html">Home</a>
+        <a class="sidebar-link active" href="cv.html">CV</a>
+        <a class="sidebar-link" href="curiosity.html">Curiosities</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="uva-contact-row">
+        <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
+          <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+        </a>
+        <div class="sidebar-contact">
+          <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">
+            r.p.oostdam at uva.nl
           </a>
-          <div class="sidebar-contact">
-            <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">
-              r.p.oostdam at uva.nl
-            </a>
-          </div>
         </div>
-        <span class="sidebar-copy">©<span id="year"></span></span>
       </div>
-    </aside>
+      <span class="sidebar-copy">©<span id="year"></span></span>
+    </div>
+  </aside>
 
-    <div class="content-wrap">
-      <div class="cv-embed-wrapper">
-        <iframe
-          class="cv-embed"
-          src="assets/Remo_Oostdam_CV.pdf#view=FitH"
-          title="CV of Remo Oostdam"
-        ></iframe>
-      </div>
+  <div class="content-wrap">
+    <div class="cv-embed-wrapper">
+      <iframe
+              class="cv-embed"
+              src="assets/Remo_Oostdam_CV.pdf#view=FitH"
+              title="CV of Remo Oostdam"
+      ></iframe>
     </div>
   </div>
+</div>
 
-  <div class="scroll-progress" aria-hidden="true">
-    <svg viewBox="0 0 36 36">
-      <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
-      <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
-    </svg>
-  </div>
+<div class="scroll-progress" aria-hidden="true">
+  <svg viewBox="0 0 36 36">
+    <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
+    <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
+  </svg>
+</div>
 
-  <script>
-    // Dynamic year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+  // Dynamic year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile hamburger menu toggle (same as index.html)
-    (function () {
-      const toggle = document.querySelector('.menu-toggle');
-      const nav = document.getElementById('main-menu');
-      if (!toggle || !nav) return;
+  // Mobile hamburger menu toggle (same as index.html)
+  (function () {
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('main-menu');
+    if (!toggle || !nav) return;
 
-      toggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('is-open');
-        toggle.classList.toggle('is-open', isOpen);
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-    })();
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      toggle.classList.toggle('is-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  })();
 
-    // Email obfuscation
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll("a.js-email").forEach((a) => {
-        const user = a.dataset.user;
-        const domain = a.dataset.domain;
-        if (!user || !domain) return;
+  // Email obfuscation
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("a.js-email").forEach((a) => {
+      const user = a.dataset.user;
+      const domain = a.dataset.domain;
+      if (!user || !domain) return;
 
-        const email = `${user}@${domain}`;
-        const mailto = `mailto:${email}`;
+      const email = `${user}@${domain}`;
+      const mailto = `mailto:${email}`;
 
-        a.setAttribute("href", mailto);
+      a.setAttribute("href", mailto);
 
-        a.addEventListener("click", (e) => {
-          if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
-            e.preventDefault();
-            window.location.href = mailto;
-          }
-        });
+      a.addEventListener("click", (e) => {
+        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
+          e.preventDefault();
+          window.location.href = mailto;
+        }
       });
     });
+  });
 
-    // Scroll progress
-    (function () {
-      const circle = document.querySelector('.scroll-progress__value');
-      if (!circle) return;
+  // Scroll progress
+  (function () {
+    const circle = document.querySelector('.scroll-progress__value');
+    if (!circle) return;
 
-      const radius = 16;
-      const circumference = 2 * Math.PI * radius;
-      circle.style.strokeDasharray = `${circumference}`;
-      circle.style.strokeDashoffset = `${circumference}`;
+    const radius = 16;
+    const circumference = 2 * Math.PI * radius;
+    circle.style.strokeDasharray = `${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
 
-      function setProgress() {
-        const doc = document.documentElement;
-        const scrollTop = doc.scrollTop || document.body.scrollTop;
-        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    function setProgress() {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
 
-        if (scrollHeight <= 0) {
-          circle.style.strokeDashoffset = `${circumference}`;
-          return;
-        }
-
-        const progress = scrollTop / scrollHeight;
-        const offset = circumference * (1 - progress);
-        circle.style.strokeDashoffset = offset;
+      if (scrollHeight <= 0) {
+        circle.style.strokeDashoffset = `${circumference}`;
+        return;
       }
 
-      window.addEventListener('scroll', setProgress, { passive: true });
-      window.addEventListener('resize', setProgress);
-      setProgress();
-    })();
-  </script>
+      const progress = scrollTop / scrollHeight;
+      const offset = circumference * (1 - progress);
+      circle.style.strokeDashoffset = offset;
+    }
+
+    window.addEventListener('scroll', setProgress, {passive: true});
+    window.addEventListener('resize', setProgress);
+    setProgress();
+  })();
+</script>
 </body>
 </html>
 
