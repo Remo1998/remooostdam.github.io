@@ -45,7 +45,7 @@
     body {
       margin: 0;
       background: var(--bg);
-      color: #2b2d30;
+      color: var(--text);
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       font-weight: 400;
       font-size: 16px;
@@ -264,10 +264,11 @@
     }
 
     .coauthors {
-      font-size: 14px;
-      color: #8a8f96;
-      margin: 2px 0 10px;
-    }
+  font-size: 14px;
+  color: var(--text);
+  margin: 2px 0 10px;
+}
+
 
     .art {
       margin-top: 48px;
@@ -524,14 +525,89 @@
     .fields {
       margin-top: 14px;
       font-size: 14.5px;
-      color: var(--muted);
+      color: var(--text);
       max-width: 68ch;
     }
+    .fields + .fields {
+  margin-top: -10px; /* or 6px if you want a touch more air */
+}
 
     .fields strong {
-      font-weight: 500;
-      color: var(--text);
-    }
+  font-weight: 600;
+  color: var(--text);
+}
+
+    .paper-title a {
+  font-size: 13px;
+  color: #4a6fa5;        /* soft academic blue */
+  margin-left: 6px;
+  text-decoration: none;
+}
+
+.paper-title a:hover {
+  text-decoration: underline;
+}
+
+.paper-details summary {
+  font-size: 13.5px;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-block;
+  list-style: none;
+}
+
+/* remove default disclosure marker (all browsers) */
+.paper-details summary::-webkit-details-marker {
+  display: none;
+}
+.paper-details summary::marker {
+  content: "";
+}
+
+/* toggle symbol */
+.paper-details .abstract-toggle {
+  margin-left: 4px;
+  color: #4a6fa5; /* soft blue */
+}
+
+/* CLOSED: show [+] */
+.paper-details:not([open]) .abstract-toggle::before {
+  content: "[+]";
+}
+
+/* OPEN: show [−] */
+.paper-details[open] .abstract-toggle::before {
+  content: "[−]";
+}
+
+.paper-details summary:hover {
+  text-decoration: underline;
+}
+
+.paper-abstract {
+  font-size: 14px;
+  color: var(--text);
+  margin: 6px 0 0;
+}
+
+.paper-abstract {
+  font-size: 14px;
+  color: var(--text);
+  margin: 6px 0 0;
+}
+
+
+.paper-meta {
+  font-size: 13.5px;
+  color: var(--text);
+  margin: 6px 0 10px;
+  max-width: 68ch;
+}
+
+
+
+
+
 
     @media (max-width: 600px) {
       .lead, p {
@@ -620,18 +696,35 @@
       <div>
         <p class="lead">
           I am a third-year PhD candidate in Finance at the University of Amsterdam.
-          I study financial intermediation and how it affects efficiency and stability.
+          I study financial intermediation and crises.
           My work combines theory and empirics under the supervision of
           <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico
             Perotti</a>
           and
-          <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">Dr. Torsten
-            Jochem</a>.
+          <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Prof. Rafael Matta</a>.
+          My co-supervisors are
+    <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">
+      Dr. Torsten Jochem
+    </a>
+    and
+    <a href="https://sites.google.com/view/yenan-wang" target="_blank" rel="noopener">Dr. Yenan Wang</a>.
         </p>
         <p class="fields">
           <strong>Fields of Interest:</strong>
-          financial intermediation, information economics, fintech, financial history
+          financial intermediation, information, DeFi, financial history
         </p>
+        <p class="fields">
+  <strong>Upcoming events:</strong>
+  <a href="https://www.iese.edu/faculty-research/initiatives/banking/banking-initiative-vii-conference/"
+     target="_blank" rel="noopener">
+    IESE Banking Initiative VIII Conference</a>;
+  Wharton visit, Fall 2026, hosted by
+  <a href="https://finance.wharton.upenn.edu/~itayg/"
+     target="_blank" rel="noopener">
+    Prof. Itay Goldstein
+  </a>
+</p>
+
       </div>
       <img class="portrait" src="assets/cv_klein.jpg" alt="Portrait of Remo Oostdam"/>
     </div>
@@ -642,19 +735,41 @@
           <h2 id="papers">Research</h2>
 
           <div>
-            <div class="paper-title">
-              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880" target="_blank" rel="noopener">
-                Sand in the Wheels: Addressing Runs through Contingent Fees
-              </a>
-            </div>
-            <div class="coauthors">
-              Working paper with
-              <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael
-                Matta</a>
-              and
-              <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>.
-            </div>
-          </div>
+  <div class="paper-title">
+  Sand in the Wheels: Addressing Runs through Contingent Fees
+  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880"
+     target="_blank" rel="noopener">
+    [SSRN]
+  </a>
+
+</div>
+
+
+  <div class="coauthors">
+    Joint with
+    <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">
+      Rafael Matta
+    </a>
+    and
+    <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">
+      Enrico Perotti</a>.
+  </div>
+             <p class="paper-meta">
+    Conferences: Bundesbank Autumn Conference (2025); De Nederlandsche Bank; Frankfurt Summer School (2nd); Florence School of Banking & Finance; Federal Reserve Bank of New York; University of Amsterdam
+  </p>
+             <details class="paper-details">
+    <summary>
+  Abstract <span class="abstract-toggle"></span>
+</summary>
+
+    <p class="paper-abstract">
+      Inefficient runs on viable intermediaries such as banks, money market funds (MMFs) and stablecoins can be tempered by automatic stabilizers in the form of redemption fees triggered by high withdrawals. We derive run incentives in a global games framework to characterize the optimal fee structure and its allocation to balance liquidity provision and endogenous run risk. A first result is that flat fees reduce run incentives. A central insight is that how fee revenues are allocated fundamentally changes strategic uncertainty. When fee revenues are assigned to the queue, strategic uncertainty drops while liquidity provision improves, so a high fee is optimal. A "fee-to-the-unpaid" allocation limits liquidity provision but reduces run incentives further, allowing lower fees. The optimal mix depends on asset liquidity. While low asset liquidity in banks calls for a mixed allocation, for MMFs or stablecoins the optimal mechanism converges to full "fee-to-the-queue".
+    </p>
+  </details>
+
+
+</div>
+
 
           <div style="margin-top:20px;">
             <div class="paper-title">
