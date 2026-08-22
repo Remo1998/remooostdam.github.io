@@ -19,14 +19,28 @@
 
   --sidebar-width: 240px;
   --gutter:        56px;
-  --measure:       720px;   /* main text column; curiosity.html widens this */
+  --measure:       744px;   /* text column cap; each page may narrow this */
+
+  /* Width of the outer frame. CONSTANT on every page — this is what keeps the
+     sidebar in exactly the same place as you move between pages. Only
+     --measure varies per page, and it caps the text column inside the frame. */
+  --page-max:      1196px;
 }
 
 /* --------------------------------------------------------------------------
    2. Base
    -------------------------------------------------------------------------- */
 
-html { box-sizing: border-box; -webkit-text-size-adjust: 100%; }
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;   /* in-page jumps; disabled under reduced-motion */
+
+  /* Always reserve the scrollbar track, so a short page and a long page put
+     the centred layout in the same place instead of shifting by ~15px. */
+  scrollbar-gutter: stable;
+}
+
 *, *::before, *::after { box-sizing: inherit; }
 
 body {
@@ -68,8 +82,6 @@ img { max-width: 100%; }
    -------------------------------------------------------------------------- */
 
 .layout {
-  --page-max: calc(var(--sidebar-width) + var(--gutter) + var(--measure));
-
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, var(--measure));
   gap: var(--gutter);
@@ -318,20 +330,6 @@ section:first-of-type { margin-top: 36px; }
 }
 
 .lightbox-close:hover { color: #fff; }
-
-/* On a phone, fitting the image to the viewport gains nothing over the page
-   itself. Render it at natural size instead and let the overlay pan. */
-@media (max-width: 700px) {
-  .lightbox { padding: 56px 12px 32px; }
-
-  .lightbox-content {
-    max-width: none;
-    max-height: none;
-    width: 760px;
-  }
-
-  .lightbox-content.rotated { width: auto; max-height: 80vh; }
-}
 
 /* --------------------------------------------------------------------------
    8. Tablet and phone
