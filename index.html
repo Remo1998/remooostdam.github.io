@@ -111,32 +111,6 @@
       max-width: 62ch;
     }
 
-    /* Paper figure. The PNGs have a transparent background, so they sit
-       directly on the cream with no white box. */
-
-    .paper-figure { margin: 18px 0 0; }
-
-    .figure-panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 28px;
-      align-items: end;
-    }
-
-    .figure-panels figure { margin: 0; }
-
-    .figure-panels img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .figure-panels figcaption {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
     /* Teaching: level in the left column, courses on the right */
 
     .teaching-list {
@@ -177,10 +151,6 @@
       .teaching-list dt:first-of-type { padding-top: 0; }
 
       .paper { grid-template-columns: 26px minmax(0, 1fr); }
-
-      /* Panels stay side by side, scaled down to fit the two columns. */
-      .figure-panels { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
-      .figure-panels figcaption { font-size: 11.5px; margin-top: 4px; }
     }
   </style>
 </head>
@@ -223,18 +193,15 @@
     <div class="intro">
       <div class="intro-text">
         <p class="lead">
-          Welcome, I'm a fourth-year PhD candidate in Finance at the University of Amsterdam.
-          I study financial intermediation and crises. My work combines theory and
-          empirics under the supervision of
-          <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico Perotti</a>
+          Welcome! I am a fourth-year PhD candidate in Finance at the University of Amsterdam, supervised by <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico Perotti</a>
           and
-          <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Prof. Rafael Matta</a>.
+          <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Prof. Rafael Matta</a>. I study financial intermediation and crises, combining theory and empirics.
         </p>
 
         <div class="fields-group">
           <p class="fields">
             <strong>Fields of interest:</strong>
-            financial intermediation, information, DeFi, financial history
+            financial intermediation, information, financial history
           </p>
           <p class="fields">
             <strong>Upcoming:</strong>
@@ -288,24 +255,6 @@
               Federal Reserve Bank of New York; Toulouse Business School; University of Amsterdam
             </p>
 
-            <figure class="paper-figure">
-              <div class="figure-panels">
-                <figure>
-                  <img src="assets/fig-runs-a.png"
-                       width="840" height="736"
-                       loading="lazy"
-                       alt="Payoff by queue position under sequential service: agents are paid one unit until liquid assets (blue) and then illiquid assets (red hatched) are exhausted, after which the payoff drops to zero.">
-                  <figcaption>(a) Sequential service</figcaption>
-                </figure>
-                <figure>
-                  <img src="assets/fig-runs-b.png"
-                       width="840" height="736"
-                       loading="lazy"
-                       alt="Payoff by queue position under fee-to-the-queue: arriving agents pay a fee, and the fees collected finance additional withdrawals, extending the set of agents who receive a positive payoff.">
-                  <figcaption>(b) Fee-to-the-queue</figcaption>
-                </figure>
-              </div>
-            </figure>
           </div>
         </article>
 
