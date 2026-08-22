@@ -4,504 +4,155 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Remo Oostdam — CV</title>
-  <meta name="description" content="Curriculum Vitae of Remo Oostdam"/>
+  <meta name="description" content="Curriculum Vitae of Remo Oostdam, PhD Candidate in Finance at the University of Amsterdam."/>
 
-  <!-- Favicons -->
   <!-- Favicons -->
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="shortcut icon" href="assets/favicon.ico">
-
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="apple-touch-icon" href="assets/apple-icon.png">
 
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/style.css">
 
   <style>
-    :root {
-      --bg: #FFF9F0;
-      --text: #0f1115;
-      --muted: #5f6670;
-      --line: #c8c8c8;
-      --max: 980px;
-      --sidebar-width: 260px;
-    }
+    /* ---- Page-specific: CV ---- */
 
-    html {
-      box-sizing: border-box;
-    }
+    body { --measure: 820px; }
 
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: #2b2d30;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a {
-      color: var(--text);
-      text-decoration: none;
-      transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* ---------- LAYOUT ---------- */
-
-    .layout {
+    .cv-header {
       display: flex;
-      min-height: 100vh;
-    }
-
-    /* === Sidebar: MATCH index.html exactly === */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      padding: 24px 24px;
-      border-right: 1px solid var(--line);
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
+      align-items: flex-end;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      margin-bottom: 20px;
     }
 
-    .sidebar-top {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .sidebar-header-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .sidebar-name {
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .sidebar-role {
+    .cv-header h1 {
+      font-weight: 600;
       font-size: 12px;
-      letter-spacing: .092em;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 10px;
-    }
-
-    .sidebar-link {
-      display: inline-block;
-      padding: 6px 8px;
-      font-size: 13px;
-      color: var(--text);
-      width: max-content;
-      position: relative;
-      background: none;
-      text-decoration: none;
-    }
-
-    .sidebar-link:not(.active):hover {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-    }
-
-    .sidebar-link.active {
-      pointer-events: none;
-      cursor: default;
-    }
-
-    .sidebar-link.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -2px;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 3px;
-      background: black;
-      border-radius: 2px;
-    }
-
-    .sidebar-bottom {
-      margin-top: 24px;
-    }
-
-    .uva-contact-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .sidebar-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      font-size: 14px;
-      font-weight: 400; /* index */
-    }
-
-    .uva-logo img {
-      height: 40px;
-      width: auto;
-      display: block;
-      opacity: .85;
-      transition: opacity .2s ease;
-    }
-
-    .uva-logo img:hover {
-      opacity: 1;
-    }
-
-    .sidebar-copy {
-      font-size: 12px;
       color: var(--muted);
-      margin-top: 4px;
+      margin: 0 0 4px;
     }
 
-    .content-wrap {
-      margin-left: var(--sidebar-width);
-      max-width: var(--max);
-      padding: 32px 24px 72px;
-      width: 100%;
-    }
-
-    /* ---------- CV ---------- */
+    .cv-updated { font-size: 13.5px; color: var(--muted); }
 
     .cv-embed-wrapper {
-      border: 1px solid var(--line);
+      border: 1px solid var(--line-strong);
       border-radius: 6px;
       overflow: hidden;
       background: #fff;
     }
 
     .cv-embed {
-      width: 100%;
-      height: 900px;
-      border: none;
-    }
-
-    /* ---------- Scroll progress ---------- */
-
-    .scroll-progress {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      width: 36px;
-      height: 36px;
-      pointer-events: none;
-    }
-
-    .scroll-progress svg {
-      transform: rotate(-90deg);
-    }
-
-    .scroll-progress__bg {
-      fill: none;
-      stroke: var(--line);
-      stroke-width: 3;
-    }
-
-    .scroll-progress__value {
-      fill: none;
-      stroke: #b55e33;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-    }
-
-    /* ---------- Hamburger (match index) ---------- */
-
-    .menu-toggle {
-      display: none; /* desktop: hidden */
-      background: transparent;
-      border: none;
-      padding: 4px;
-      cursor: pointer;
-      line-height: 0;
-      margin-top: 2px;
-    }
-
-    .menu-bar {
       display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--text);
-      margin: 4px 0;
-      transition: transform .2s ease, opacity .2s ease;
+      width: 100%;
+      aspect-ratio: 1 / 1.32;   /* roughly A4, so it scales with the column */
+      border: none;
     }
 
-    .menu-toggle.is-open .menu-bar:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
-    }
+    /* Phone fallback. iOS Safari renders only the first page of a PDF inside
+       an iframe and will not scroll it, so below this width we drop the dead
+       box and leave the download button as the way in. */
 
-    .menu-toggle.is-open .menu-bar:nth-child(2) {
-      opacity: 0;
-    }
+    .cv-fallback { display: none; }
 
-    .menu-toggle.is-open .menu-bar:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
-    }
+    @media (max-width: 700px) {
+      .cv-embed-wrapper { display: none; }
 
-    /* ---------- MOBILE (match index) ---------- */
-
-    @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
+      .cv-fallback {
+        display: block;
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0;
       }
 
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 16px 16px 12px;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .sidebar-top {
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .sidebar-nav {
-        flex-direction: column;
-        gap: 4px;
-        margin-top: 6px;
-        display: none;
-      }
-
-      .sidebar-nav.is-open {
-        display: flex;
-      }
-
-      .sidebar-link {
-        padding: 4px 0;
-        font-size: 14px;
-      }
-
-      .sidebar-bottom {
-        margin-top: 6px;
-        width: 100%;
-      }
-
-      .uva-contact-row {
-        align-items: center;
-        gap: 8px;
-      }
-
-      .uva-logo img {
-        height: 30px;
-      }
-
-      .sidebar-contact {
-        flex-direction: column;
-        gap: 2px;
-        font-size: 13px;
-        font-weight: 400;
-      }
-
-      .sidebar-copy {
-        margin-top: 2px;
-        font-size: 11.5px;
-      }
-
-      .content-wrap {
-        margin-left: 0;
-        padding: 20px 16px 56px;
-      }
-
-      .cv-embed {
-        height: 650px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cv-embed {
-        height: 580px;
-      }
-
-      .sidebar-contact {
-        font-size: 12.5px;
+      .cv-header {
+        align-items: flex-start;
+        flex-direction: column-reverse;   /* button first, then the label */
+        gap: 16px;
+        margin-bottom: 14px;
       }
     }
   </style>
 </head>
-
 <body>
+
 <div class="layout">
+
   <aside class="sidebar">
     <div class="sidebar-top">
-      <div class="sidebar-header-row">
-        <div>
-          <div class="sidebar-name">Remo Oostdam</div>
-          <div class="sidebar-role">PhD Candidate in Finance</div>
-        </div>
-
-        <button
-                class="menu-toggle"
-                type="button"
-                aria-label="Toggle navigation menu"
-                aria-expanded="false"
-                aria-controls="main-menu"
-        >
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-        </button>
+      <div>
+        <div class="sidebar-name">Remo Oostdam</div>
+        <div class="sidebar-role">PhD Candidate in Finance</div>
       </div>
 
-      <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
+      <nav class="sidebar-nav" aria-label="Main">
         <a class="sidebar-link" href="index.html">Home</a>
-        <a class="sidebar-link active" href="cv.html">CV</a>
-        <a class="sidebar-link" href="curiosity.html">Curiosities</a>
+        <a class="sidebar-link" href="cv.html" aria-current="page">CV</a>
+        <a class="sidebar-link" href="curiosity.html">Curiosity</a>
       </nav>
     </div>
 
     <div class="sidebar-bottom">
       <div class="uva-contact-row">
         <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
-          <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+          <img src="assets/uva.svg" alt="University of Amsterdam">
         </a>
         <div class="sidebar-contact">
           <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">
-            r.p.oostdam at uva.nl
-          </a>
+          <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">r.p.oostdam at uva.nl</a>
         </div>
       </div>
-      <span class="sidebar-copy">©<span id="year"></span></span>
+      <span class="sidebar-copy">© <span class="js-year"></span> Remo Oostdam</span>
     </div>
   </aside>
 
   <div class="content-wrap">
-    <div class="cv-embed-wrapper">
-      <iframe
-              class="cv-embed"
-              src="assets/Remo_Oostdam_CV.pdf#view=FitH"
-              title="CV of Remo Oostdam"
-      ></iframe>
+
+    <div class="cv-header">
+      <div>
+        <h1>Curriculum Vitae</h1>
+        <!-- TODO: update this date whenever you replace the PDF -->
+        <div class="cv-updated">Last updated: August 2026</div>
+      </div>
+
+      <a class="btn-download" href="Remo_Oostdam_CV.pdf" download="Remo_Oostdam_CV.pdf">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 1.5v9"/>
+          <path d="M4.5 7.5 8 11l3.5-3.5"/>
+          <path d="M2 13.5h12"/>
+        </svg>
+        Download PDF
+      </a>
     </div>
+
+    <!-- Desktop / tablet: inline preview -->
+    <div class="cv-embed-wrapper">
+      <iframe class="cv-embed"
+              src="Remo_Oostdam_CV.pdf#view=FitH"
+              title="Curriculum Vitae of Remo Oostdam"></iframe>
+    </div>
+
+    <!-- Phone: mobile browsers cannot reliably preview a PDF inline -->
+    <p class="cv-fallback">
+      Mobile browsers cannot reliably preview a PDF in the page — use the button above
+      to open the full CV.
+    </p>
   </div>
 </div>
 
-<div class="scroll-progress" aria-hidden="true">
-  <svg viewBox="0 0 36 36">
-    <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
-    <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
-  </svg>
-</div>
 
-<script>
-  // Dynamic year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Mobile hamburger menu toggle (same as index.html)
-  (function () {
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.getElementById('main-menu');
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('is-open');
-      toggle.classList.toggle('is-open', isOpen);
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  })();
-
-  // Email obfuscation
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("a.js-email").forEach((a) => {
-      const user = a.dataset.user;
-      const domain = a.dataset.domain;
-      if (!user || !domain) return;
-
-      const email = `${user}@${domain}`;
-      const mailto = `mailto:${email}`;
-
-      a.setAttribute("href", mailto);
-
-      a.addEventListener("click", (e) => {
-        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
-          e.preventDefault();
-          window.location.href = mailto;
-        }
-      });
-    });
-  });
-
-  // Scroll progress
-  (function () {
-    const circle = document.querySelector('.scroll-progress__value');
-    if (!circle) return;
-
-    const radius = 16;
-    const circumference = 2 * Math.PI * radius;
-    circle.style.strokeDasharray = `${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-
-    function setProgress() {
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-
-      if (scrollHeight <= 0) {
-        circle.style.strokeDashoffset = `${circumference}`;
-        return;
-      }
-
-      const progress = scrollTop / scrollHeight;
-      const offset = circumference * (1 - progress);
-      circle.style.strokeDashoffset = offset;
-    }
-
-    window.addEventListener('scroll', setProgress, {passive: true});
-    window.addEventListener('resize', setProgress);
-    setProgress();
-  })();
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
-
-
-
-

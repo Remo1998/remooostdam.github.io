@@ -3,933 +3,370 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Remo Oostdam</title>
-  <meta name="description" content="Remo Oostdam – PhD Candidate in Finance"/>
+  <title>Remo Oostdam — PhD Candidate in Finance</title>
+  <meta name="description" content="Remo Oostdam – PhD Candidate in Finance at the University of Amsterdam, studying financial intermediation and crises."/>
 
-  <!-- Favicons -->
   <!-- Favicons -->
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="shortcut icon" href="assets/favicon.ico">
-
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="apple-touch-icon" href="assets/apple-icon.png">
-
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/style.css">
 
   <style>
-    :root {
-      --bg: #FFF9F0;
-      --text: #0f1115;
-      --muted: #5f6670;
-      --line: #c8c8c8;
-      --accent: #000000;
-      --max: 980px;
+    /* ---- Page-specific: home ---- */
 
-      --sidebar-width: 260px;
-      --art-w: 200px;
-    }
-
-    html {
-      box-sizing: border-box;
-    }
-
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    /* All links: black and clickable */
-    a {
-      color: var(--text);
-      text-decoration: none;
-      transition: color .2s ease, opacity .2s ease, text-decoration .2s ease, background .15s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* ---------- LAYOUT ---------- */
-
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      padding: 24px 24px;
-      border-right: 1px solid var(--line);
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sidebar-top {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* NEW: header row so hamburger can sit on the right on mobile */
-    .sidebar-header-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .sidebar-name {
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .sidebar-role {
-      font-size: 12px;
-      letter-spacing: .092em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 10px;
-    }
-
-    /* Base sidebar link */
-    .sidebar-link {
-      display: inline-block;
-      padding: 6px 8px;
-      font-size: 13px;
-      color: var(--text);
-      width: max-content;
-      position: relative;
-      background: none;
-      text-decoration: none;
-    }
-
-    /* Hover underline for non-active links */
-    .sidebar-link:not(.active):hover {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-    }
-
-    /* ACTIVE PAGE (current page): centered thick black underline */
-    .sidebar-link.active {
-      pointer-events: none;
-      cursor: default;
-    }
-
-    .sidebar-link.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -2px;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 3px;
-      background: black;
-      border-radius: 2px;
-    }
-
-    .sidebar-bottom {
-      margin-top: 24px;
-    }
-
-    /* UvA logo left, contact + copyright right */
-    .uva-contact-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    /* Always stack LinkedIn + email */
-    .sidebar-contact {
-      display: flex;
-      flex-direction: column; /* <-- always vertical */
-      gap: 2px;
-      font-size: 14px;
-    }
-
-    .uva-logo img {
-      height: 40px;
-      width: auto;
-      display: block;
-      opacity: .85;
-      transition: opacity .2s ease;
-    }
-
-    .uva-logo img:hover {
-      opacity: 1;
-    }
-
-    .sidebar-copy {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .content-wrap {
-      margin-left: var(--sidebar-width);
-      max-width: var(--max);
-      width: 100%;
-      padding: 32px 24px 72px;
-    }
-
-    /* ---------- Content styling ---------- */
+    /* Slightly wider than the other pages so "Fields of interest" and
+       "Upcoming" each hold a single line beside the portrait. */
+    body { --measure: 800px; }
 
     .intro {
       display: grid;
-      grid-template-columns: 1fr auto; /* text | portrait */
-      gap: 22px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 36px;
       align-items: start;
-      margin-top: 0;
-    }
-
-    .intro > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
     .portrait {
-      width: 150px; /* fixed, clean alignment */
+      width: 180px;
+      height: auto;          /* let aspect-ratio drive height, not the attr */
       aspect-ratio: 4 / 5;
       object-fit: cover;
       border: 1px solid #e4e0d8;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      justify-self: end; /* key: push to the right edge */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
     }
 
-    .lead {
-      font-size: 16px;
-      font-weight: 400;
-      margin: 0 0 8px;
-      max-width: 68ch;
+    /* Research entries. A hanging index number in a narrow left gutter —
+       quiet enough to read as structure rather than as a ranking. */
+
+    .paper {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      margin-top: 30px;
     }
 
-    .content {
-      display: block;
-      margin-top: 24px;
-    }
+    .paper:first-of-type { margin-top: 0; }
 
-    section {
-      margin-top: 22px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-    }
-
-    h2 {
-      font-weight: 500;
-      font-size: 17.5px;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      margin: 0 0 6px;
-      color: var(--text);
+    .paper-num {
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .04em;
+      color: var(--muted);
+      opacity: .7;
+      padding-top: 6px;
+      user-select: none;
     }
 
     .paper-title {
       font-weight: 500;
       font-size: 17px;
-      letter-spacing: .01em;
-      margin: 0 0 4px;
-      color: var(--text);
+      line-height: 1.4;
+      margin: 0 0 3px;
     }
 
     .coauthors {
-  font-size: 14px;
-  color: var(--text);
-  margin: 2px 0 10px;
-}
-
-
-    .art {
-      margin-top: 48px;
-      justify-self: end;
-      place-self: start end;
-      display: inline-grid;
-      justify-items: end;
-      width: max-content;
-      text-align: right;
-    }
-
-    .art img {
-      display: block;
-      width: auto;
-      max-width: var(--art-w);
-      height: auto;
-      margin: 0;
-      border: 1px solid var(--line);
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .art img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .caption {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 6px;
-      max-width: var(--art-w);
-      text-align: right;
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(4px);
-    }
-
-    .lightbox-content {
-      display: block;
-      margin: auto;
-      max-width: 80%;
-      max-height: 80%;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      border: 4px solid #fff;
-    }
-
-    .lightbox-caption {
-      margin: 16px auto;
-      text-align: center;
-      color: #f0f0f0;
-      font-size: 14px;
-      max-width: 80%;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #f0f0f0;
-      font-size: 32px;
-      font-weight: 300;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .lightbox-close:hover {
-      color: #fff;
-    }
-
-    /* ---------- Scroll progress circle ---------- */
-
-    .scroll-progress {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      width: 36px;
-      height: 36px;
-      z-index: 200;
-      pointer-events: none;
-    }
-
-    .scroll-progress svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .scroll-progress__bg {
-      fill: none;
-      stroke: var(--line);
-      stroke-width: 3;
-    }
-
-    .scroll-progress__value {
-      fill: none;
-      stroke: #b55e33;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-      transition: stroke-dashoffset 0.15s ease-out;
-    }
-
-    /* ---------- NEW: Hamburger menu styles ---------- */
-
-    .menu-toggle {
-      display: none; /* desktop: hidden */
-      background: transparent;
-      border: none;
-      padding: 4px;
-      cursor: pointer;
-      line-height: 0;
-      margin-top: 2px;
-    }
-
-    .menu-bar {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: var(--text);
-      margin: 4px 0;
-      transition: transform .2s ease, opacity .2s ease;
-    }
-
-    .menu-toggle.is-open .menu-bar:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
-    }
-
-    .menu-toggle.is-open .menu-bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.is-open .menu-bar:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
-    }
-
-    /* ---------- RESPONSIVE (iPad + iPhone) ---------- */
-
-    @media (max-width: 1000px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 16px 16px 12px;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .sidebar-top {
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      /* show hamburger on mobile only */
-      .menu-toggle {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      /* nav: hidden by default on mobile, opened via JS */
-      .sidebar-nav {
-        flex-direction: column;
-        gap: 4px;
-        margin-top: 6px;
-        display: none;
-      }
-
-      .sidebar-nav.is-open {
-        display: flex;
-      }
-
-      .sidebar-link {
-        padding: 4px 0;
-        font-size: 14px;
-      }
-
-      .sidebar-bottom {
-        margin-top: 6px;
-        width: 100%;
-      }
-
-      .uva-contact-row {
-        align-items: center;
-        gap: 8px;
-      }
-
-      .uva-logo img {
-        height: 30px;
-      }
-
-      .sidebar-contact {
-        flex-direction: column;
-        gap: 2px;
-        font-size: 13px;
-      }
-
-      .sidebar-copy {
-        margin-top: 2px;
-        font-size: 11.5px;
-      }
-
-      .content-wrap {
-        margin-left: 0;
-        padding: 20px 16px 56px;
-      }
-
-      .intro {
-        grid-template-columns: 1fr auto;
-        align-items: start;
-        gap: 16px;
-      }
-
-      .portrait {
-        width: 120px; /* slightly smaller for phones */
-        justify-self: end;
-      }
-
-      .art {
-        justify-self: start;
-        text-align: left;
-      }
-
-      .caption {
-        text-align: left;
-      }
-    }
-
-    .fields {
-      margin-top: 14px;
       font-size: 14.5px;
       color: var(--text);
-      max-width: 68ch;
+      margin: 0 0 10px;
     }
-    .fields + .fields {
-  margin-top: -10px; /* or 6px if you want a touch more air */
-}
 
-    .fields strong {
-  font-weight: 600;
-  color: var(--text);
-}
+    /* Order within an entry: title, coauthors, abstract, then venues.
+       The abstract is the substance, so it sits above the venue list. */
 
-    .paper-title a {
-  font-size: 13px;
-  color: #4a6fa5;        /* soft academic blue */
-  margin-left: 6px;
-  text-decoration: none;
-}
+    .paper-details { margin: 0 0 10px; }
 
-.paper-title a:hover {
-  text-decoration: underline;
-}
+    .paper-details summary {
+      display: inline-block;
+      list-style: none;
+      font-size: 13.5px;
+      cursor: pointer;
+    }
 
-.paper-details summary {
-  font-size: 13.5px;
-  color: var(--text);
-  cursor: pointer;
-  display: inline-block;
-  list-style: none;
-}
+    .paper-details summary::-webkit-details-marker { display: none; }
+    .paper-details summary::marker { content: ""; }
+    .paper-details summary:hover { text-decoration: underline; text-underline-offset: 2px; }
+    .paper-details .abstract-toggle { margin-left: 4px; color: var(--link); }
+    .paper-details:not([open]) .abstract-toggle::before { content: "[+]"; }
+    .paper-details[open] .abstract-toggle::before { content: "[−]"; }
 
-/* remove default disclosure marker (all browsers) */
-.paper-details summary::-webkit-details-marker {
-  display: none;
-}
-.paper-details summary::marker {
-  content: "";
-}
+    .paper-abstract {
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 8px 0 0;
+      max-width: 62ch;
+    }
 
-/* toggle symbol */
-.paper-details .abstract-toggle {
-  margin-left: 4px;
-  color: #4a6fa5; /* soft blue */
-}
+    .paper-meta {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+      max-width: 62ch;
+    }
 
-/* CLOSED: show [+] */
-.paper-details:not([open]) .abstract-toggle::before {
-  content: "[+]";
-}
+    /* Paper figure. The PNGs have a transparent background, so they sit
+       directly on the cream with no white box. */
 
-/* OPEN: show [−] */
-.paper-details[open] .abstract-toggle::before {
-  content: "[−]";
-}
+    .paper-figure { margin: 18px 0 0; }
 
-.paper-details summary:hover {
-  text-decoration: underline;
-}
+    .figure-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 28px;
+      align-items: end;
+    }
 
-.paper-abstract {
-  font-size: 14px;
-  color: var(--text);
-  margin: 6px 0 0;
-}
+    .figure-panels figure { margin: 0; }
 
-.paper-abstract {
-  font-size: 14px;
-  color: var(--text);
-  margin: 6px 0 0;
-}
+    .figure-panels img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
+    .figure-panels figcaption {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
 
-.paper-meta {
-  font-size: 13.5px;
-  color: var(--text);
-  margin: 6px 0 10px;
-  max-width: 68ch;
-}
+    /* Teaching: level in the left column, courses on the right */
 
+    .teaching-list {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr);
+      gap: 8px 20px;
+      margin: 0;
+      font-size: 15px;
+    }
 
+    .teaching-list dt {
+      font-size: 12.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 3px;
+    }
 
+    .teaching-list dd { margin: 0; }
 
+    .teaching-inst { color: var(--muted); font-size: 14px; }
 
+    @media (max-width: 700px) {
+      .intro { grid-template-columns: 1fr; gap: 22px; }
 
-    @media (max-width: 600px) {
-      .lead, p {
-        max-width: 55ch;
+      /* Portrait comes after the intro text and both field lines, centred. */
+      .intro-text { grid-row: 1; }
+      .portrait { width: 150px; grid-row: 2; justify-self: center; }
+
+      .lead, .paper-meta, .paper-abstract { max-width: none; }
+
+      .teaching-list {
+        grid-template-columns: 1fr;
+        gap: 2px;
       }
 
-      .sidebar-name {
-        font-size: 20px;
-      }
+      .teaching-list dt { padding-top: 14px; }
+      .teaching-list dt:first-of-type { padding-top: 0; }
 
-      .sidebar-role {
-        font-size: 11px;
-      }
+      .paper { grid-template-columns: 26px minmax(0, 1fr); }
 
-      .sidebar-contact {
-        font-size: 12.5px;
-      }
+      /* Panels stay side by side, scaled down to fit the two columns. */
+      .figure-panels { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+      .figure-panels figcaption { font-size: 11.5px; margin-top: 4px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Lightbox modal -->
-<div id="lightbox" class="lightbox">
-  <span class="lightbox-close" aria-label="Close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img" alt="">
-  <div class="lightbox-caption" id="lightbox-caption"></div>
-</div>
-
 <div class="layout">
+
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-top">
-
-      <!-- UPDATED: header row + hamburger (mobile only) -->
-      <div class="sidebar-header-row">
-        <div>
-          <div class="sidebar-name">Remo Oostdam</div>
-          <div class="sidebar-role">PhD Candidate in Finance</div>
-        </div>
-
-        <button
-                class="menu-toggle"
-                type="button"
-                aria-label="Toggle navigation menu"
-                aria-expanded="false"
-                aria-controls="main-menu"
-        >
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-          <span class="menu-bar"></span>
-        </button>
+      <div>
+        <div class="sidebar-name">Remo Oostdam</div>
+        <div class="sidebar-role">PhD Candidate in Finance</div>
       </div>
 
-      <!-- UPDATED: add id so JS can control -->
-      <nav class="sidebar-nav" id="main-menu" aria-label="Main menu">
-        <a class="sidebar-link active" href="index.html">Home</a>
+      <nav class="sidebar-nav" aria-label="Main">
+        <a class="sidebar-link" href="index.html" aria-current="page">Home</a>
         <a class="sidebar-link" href="cv.html">CV</a>
-        <a class="sidebar-link" href="curiosity.html">Curiosities</a>
+        <a class="sidebar-link" href="curiosity.html">Curiosity</a>
       </nav>
     </div>
 
     <div class="sidebar-bottom">
       <div class="uva-contact-row">
         <a href="https://www.uva.nl/en" target="_blank" class="uva-logo" rel="noopener">
-          <img src="assets/uva.svg" alt="University of Amsterdam Logo">
+          <img src="assets/uva.svg" alt="University of Amsterdam">
         </a>
         <div class="sidebar-contact">
           <a href="https://www.linkedin.com/in/remo-oostdam/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="js-email"
-             data-user="r.p.oostdam"
-             data-domain="uva.nl"
-             href="#"
-             rel="nofollow">
-            r.p.oostdam at uva.nl
-          </a>
+          <a class="js-email" data-user="r.p.oostdam" data-domain="uva.nl" href="#" rel="nofollow">r.p.oostdam at uva.nl</a>
         </div>
       </div>
-      <span class="sidebar-copy">©<span id="year"></span></span>
+      <span class="sidebar-copy">© <span class="js-year"></span> Remo Oostdam</span>
     </div>
   </aside>
 
   <!-- Main content -->
   <div class="content-wrap">
+
     <div class="intro">
-      <div>
+      <div class="intro-text">
         <p class="lead">
-          I am a third-year PhD candidate in Finance at the University of Amsterdam.
-          I study financial intermediation and crises.
-          My work combines theory and empirics under the supervision of
-          <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico
-            Perotti</a>
+          Welcome, I'm a fourth-year PhD candidate in Finance at the University of Amsterdam.
+          I study financial intermediation and crises. My work combines theory and
+          empirics under the supervision of
+          <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Prof. Enrico Perotti</a>
           and
           <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Prof. Rafael Matta</a>.
-          My co-supervisors are
-    <a href="https://sites.google.com/view/tjochem" target="_blank" rel="noopener">
-      Dr. Torsten Jochem
-    </a>
-    and
-    <a href="https://sites.google.com/view/yenan-wang" target="_blank" rel="noopener">Dr. Yenan Wang</a>.
         </p>
-        <p class="fields">
-          <strong>Fields of Interest:</strong>
-          financial intermediation, information, DeFi, financial history
-        </p>
-        <p class="fields">
-  <strong>Upcoming events:</strong>
-  Wharton visit, Fall 2026, hosted by
-  <a href="https://finance.wharton.upenn.edu/~itayg/"
-     target="_blank" rel="noopener">
-    Prof. Itay Goldstein
-  </a>
-</p>
 
+        <div class="fields-group">
+          <p class="fields">
+            <strong>Fields of interest:</strong>
+            financial intermediation, information, DeFi, financial history
+          </p>
+          <p class="fields">
+            <strong>Upcoming:</strong>
+            Wharton visit, Fall 2026, hosted by
+            <a href="https://finance.wharton.upenn.edu/~itayg/" target="_blank" rel="noopener">Prof. Itay Goldstein</a>
+          </p>
+        </div>
       </div>
-      <img class="portrait" src="assets/cv_klein.jpg" alt="Portrait of Remo Oostdam"/>
+
+      <img class="portrait" src="assets/cv_klein.jpg" alt="Portrait of Remo Oostdam" width="180" height="225"/>
     </div>
 
-    <div class="content">
-      <main>
-        <section aria-labelledby="papers">
-          <h2 id="papers">Research</h2>
+    <main>
+      <section aria-labelledby="research">
+        <h2 id="research">Research</h2>
 
+        <article class="paper">
+          <span class="paper-num" aria-hidden="true">01</span>
           <div>
-  <div class="paper-title">
-  Sand in the Wheels: Addressing Runs through Contingent Fees
-  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880"
-     target="_blank" rel="noopener">
-    [SSRN]
-  </a>
-
-</div>
-
-
-  <div class="coauthors">
-    Joint with
-    <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">
-      Rafael Matta
-    </a>
-    and
-    <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">
-      Enrico Perotti</a>.
-  </div>
-             <p class="paper-meta">
-    Conferences: Bundesbank Autumn Conference (2025); De Nederlandsche Bank; Frankfurt Summer School (2nd); Florence School of Banking & Finance; Federal Reserve Bank of New York; University of Amsterdam
-  </p>
-             <details class="paper-details">
-    <summary>
-  Abstract <span class="abstract-toggle"></span>
-</summary>
-
-    <p class="paper-abstract">
-      We show that contingent fees can discourage self-reinforcing bank runs without compromising liquidity provision, deriving their optimal level, format and allocation so as to balance liquidity needs and endogenous run risk. Flat fees triggered by high withdrawals are optimal, reducing runs via a strategic and a payoff channel. Assigning fee revenues to the queue reduces strategic uncertainty while improving liquidity provision, so a high fee is optimal. A “fee-to-the-unpaid” limits liquidity provision but reduces run incentives further, allowing lower fees. Illiquid bank and bond fund assets call for a mixed allocation, while for MMFs a full “fee-to-the-queue” solution is best.
-    </p>
-  </details>
-
-
-</div>
-
-
-          <div style="margin-top:20px;">
-            <div class="paper-title">
-              The Dawn of Deposit Banking and Runs in the Netherlands
+            <h3 class="paper-title">
+              Sand in the Wheels: Addressing Runs through Contingent Fees<a
+                class="link-ref"
+                href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5567880"
+                target="_blank" rel="noopener">[SSRN]</a>
+            </h3>
+            <div class="coauthors">
+              Joint with
+              <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael Matta</a>
+              and
+              <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>.
             </div>
+
+            <details class="paper-details">
+              <summary>Abstract <span class="abstract-toggle"></span></summary>
+              <p class="paper-abstract">
+                We show that contingent fees can discourage self-reinforcing bank runs without
+                compromising liquidity provision, deriving their optimal level, format and
+                allocation so as to balance liquidity needs and endogenous run risk. Flat fees
+                triggered by high withdrawals are optimal, reducing runs via a strategic and a
+                payoff channel. Assigning fee revenues to the queue reduces strategic
+                uncertainty while improving liquidity provision, so a high fee is optimal. A
+                “fee-to-the-unpaid” limits liquidity provision but reduces run incentives
+                further, allowing lower fees. Illiquid bank and bond fund assets call for a
+                mixed allocation, while for MMFs a full “fee-to-the-queue” solution is best.
+              </p>
+            </details>
+
+            <p class="paper-meta">
+              Presented at: Bundesbank Autumn Conference (2025); De Nederlandsche Bank; EBFin 2026;
+              Frankfurt Summer School (2nd); Florence School of Banking &amp; Finance;
+              Federal Reserve Bank of New York; Toulouse Business School; University of Amsterdam
+            </p>
+
+            <figure class="paper-figure">
+              <div class="figure-panels">
+                <figure>
+                  <img src="assets/fig-runs-a.png"
+                       width="840" height="736"
+                       loading="lazy"
+                       alt="Payoff by queue position under sequential service: agents are paid one unit until liquid assets (blue) and then illiquid assets (red hatched) are exhausted, after which the payoff drops to zero.">
+                  <figcaption>(a) Sequential service</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/fig-runs-b.png"
+                       width="840" height="736"
+                       loading="lazy"
+                       alt="Payoff by queue position under fee-to-the-queue: arriving agents pay a fee, and the fees collected finance additional withdrawals, extending the set of agents who receive a positive payoff.">
+                  <figcaption>(b) Fee-to-the-queue</figcaption>
+                </figure>
+              </div>
+            </figure>
+          </div>
+        </article>
+
+        <article class="paper">
+          <span class="paper-num" aria-hidden="true">02</span>
+          <div>
+            <h3 class="paper-title">The Dawn of Deposit Banking and Runs in the Netherlands</h3>
             <div class="coauthors">
               Work in progress with
               <a href="https://www.evamulder.com/" target="_blank" rel="noopener">Eva Mulder</a>.
             </div>
           </div>
-           <div style="margin-top:20px;">
-            <div class="paper-title">
-              Liquidity Runs
-            </div>
+        </article>
+
+        <article class="paper">
+          <span class="paper-num" aria-hidden="true">03</span>
+          <div>
+            <h3 class="paper-title">Liquidity Runs</h3>
             <div class="coauthors">
               Work in progress with
-    <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">
-      Rafael Matta
-    </a>
-    and
-    <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">
-      Enrico Perotti</a>.</div>
+              <a href="https://sites.google.com/site/almeidadamatta/home" target="_blank" rel="noopener">Rafael Matta</a>
+              and
+              <a href="https://www.enricoperotti.eu/" target="_blank" rel="noopener">Enrico Perotti</a>.
+            </div>
           </div>
-        </section>
+        </article>
+      </section>
 
-        <section aria-labelledby="teaching">
-          <h2 id="teaching">Teaching</h2>
-          <p class="teaching-inline">
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131865"
-               target="_blank" rel="noopener">Finance 1</a>,
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131917"
-               target="_blank" rel="noopener">Corporate Finance</a>,
-            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131595"
-               target="_blank" rel="noopener">Financial Regulation</a>,
+      <section aria-labelledby="teaching">
+        <h2 id="teaching">Teaching</h2>
+
+        <dl class="teaching-list">
+          <dt>PhD-level</dt>
+          <dd>
             <a href="https://eur.osiris-student.nl/onderwijscatalogus/extern/cursus?cursuscode=TIF20102&amp;collegejaar=2025"
                target="_blank" rel="noopener">Banking</a>
-          </p>
-        </section>
-      </main>
+            <span class="teaching-inst">(Tinbergen Institute)</span>
+          </dd>
 
-      <!--      <aside class="art">-->
-      <!--        <img src="assets/Franz_Marc_029a.jpg" alt="Franz Marc – Turm der blauen Pferde" id="art-image"/>-->
-      <!--        <div class="caption">-->
-      <!--          <em>Turm der blauen Pferde</em> (Tower of Blue Horses)<br>-->
-      <!--          Franz Marc.-->
-      <!--        </div>-->
-      <!--      </aside>-->
-    </div>
+          <dt>Master</dt>
+          <dd>
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131595"
+               target="_blank" rel="noopener">Financial Regulation</a>,
+            Thesis Supervision
+            <span class="teaching-inst">(University of Amsterdam)</span>
+          </dd>
+
+          <dt>Bachelor</dt>
+          <dd>
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131865"
+               target="_blank" rel="noopener">Finance I</a>,
+            <a href="https://coursecatalogue.uva.nl/xmlpages/page/2025-2026-en/search-course/course/131917"
+               target="_blank" rel="noopener">Corporate Finance</a>
+            <span class="teaching-inst">(University of Amsterdam)</span>
+          </dd>
+        </dl>
+      </section>
+    </main>
   </div>
 </div>
 
-<div class="scroll-progress" aria-hidden="true">
-  <svg viewBox="0 0 36 36">
-    <circle class="scroll-progress__bg" cx="18" cy="18" r="16"></circle>
-    <circle class="scroll-progress__value" cx="18" cy="18" r="16"></circle>
-  </svg>
-</div>
-
-<script>
-  // Dynamic year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Lightbox logic
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
-  const artImage = document.getElementById('art-image');
-  const closeBtn = document.querySelector('.lightbox-close');
-
-  if (artImage) {
-    artImage.addEventListener('click', () => {
-      if (!lightbox) return;
-      lightbox.style.display = 'block';
-      lightboxImg.src = artImage.src;
-      lightboxCaption.innerHTML = document.querySelector('.caption').innerHTML;
-    });
-  }
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      lightbox.style.display = 'none';
-    });
-  }
-  if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) lightbox.style.display = 'none';
-    });
-  }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox) lightbox.style.display = 'none';
-  });
-</script>
-
-<script>
-  // Reading progress circle
-  (function () {
-    const circle = document.querySelector('.scroll-progress__value');
-    if (!circle) return;
-
-    const radius = 16;
-    const circumference = 2 * Math.PI * radius;
-    circle.style.strokeDasharray = `${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-
-    function setProgress() {
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-
-      if (scrollHeight <= 0) {
-        circle.style.strokeDashoffset = `${circumference}`;
-        return;
-      }
-
-      const progress = scrollTop / scrollHeight;
-      const offset = circumference * (1 - progress);
-      circle.style.strokeDashoffset = offset;
-    }
-
-    window.addEventListener('scroll', setProgress, {passive: true});
-    window.addEventListener('resize', setProgress);
-    setProgress();
-  })();
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("a.js-email").forEach((a) => {
-      const user = a.dataset.user;
-      const domain = a.dataset.domain;
-      if (!user || !domain) return;
-
-      const email = `${user}@${domain}`;
-      const mailto = `mailto:${email}`;
-
-      // Keep visible text obfuscated, only make click target real
-      a.setAttribute("href", mailto);
-
-      // Extra safety: if something overwrites href later, still open mail
-      a.addEventListener("click", (e) => {
-        if (!a.getAttribute("href") || a.getAttribute("href") === "#") {
-          e.preventDefault();
-          window.location.href = mailto;
-        }
-      });
-    });
-  });
-</script>
-
-<!-- NEW: Mobile hamburger menu toggle (same behavior as curiosity.html) -->
-<script>
-  (function () {
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.getElementById('main-menu');
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('is-open');
-      toggle.classList.toggle('is-open', isOpen);
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  })();
-</script>
-
+<script src="assets/site.js" defer></script>
 </body>
 </html>
-
